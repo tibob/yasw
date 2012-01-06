@@ -1,1 +1,7 @@
-yasw.pro.user
+/yasw.pro.user
+/Makefile
+*.o
+moc_*
+qrc_*
+ui_*
+/yasw
