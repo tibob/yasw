@@ -1,7 +1,7 @@
 /*! \mainpage YASW Documentation
 
 This is YASW (Yet Another Scan Wizard) documentation.
-\section Implement your own filter
+\section sect_implement_filter Implement your own filter
 In order your own filter, you have to create a class that inherits from BaseFilter and reimplement
 - AbstractFilterWidget* getWidget();
 - QString getName();
@@ -12,7 +12,7 @@ modifiy hte INCLUDEPATH in yasw.pro.
 
 Have a look at the Rotation class (folder filter/rotation) for a simple filter example.
 
-\Section todo
+\section todo
 \todo add a crop filter
 \todo (later) add filter for color manipulation (gama, line detection...)
 
