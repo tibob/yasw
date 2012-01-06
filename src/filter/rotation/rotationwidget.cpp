@@ -33,14 +33,12 @@ void RotationWidget::setPreview(QPixmap pixmap)
 void RotationWidget::on_rotateLeft_clicked()
 {
     rotationAngle = (rotationAngle - 90) % 360;
-    qDebug() << rotationAngle;
     emit rotationChanged();
 }
 
 void RotationWidget::on_rotateRight_clicked()
 {
     rotationAngle = (rotationAngle + 90) % 360;;
-    qDebug() << rotationAngle;
     emit rotationChanged();
 }
 
