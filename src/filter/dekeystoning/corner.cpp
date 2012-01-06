@@ -30,10 +30,21 @@ void Corner::removeLine(Line *line)
 QVariant Corner::itemChange(GraphicsItemChange change, const QVariant &value)
 {
     if (change == ItemPositionHasChanged) {
+        cornerMoved = true;
         foreach (Line *line, myLines)
             line->trackCorners();
     }
     return QGraphicsEllipseItem::itemChange(change, value);
+}
+
+void Corner::resetCornerMoved()
+{
+    cornerMoved = false;
+}
+
+bool Corner::getCornerMoved()
+{
+    return cornerMoved;
 }
 
 

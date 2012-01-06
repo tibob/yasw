@@ -1,6 +1,5 @@
 #include "dekeystoninggraphicsview.h"
 
-
 DekeystoningGraphicsView::DekeystoningGraphicsView(QWidget *parent):
         BaseFilterGraphicsView(parent)
 {
@@ -32,13 +31,12 @@ DekeystoningGraphicsView::DekeystoningGraphicsView(QWidget *parent):
 */
 qreal DekeystoningGraphicsView::meanWidth()
 {
-    QLineF line1, line2;
+    QLineF line1 = QLineF(c1->pos(), c2->pos());
+    QLineF line2 = QLineF(c3->pos(), c4->pos());
 
-    line1 = QLineF(c1->pos(), c2->pos());
-    line2 = QLineF(c3->pos(), c4->pos());
+    qreal width = (line1.length() + line2.length())/2;
 
-    return (line1.length() + line2.length())/2;
-
+    return width;
 }
 
 /** \brief Mean height of the transformation polygon.
@@ -47,22 +45,53 @@ qreal DekeystoningGraphicsView::meanWidth()
 */
 qreal DekeystoningGraphicsView::meanHeight()
 {
-    QLineF line1, line2;
+    QLineF line1 = QLineF(c2->pos(), c3->pos());
+    QLineF line2 = QLineF(c1->pos(), c4->pos());
 
-    line1 = QLineF(c2->pos(), c3->pos());
-    line2 = QLineF(c1->pos(), c4->pos());
+    qreal height = (line1.length() + line2.length())/2;
 
-    return (line1.length() + line2.length())/2;
-
+    return height;
 }
 
-QPolygonF DekeystoningGraphicsView::sourcePolygon()
+QPolygonF DekeystoningGraphicsView::polygon()
 {
     QPolygonF polygon;
 
     polygon << c1->pos() << c2->pos() << c3->pos() << c4->pos();
 
     return polygon;
+}
+
+void DekeystoningGraphicsView::hidePolygon(bool hide)
+{
+    bool showPolygon = !hide;
+
+    c1->setVisible(showPolygon);
+    c2->setVisible(showPolygon);
+    c3->setVisible(showPolygon);
+    c4->setVisible(showPolygon);
+    l1->setVisible(showPolygon);
+    l2->setVisible(showPolygon);
+    l3->setVisible(showPolygon);
+    l4->setVisible(showPolygon);
+}
+
+/** \brief check if polygon moved since last resetPolygonMoved() */
+bool DekeystoningGraphicsView::polygonMoved()
+{
+    return c1->getCornerMoved()
+            & c2->getCornerMoved()
+            & c3->getCornerMoved()
+            & c4->getCornerMoved();
+}
+
+/** \brief resets all registered moves for the polygon, so that polygonMoved() returns false */
+void DekeystoningGraphicsView::resetPolygonMoved()
+{
+    c1->resetCornerMoved();
+    c2->resetCornerMoved();
+    c3->resetCornerMoved();
+    c4->resetCornerMoved();
 }
 
 

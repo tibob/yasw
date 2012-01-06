@@ -57,6 +57,9 @@
    <class>DekeystoningGraphicsView</class>
    <extends>QGraphicsView</extends>
    <header>dekeystoninggraphicsview.h</header>
+   <slots>
+    <slot>hidePolygon(bool)</slot>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources/>
@@ -68,8 +71,8 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>64</x>
-     <y>32</y>
+     <x>73</x>
+     <y>27</y>
     </hint>
     <hint type="destinationlabel">
      <x>113</x>
@@ -84,12 +87,28 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>87</x>
-     <y>28</y>
+     <x>96</x>
+     <y>27</y>
     </hint>
     <hint type="destinationlabel">
      <x>165</x>
      <y>27</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>preview</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>view</receiver>
+   <slot>hidePolygon(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>151</x>
+     <y>13</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>192</x>
+     <y>130</y>
     </hint>
    </hints>
   </connection>
