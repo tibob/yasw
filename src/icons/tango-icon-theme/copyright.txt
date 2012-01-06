@@ -1,0 +1,5 @@
+The icons in this folder are taken from the Tango Icon Theme Version 0.8.90.
+It can be downloaded from http://tango.freedesktop.org/releases
+
+The icons in the Tango Icon Theme are released under the Public Domain, as stated by the COPYING file in the original tarball:
+"The icons in this repository are herefore released into the Public Domain."

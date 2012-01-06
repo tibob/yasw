@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>tango-icon-theme/edit-redo.svg</file>
+        <file>tango-icon-theme/edit-undo.svg</file>
+    </qresource>
+</RCC>
