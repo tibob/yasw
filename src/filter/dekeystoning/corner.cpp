@@ -20,17 +20,21 @@
 #include "corner.h"
 #include "line.h"
 
+/*! \brief Creates a Corner for the polygon
+
+    The corner is a circle (diameter 8 pixel) that can be moved to modify the polygon.
+    It ignores Transformation of the GraphicsView so that it has allways the same size while zooming.
+*/
 Corner::Corner(qreal x, qreal y)
 {
     const int Diameter = 8;
     this->x = x;
     this->y = y;
-//    setRect(x-Diameter/2, y-Diameter/2, Diameter, Diameter);
     setRect(-Diameter/2, -Diameter/2, Diameter, Diameter);
     setPos(x, y);
     setZValue(100);
     setFlags(ItemIsMovable |
-             ItemIgnoresTransformations |  // no use, I have to fix the diameter for myself
+             ItemIgnoresTransformations |
              ItemSendsGeometryChanges);
 }
 
@@ -45,7 +49,13 @@ void Corner::removeLine(Line *line)
     myLines.remove(line);
 }
 
+/*! \brief Handle Corner moves
 
+    itemChanged ist called because the Flag ItemSendsGeometryChanges is set.
+    When called, it will update the position of the sides of the Polygon (Line)
+    and register that the Corner moved so that the transformation Matrix and the output Pixmap
+    has to be recalculated.
+*/
 QVariant Corner::itemChange(GraphicsItemChange change, const QVariant &value)
 {
     if (change == ItemPositionHasChanged) {

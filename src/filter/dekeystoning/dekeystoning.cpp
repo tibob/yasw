@@ -40,8 +40,6 @@ AbstractFilterWidget* Dekeystoning::getWidget()
 
 void Dekeystoning::recalculate()
 {
-    qDebug() << "recalculate()";
-
     QPolygonF polygon = widget->polygon();
 
     QTransform transformMatrix;
