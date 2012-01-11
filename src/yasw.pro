@@ -30,7 +30,11 @@ SOURCES += main.cpp \
     filter/dekeystoning/dekeystoning.cpp \
     filter/rotation/rotationwidget.cpp \
     filter/rotation/rotation.cpp \
-    filter/abstractfilterwidget.cpp
+    filter/abstractfilterwidget.cpp \
+    filter/cropping/cropping.cpp \
+    filter/cropping/croppingwidget.cpp \
+    filter/cropping/croppinggraphicsview.cpp \
+    filter/cropping/croppingcorner.cpp
 HEADERS += mainwindow.h \
     filter/dekeystoning/corner.h \
     filter/dekeystoning/line.h \
@@ -43,14 +47,20 @@ HEADERS += mainwindow.h \
     filter/dekeystoning/dekeystoning.h \
     filter/rotation/rotationwidget.h \
     filter/rotation/rotation.h \
-    filter/abstractfilterwidget.h
+    filter/abstractfilterwidget.h \
+    filter/cropping/cropping.h \
+    filter/cropping/croppingwidget.h \
+    filter/cropping/croppinggraphicsview.h \
+    filter/cropping/croppingcorner.h
 FORMS += mainwindow.ui \
     filter/basefilterwidget.ui \
     filter/dekeystoning/dekeystoningwidget.ui \
-    filter/rotation/rotationwidget.ui
+    filter/rotation/rotationwidget.ui \
+    filter/cropping/croppingwidget.ui
 INCLUDEPATH += filter \
     filter/dekeystoning \
-    filter/rotation
+    filter/rotation \
+    filter/cropping
 RESOURCES += icons/icons.qrc
 
 OTHER_FILES += \

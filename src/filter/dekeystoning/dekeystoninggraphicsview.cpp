@@ -98,9 +98,9 @@ void DekeystoningGraphicsView::hidePolygon(bool hide)
 bool DekeystoningGraphicsView::polygonMoved()
 {
     return c1->getCornerMoved()
-            & c2->getCornerMoved()
-            & c3->getCornerMoved()
-            & c4->getCornerMoved();
+            || c2->getCornerMoved()
+            || c3->getCornerMoved()
+            || c4->getCornerMoved();
 }
 
 /** \brief resets all registered moves for the polygon, so that polygonMoved() returns false */

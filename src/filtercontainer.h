@@ -22,7 +22,6 @@
 #include <QTabWidget>
 #include <QMap>
 #include "basefilter.h"
-#include "dekeystoning.h"
 #include "abstractfilterwidget.h"
 
 class FilterContainer : public QTabWidget
@@ -35,8 +34,6 @@ public:
 public slots:
     void tabChanged(int index);
 private:
-    BaseFilter *baseFilter;
-    Dekeystoning *dekeystoningFilter;
     QList<BaseFilter *> tabToFilter;
     int oldIndex; //stores the last selected index
 

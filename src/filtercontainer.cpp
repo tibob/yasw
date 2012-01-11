@@ -19,6 +19,8 @@
 #include "filtercontainer.h"
 #include <QDebug>
 #include "rotation.h"
+#include "dekeystoning.h"
+#include "cropping.h"
 
 /** \class FilterContainer
     \brief A QTabWidget to display the different filters.
@@ -36,7 +38,7 @@ FilterContainer::FilterContainer( QWidget * parent)
     oldIndex = -1;
 
     // initialise the filters
-    baseFilter = new BaseFilter();
+    BaseFilter *baseFilter = new BaseFilter();
     tabToFilter.append(baseFilter); // as tabToFilter is empty, we start at index 0
     addTab(baseFilter->getWidget(), baseFilter->getName());
 
@@ -46,9 +48,13 @@ FilterContainer::FilterContainer( QWidget * parent)
     addTab(rotationFilter->getWidget(), rotationFilter->getName());
 
 
-    dekeystoningFilter = new Dekeystoning();
+    Dekeystoning *dekeystoningFilter = new Dekeystoning();
     tabToFilter.append(dekeystoningFilter);
     addTab(dekeystoningFilter->getWidget(), dekeystoningFilter->getName());
+
+    Cropping *croppingFilter = new Cropping();
+    tabToFilter.append(croppingFilter);
+    addTab(croppingFilter->getWidget(), croppingFilter->getName());
 
     connect(this, SIGNAL(currentChanged(int)),
             this, SLOT(tabChanged(int)));
@@ -56,12 +62,14 @@ FilterContainer::FilterContainer( QWidget * parent)
 
 FilterContainer::~FilterContainer()
 {
-    delete baseFilter;
+//! \todo free tabToFilter content.
 }
 
 void FilterContainer::setImage(QPixmap pixmap)
 {
-    tabToFilter[0]->setImage(pixmap);
+    // We do downscale the Pixmap to have better performance
+    //! \todo Do a better job here (only downscale, compare width and height...)
+    tabToFilter[0]->setImage(pixmap.scaledToHeight(1000));
     updateCurrentTabPixmap();
 }
 

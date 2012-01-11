@@ -29,7 +29,7 @@ Dekeystoning::Dekeystoning()
 /*! \brief Retruns the name of the filter */
 QString Dekeystoning::getName()
 {
-    return QString("Dekeystoning");
+    return tr("Dekeystoning");
 }
 
 /*! \todo cannot this be handled by BaseFilter::getWidget() ? */

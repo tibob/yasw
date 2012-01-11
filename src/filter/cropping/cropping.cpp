@@ -16,23 +16,32 @@
  * You should have received a copy of the GNU General Public License
  * along with YASW.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef DEKEYSTONING_H
-#define DEKEYSTONING_H
+#include "cropping.h"
 
-#include "basefilter.h"
-#include "dekeystoningwidget.h"
-
-class Dekeystoning : public BaseFilter
+Cropping::Cropping()
 {
-    Q_OBJECT
-public:
-    Dekeystoning();
-    AbstractFilterWidget* getWidget();
-    QString getName();
-private:
-    DekeystoningWidget *widget;
-public slots:
-    void recalculate();
-};
+    widget = new CroppingWidget();
+    filterWidget = widget;
+    connect(widget, SIGNAL(rectangleChanged()), this, SLOT(recalculate()));
+}
 
-#endif // DEKEYSTONING_H
+void Cropping::recalculate() {
+    QRect rectangle = widget->rectangle();
+
+    outputPixmap = inputPixmap.copy(rectangle);
+
+    widget->setPreview(outputPixmap);
+}
+
+QString Cropping::getName()
+{
+    return tr("Cropping");
+}
+
+AbstractFilterWidget * Cropping::getWidget()
+{
+    return filterWidget;
+}
+
+
+

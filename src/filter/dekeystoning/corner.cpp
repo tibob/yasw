@@ -28,6 +28,7 @@
 Corner::Corner(qreal x, qreal y)
 {
     const int Diameter = 8;
+    //! \todo useles code as x, y are never used again ?
     this->x = x;
     this->y = y;
     setRect(-Diameter/2, -Diameter/2, Diameter, Diameter);

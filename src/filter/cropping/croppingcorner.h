@@ -16,23 +16,25 @@
  * You should have received a copy of the GNU General Public License
  * along with YASW.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef DEKEYSTONING_H
-#define DEKEYSTONING_H
 
-#include "basefilter.h"
-#include "dekeystoningwidget.h"
+#ifndef CROPPINGCORNER_H
+#define CROPPINGCORNER_H
 
-class Dekeystoning : public BaseFilter
+#include <QGraphicsEllipseItem>
+
+enum CornerType { TopLeftCorner, BottomRightCorner };
+
+class CroppingCorner : public QGraphicsEllipseItem
 {
-    Q_OBJECT
 public:
-    Dekeystoning();
-    AbstractFilterWidget* getWidget();
-    QString getName();
+    CroppingCorner(qreal x, qreal y, int cornerType, QRect *rectangle);
+    bool getCornerMoved();
+    void resetCornerMoved();
 private:
-    DekeystoningWidget *widget;
-public slots:
-    void recalculate();
+    void moveRectangle();
+    int cornerType;
+    QRect *rectangle;
+    bool cornerMoved;
 };
 
-#endif // DEKEYSTONING_H
+#endif // CROPPINGCORNER_H
