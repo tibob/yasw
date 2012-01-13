@@ -74,8 +74,28 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
    <class>CroppingGraphicsView</class>
    <extends>QGraphicsView</extends>
    <header>croppinggraphicsview.h</header>
+   <slots>
+    <slot>hideRectangle(bool)</slot>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>preview</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>view</receiver>
+   <slot>hideRectangle(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>139</x>
+     <y>23</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>134</x>
+     <y>85</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

@@ -24,17 +24,23 @@
 
 enum CornerType { TopLeftCorner, BottomRightCorner };
 
-class CroppingCorner : public QGraphicsEllipseItem
+/*! Inherits QObject to be able to emit signals */
+class CroppingCorner : public QObject, public QGraphicsEllipseItem
 {
+    Q_OBJECT
 public:
-    CroppingCorner(qreal x, qreal y, int cornerType, QRect *rectangle);
+    CroppingCorner(qreal x, qreal y);//, int cornerType, QRect *rectangle);
     bool getCornerMoved();
     void resetCornerMoved();
+protected:
+    QVariant itemChange(GraphicsItemChange change, const QVariant &value);
 private:
-    void moveRectangle();
+//    void moveRectangle();
     int cornerType;
     QRect *rectangle;
     bool cornerMoved;
+signals:
+    void signalCornerMoved();
 };
 
 #endif // CROPPINGCORNER_H

@@ -32,7 +32,7 @@
     The corner is a circle (diameter 8 pixel) that can be moved to modify the rectangle.
     It ignores Transformation of the GraphicsView so that it has allways the same size while zooming.
 */
-CroppingCorner::CroppingCorner(qreal x, qreal y, int cornerType, QRect *rectangle)
+CroppingCorner::CroppingCorner(qreal x, qreal y)
 {
     const int Diameter = 8;
     setRect(-Diameter/2, -Diameter/2, Diameter, Diameter);
@@ -41,22 +41,22 @@ CroppingCorner::CroppingCorner(qreal x, qreal y, int cornerType, QRect *rectangl
     setFlags(ItemIsMovable |
              ItemIgnoresTransformations |
              ItemSendsGeometryChanges);
-    this->cornerType = cornerType;
-    this->rectangle = rectangle;
-    moveRectangle();
+//    this->cornerType = cornerType;
+//    this->rectangle = rectangle;
+//    moveRectangle();
 }
 
-void CroppingCorner::moveRectangle()
-{
-    switch (cornerType) {
-        case TopLeftCorner:
-            rectangle->setTopLeft(scenePos().toPoint());
-            break;
-        case BottomRightCorner:
-            rectangle->setBottomRight(scenePos().toPoint());
-            break;
-    }
-}
+//void CroppingCorner::moveRectangle()
+//{
+//    switch (cornerType) {
+//        case TopLeftCorner:
+//            rectangle->setTopLeft(scenePos().toPoint());
+//            break;
+//        case BottomRightCorner:
+//            rectangle->setBottomRight(scenePos().toPoint());
+//            break;
+//    }
+//}
 
 bool CroppingCorner::getCornerMoved()
 {
@@ -68,3 +68,13 @@ void CroppingCorner::resetCornerMoved()
     cornerMoved = false;
 }
 
+
+QVariant CroppingCorner::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+{
+    if (change == ItemPositionHasChanged) {
+        cornerMoved = true;
+//        moveRectangle();
+        emit signalCornerMoved();
+    }
+    return QGraphicsEllipseItem::itemChange(change, value);
+}

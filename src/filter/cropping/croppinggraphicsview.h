@@ -18,7 +18,7 @@
  */
 #ifndef CROPPINGGRAPHICSVIEW_H
 #define CROPPINGGRAPHICSVIEW_H
-#include <QRect>
+#include <QGraphicsRectItem>
 #include "basefiltergraphicsview.h"
 #include "croppingcorner.h"
 
@@ -32,10 +32,11 @@ public:
     void resetRectangleMoved();
 public slots:
     void hideRectangle(bool hide);
+    void moveRectangle();
 private:
     CroppingCorner *topLeftCorner;
     CroppingCorner *bottomRightCorner;
-    QRect rectangle;
+    QGraphicsRectItem *rectangle;
 };
 
 #endif // CROPPINGGRAPHICSVIEW_H

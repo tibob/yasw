@@ -18,16 +18,22 @@
  */
 #include "croppinggraphicsview.h"
 
+/*! \todo free allocated memory on destroy */
 CroppingGraphicsView::CroppingGraphicsView(QWidget *parent) :
     BaseFilterGraphicsView(parent)
 {
-    topLeftCorner = new CroppingCorner(100, 100, TopLeftCorner, &rectangle);
+    topLeftCorner = new CroppingCorner(100, 100); //, TopLeftCorner, &rectangle);
     scene->addItem(topLeftCorner);
 
-    bottomRightCorner = new CroppingCorner(500, 500, BottomRightCorner, &rectangle);
+    bottomRightCorner = new CroppingCorner(500, 500); //, BottomRightCorner, &rectangle);
     scene->addItem(bottomRightCorner);
 
-    scene->addRect(rectangle);
+    rectangle = new QGraphicsRectItem();
+    scene->addItem(rectangle);
+
+    connect(topLeftCorner, SIGNAL(signalCornerMoved()), this, SLOT(moveRectangle()));
+    connect(bottomRightCorner, SIGNAL(signalCornerMoved()), this, SLOT(moveRectangle()));
+    moveRectangle();
 }
 
 QRect CroppingGraphicsView::getRectangle()
@@ -54,5 +60,14 @@ void CroppingGraphicsView::hideRectangle(bool hide)
 
     topLeftCorner->setVisible(showRectangle);
     bottomRightCorner->setVisible(showRectangle);
-    //! \todo to hide Rectangle we need a QGraphicsRectItem
+    rectangle->setVisible(showRectangle);
+}
+
+void CroppingGraphicsView::moveRectangle()
+{
+    qreal width = bottomRightCorner->x()-topLeftCorner->x();
+    qreal heigth = bottomRightCorner->y()-topLeftCorner->y();
+
+    rectangle->setRect(0, 0, width, heigth);
+    rectangle->setPos(topLeftCorner->scenePos());
 }
