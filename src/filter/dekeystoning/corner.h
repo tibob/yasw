@@ -36,7 +36,6 @@ protected:
     QVariant itemChange(GraphicsItemChange change, const QVariant &value);
 private:
     QSet<Line *> myLines;
-    qreal x, y;
     bool cornerMoved;
 };
 

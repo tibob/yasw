@@ -20,17 +20,20 @@
 #include "corner.h"
 #include "line.h"
 
-/*! \brief Creates a Corner for the polygon
+/*! \class Corner
+    \brief Corner to build a polygon
 
-    The corner is a circle (diameter 8 pixel) that can be moved to modify the polygon.
-    It ignores Transformation of the GraphicsView so that it has allways the same size while zooming.
+    The corner is a circle (diameter 8 pixel) that can be moved to modify the lines
+    connected to it (via Line::trackCorner). All the corner together build a polygon,
+    wich moves with it.
+    Corner is q QGraphicsItem wich is to be used in a QGraphicsScene/View.
+
+    It ignores Transformation of the GraphicsView so that it has allways the same
+    size while zooming.
 */
 Corner::Corner(qreal x, qreal y)
 {
     const int Diameter = 8;
-    //! \todo useles code as x, y are never used again ?
-    this->x = x;
-    this->y = y;
     setRect(-Diameter/2, -Diameter/2, Diameter, Diameter);
     setPos(x, y);
     setZValue(100);

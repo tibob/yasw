@@ -18,6 +18,18 @@
  */
 #include "dekeystoninggraphicsview.h"
 
+/*! \class DekeystoningGraphicsView
+    \brief Display a polygon over an image for configuring of deykeystoning.
+
+    DekeystoningGraphicsView inherits BaseFilterGraphicsView and its
+    features (scene, zooming, setPixmap).
+    The polygon can be hidden (to display the preview of the pixmap.
+ */
+
+/*! Constructs the polygon, formed of 4 corners (c1..4) and 4 lines (l1..4)
+  and adds them to the scene.
+  \todo appropriate naming for corners and lines would be nice
+  */
 DekeystoningGraphicsView::DekeystoningGraphicsView(QWidget *parent):
         BaseFilterGraphicsView(parent)
 {
@@ -43,6 +55,19 @@ DekeystoningGraphicsView::DekeystoningGraphicsView(QWidget *parent):
     scene->addItem(l4);
 }
 
+/*! cleen the allocated memory */
+DekeystoningGraphicsView::~DekeystoningGraphicsView()
+{
+    delete c1;
+    delete c2;
+    delete c3;
+    delete c4;
+    delete l1;
+    delete l2;
+    delete l3;
+    delete l4;
+}
+
 /** \brief Mean width of the transformation polygon.
 
   This is used as the width of the resulting Pixmap.
@@ -57,7 +82,7 @@ qreal DekeystoningGraphicsView::meanWidth()
     return width;
 }
 
-/** \brief Mean height of the transformation polygon.
+/*! \brief Mean height of the transformation polygon.
 
   This is used as the height of the resulting Pixmap.
 */
@@ -71,6 +96,7 @@ qreal DekeystoningGraphicsView::meanHeight()
     return height;
 }
 
+/*! \return The polygon as drywed in the scene */
 QPolygonF DekeystoningGraphicsView::polygon()
 {
     QPolygonF polygon;
@@ -80,6 +106,7 @@ QPolygonF DekeystoningGraphicsView::polygon()
     return polygon;
 }
 
+/*! Hides the polygon so that it does not interfere with a previewed Pixmap */
 void DekeystoningGraphicsView::hidePolygon(bool hide)
 {
     bool showPolygon = !hide;
@@ -94,7 +121,7 @@ void DekeystoningGraphicsView::hidePolygon(bool hide)
     l4->setVisible(showPolygon);
 }
 
-/** \brief check if polygon moved since last resetPolygonMoved() */
+/** \brief Check if polygon moved since last resetPolygonMoved() */
 bool DekeystoningGraphicsView::polygonMoved()
 {
     return c1->getCornerMoved()
@@ -103,7 +130,8 @@ bool DekeystoningGraphicsView::polygonMoved()
             || c4->getCornerMoved();
 }
 
-/** \brief resets all registered moves for the polygon, so that polygonMoved() returns false */
+/** \brief Resets all registered moves for the polygon, so that polygonMoved()
+returns false */
 void DekeystoningGraphicsView::resetPolygonMoved()
 {
     c1->resetCornerMoved();

@@ -27,6 +27,7 @@ class CroppingGraphicsView : public BaseFilterGraphicsView
     Q_OBJECT
 public:
     CroppingGraphicsView(QWidget *parent);
+    ~CroppingGraphicsView();
     QRect getRectangle();
     bool rectangleMoved();
     void resetRectangleMoved();

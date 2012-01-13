@@ -28,6 +28,7 @@ class DekeystoningGraphicsView : public BaseFilterGraphicsView
     Q_OBJECT
 public:
     DekeystoningGraphicsView(QWidget *parent);
+    ~DekeystoningGraphicsView();
     qreal meanWidth();
     qreal meanHeight();
     QPolygonF polygon();

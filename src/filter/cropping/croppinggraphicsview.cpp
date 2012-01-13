@@ -18,7 +18,6 @@
  */
 #include "croppinggraphicsview.h"
 
-/*! \todo free allocated memory on destroy */
 CroppingGraphicsView::CroppingGraphicsView(QWidget *parent) :
     BaseFilterGraphicsView(parent)
 {
@@ -34,6 +33,13 @@ CroppingGraphicsView::CroppingGraphicsView(QWidget *parent) :
     connect(topLeftCorner, SIGNAL(signalCornerMoved()), this, SLOT(moveRectangle()));
     connect(bottomRightCorner, SIGNAL(signalCornerMoved()), this, SLOT(moveRectangle()));
     moveRectangle();
+}
+
+CroppingGraphicsView::~CroppingGraphicsView()
+{
+    delete topLeftCorner;
+    delete bottomRightCorner;
+    delete rectangle;
 }
 
 QRect CroppingGraphicsView::getRectangle()
