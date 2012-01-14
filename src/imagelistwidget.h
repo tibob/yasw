@@ -16,30 +16,44 @@
  * You should have received a copy of the GNU General Public License
  * along with YASW.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
 
-#include <QMainWindow>
-#include <QModelIndex>
-#include <QFileSystemModel>
-#include <QGraphicsPixmapItem>
-#include "corner.h"
+#ifndef IMAGELISTWIDGET_H
+#define IMAGELISTWIDGET_H
+
+#include <QWidget>
+#include <QListWidgetItem>
 
 namespace Ui {
-    class MainWindow;
+    class ImageListWidget;
 }
 
-class MainWindow : public QMainWindow {
+class ImageListWidget : public QWidget
+{
     Q_OBJECT
-public:
-    MainWindow(QWidget *parent = 0);
-    ~MainWindow();
 
-protected:
-    void changeEvent(QEvent *e);
+public:
+    explicit ImageListWidget(QWidget *parent = 0);
+    ~ImageListWidget();
+
+public slots:
+    void imageClicked (QListWidgetItem * item);
+
+private slots:
+    void on_addEmpty_clicked();
+
+    void on_remove_clicked();
+
+    void on_add_clicked();
+
+    void on_up_clicked();
+
+    void on_down_clicked();
 
 private:
-    Ui::MainWindow *ui;
+    Ui::ImageListWidget *ui;
+
+signals:
+    void pixmapChanged (QPixmap newPixmap);
 };
 
-#endif // MAINWINDOW_H
+#endif // IMAGELISTWIDGET_H

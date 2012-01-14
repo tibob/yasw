@@ -38,9 +38,10 @@ FilterContainer::FilterContainer( QWidget * parent)
     oldIndex = -1;
 
     // initialise the filters
-    BaseFilter *baseFilter = new BaseFilter();
-    tabToFilter.append(baseFilter); // as tabToFilter is empty, we start at index 0
-    addTab(baseFilter->getWidget(), baseFilter->getName());
+// We do not need to display the "Base Filter" as it does not work (yet)
+//    BaseFilter *baseFilter = new BaseFilter();
+//    tabToFilter.append(baseFilter); // as tabToFilter is empty, we start at index 0
+//    addTab(baseFilter->getWidget(), baseFilter->getName());
 
     //Rotation Filter
     Rotation *rotationFilter = new Rotation();

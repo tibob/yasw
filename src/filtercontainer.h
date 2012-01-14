@@ -30,14 +30,16 @@ class FilterContainer : public QTabWidget
 public:
     FilterContainer(QWidget * parent = 0);
     ~FilterContainer();
-    void setImage(QPixmap pixmap);
+
 public slots:
     void tabChanged(int index);
+    void setImage(QPixmap pixmap);
+
 private:
-    QList<BaseFilter *> tabToFilter;
-    int oldIndex; //stores the last selected index
+        QList<BaseFilter *> tabToFilter;
+        int oldIndex; //stores the last selected index
 
-    void updateCurrentTabPixmap(int fromIndex = 1);
-};
+        void updateCurrentTabPixmap(int fromIndex = 1);
+    };
 
-#endif // FILTERCONTAINER_H
+    #endif // FILTERCONTAINER_H

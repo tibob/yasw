@@ -2,5 +2,10 @@
     <qresource prefix="/icons">
         <file>tango-icon-theme/edit-redo.svg</file>
         <file>tango-icon-theme/edit-undo.svg</file>
+        <file>tango-icon-theme/list-remove.svg</file>
+        <file>tango-icon-theme/document-new.svg</file>
+        <file>tango-icon-theme/go-down.svg</file>
+        <file>tango-icon-theme/go-up.svg</file>
+        <file>tango-icon-theme/list-add.svg</file>
     </qresource>
 </RCC>
