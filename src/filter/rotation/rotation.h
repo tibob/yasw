@@ -31,6 +31,9 @@ public:
     Rotation(QObject * parent = 0);
     AbstractFilterWidget* getWidget();
     QString getName();
+    QMap<QString, QVariant> getSettings();
+    void setSettings(QMap <QString, QVariant> settings);
+
 public slots:
     void recalculate();
 

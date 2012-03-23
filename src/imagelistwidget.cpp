@@ -21,6 +21,10 @@
 #include "ui_imagelistwidget.h"
 #include <QFileDialog>
 
+/*! \todo use Roles to store data from the filters
+  Qt::UserRole (0) = filename of picture
+  +1 = QMap<QString, QMap<QString, QVariant> to store filter settings map["filter name"]["setting"] = value
+  */
 ImageListWidget::ImageListWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ImageListWidget)

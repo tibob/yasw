@@ -43,7 +43,36 @@ void Rotation::recalculate()
     widget->setPreview(outputPixmap);
 }
 
-///*! \fixme implement this */
+/** \brief Get filter settings
+
+  The only relevant Setting for the Filter is its rotation angle.
+  \todo One my want to also save the preview checkbox.
+  */
+QMap<QString, QVariant> Rotation::getSettings()
+{
+    QMap<QString, QVariant> settings;
+
+    settings["rotation"] = widget->rotation();
+
+    return settings;
+}
+
+/** \brief Set filter settings
+
+  The only relevant Setting for the Filter is its rotation angle.
+  \todo One my want to also save the preview checkbox.
+  */
+void Rotation::setSettings(QMap<QString, QVariant> settings)
+{
+    /* We might not need to check, as the default value for an uninitialized int
+        ist 0, but this is cleaner */
+    if (settings.contains("rotation"))
+        widget->setRotation(settings["rotation"].toUInt());
+    else
+        widget->setRotation(0);
+}
+
+///*! \todo implement this */
 //QPixmap Rotation::getFilteredImage()
 //{
 //    return inputPixmap;

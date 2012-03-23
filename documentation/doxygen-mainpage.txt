@@ -2,7 +2,7 @@
 
 This is YASW (Yet Another Scan Wizard) documentation.
 \section sect_implement_filter Implement your own filter
-In order your own filter, you have to create a class that inherits from BaseFilter and reimplement
+In order develop your own filter, you have to create a class that inherits from BaseFilter and reimplement
 - AbstractFilterWidget* getWidget();
 - QString getName();
 - void recalculate(); as a public slot

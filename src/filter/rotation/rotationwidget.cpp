@@ -79,3 +79,13 @@ int RotationWidget::rotation()
     return rotationAngle;
 }
 
+/** \brief Sets the rotation angle in degrees
+
+    This function is called when changing the Settings of the Rotation Filter
+  */
+void RotationWidget::setRotation(int degrees)
+{
+    /* If the rotation angle is not 0, 90, 180 or 270, someone tempered with the project file
+       and knows what (s)he is dooing, so we don't check */
+    rotationAngle = degrees;
+}

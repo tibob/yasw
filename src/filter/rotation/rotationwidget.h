@@ -37,6 +37,7 @@ public:
     void setPreview(QPixmap pixmap);
     bool preview();
     int rotation();
+    void setRotation(int degrees);
 
 private slots:
     void on_rotateLeft_clicked();

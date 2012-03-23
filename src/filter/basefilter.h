@@ -22,6 +22,9 @@
 #include <QPixmap>
 #include <QWidget>
 #include <QObject>
+#include <QMap>
+#include <QVariant>
+#include <QString>
 #include "basefilterwidget.h"
 
 
@@ -33,13 +36,11 @@ public:
     ~BaseFilter();
     void setImage(const QPixmap pixmap);
     virtual QPixmap getFilteredImage();
-
     AbstractFilterWidget* getWidget();
     QString getName();
-    /* For later use :
-       setSettings()
-       getSettings()
-       */
+    /** \todo is a virtual function really needed here ? */
+    virtual QMap<QString, QVariant> getSettings();
+    virtual void setSettings(QMap <QString, QVariant> settings);
 public slots:
     virtual void recalculate();
 

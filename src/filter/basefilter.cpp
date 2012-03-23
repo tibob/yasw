@@ -88,6 +88,22 @@ void BaseFilter::recalculate()
     outputPixmap = inputPixmap;
 }
 
+/*! \brief virtual function to get the Filter settings
+
+    @returns A QMap of keys (QString) to settings (QVariant).
+*/
+QMap<QString, QVariant> BaseFilter::getSettings()
+{
+    /* As BaseFilter does nothing, there is nothing to save */
+    return QMap<QString, QVariant>();
+}
+
+/** \brief virtual function do set the Filter settings */
+void BaseFilter::setSettings(QMap<QString, QVariant> /* settings */)
+{
+    /* Ignore settings, as there is nothing to set */
+}
+
 
 
 
