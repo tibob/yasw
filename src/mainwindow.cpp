@@ -50,7 +50,16 @@ void MainWindow::changeEvent(QEvent *e)
     }
 }
 
+/* \todo Test only */
 void MainWindow::on_actionGetSettings_triggered()
 {
-    qDebug() << ui->filterContainer->getSettings();
+    imageSettings = ui->filterContainer->getSettings();
+    qDebug() << imageSettings;
+}
+
+void MainWindow::on_actionFilterContainer_setSettings_triggered()
+{
+    ui->filterContainer->setSettings(imageSettings);
+
+    /* \todo we need a redraw here */
 }

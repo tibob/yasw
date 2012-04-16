@@ -83,6 +83,7 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
      <string>Test</string>
     </property>
     <addaction name="actionGetSettings"/>
+    <addaction name="actionFilterContainer_setSettings"/>
    </widget>
    <addaction name="menu_File"/>
    <addaction name="menuTest"/>
@@ -96,6 +97,11 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
   <action name="actionGetSettings">
    <property name="text">
     <string>FilterContainer::getSettings</string>
+   </property>
+  </action>
+  <action name="actionFilterContainer_setSettings">
+   <property name="text">
+    <string>FilterContainer::setSettings</string>
    </property>
   </action>
  </widget>

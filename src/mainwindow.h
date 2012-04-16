@@ -41,8 +41,13 @@ protected:
 private slots:
     void on_actionGetSettings_triggered();
 
+    void on_actionFilterContainer_setSettings_triggered();
+
 private:
     Ui::MainWindow *ui;
+
+    /* \todo Test only */
+    QMap<QString, QMap<QString, QVariant> > imageSettings;
 };
 
 #endif // MAINWINDOW_H
