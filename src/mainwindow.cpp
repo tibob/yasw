@@ -16,6 +16,8 @@
  * You should have received a copy of the GNU General Public License
  * along with YASW.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+#include <QDebug>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "corner.h"
@@ -46,4 +48,9 @@ void MainWindow::changeEvent(QEvent *e)
     default:
         break;
     }
+}
+
+void MainWindow::on_actionGetSettings_triggered()
+{
+    qDebug() << ui->filterContainer->getSettings();
 }

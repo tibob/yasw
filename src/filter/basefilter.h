@@ -37,8 +37,7 @@ public:
     void setImage(const QPixmap pixmap);
     virtual QPixmap getFilteredImage();
     AbstractFilterWidget* getWidget();
-    QString getName();
-    /** \todo is a virtual function really needed here ? */
+    virtual QString getName();
     virtual QMap<QString, QVariant> getSettings();
     virtual void setSettings(QMap <QString, QVariant> settings);
 public slots:

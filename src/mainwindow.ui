@@ -78,12 +78,24 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
     </property>
     <addaction name="actionQuit"/>
    </widget>
+   <widget class="QMenu" name="menuTest">
+    <property name="title">
+     <string>Test</string>
+    </property>
+    <addaction name="actionGetSettings"/>
+   </widget>
    <addaction name="menu_File"/>
+   <addaction name="menuTest"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionQuit">
    <property name="text">
     <string>&amp;Quit</string>
+   </property>
+  </action>
+  <action name="actionGetSettings">
+   <property name="text">
+    <string>FilterContainer::getSettings</string>
    </property>
   </action>
  </widget>

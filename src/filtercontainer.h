@@ -21,6 +21,8 @@
 
 #include <QTabWidget>
 #include <QMap>
+#include <QVariant>
+#include <QString>
 #include "basefilter.h"
 #include "abstractfilterwidget.h"
 
@@ -30,6 +32,9 @@ class FilterContainer : public QTabWidget
 public:
     FilterContainer(QWidget * parent = 0);
     ~FilterContainer();
+
+    QMap<QString, QMap<QString, QVariant> > getSettings();
+    void setSettings(QMap<QString, QMap<QString, QVariant> > settings);
 
 public slots:
     void tabChanged(int index);
