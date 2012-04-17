@@ -70,6 +70,8 @@ void Rotation::setSettings(QMap<QString, QVariant> settings)
         widget->setRotation(settings["rotation"].toUInt());
     else
         widget->setRotation(0);
+
+    recalculate();
 }
 
 ///*! \todo implement this */
