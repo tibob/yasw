@@ -29,8 +29,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect (ui->imageList, SIGNAL(pixmapChanged(QPixmap)),
-             ui->filterContainer, SLOT(setImage(QPixmap)));
+    ui->imageList->setFilterContainer(ui->filterContainer);
 }
 
 MainWindow::~MainWindow()

@@ -112,9 +112,10 @@ void FilterContainer::updateCurrentTabPixmap(int fromIndex)
   Each Filter.getSettings will return its settings in a QMap<QString, QVariant>, which will be packed in another
   QMap (its type is QMap<QString, QMap<QString, QVariant> > ). The String Key is the value of Filter.getName().
   */
-QMap<QString, QMap<QString, QVariant> > FilterContainer::getSettings()
+QMap<QString, QVariant> FilterContainer::getSettings()
 {
-    QMap<QString, QMap<QString, QVariant> > allSettings;
+    /* QVariant here is a QMap<QString, QVariant> */
+    QMap<QString, QVariant> allSettings;
     BaseFilter *filter;
 
 
@@ -129,7 +130,7 @@ QMap<QString, QMap<QString, QVariant> > FilterContainer::getSettings()
 
     See also FilterContainer::getSettings
   */
-void FilterContainer::setSettings(QMap<QString, QMap<QString, QVariant> > settings)
+void FilterContainer::setSettings(QMap<QString, QVariant> settings)
 {
     QString filterName;
     BaseFilter *filter;
@@ -137,7 +138,7 @@ void FilterContainer::setSettings(QMap<QString, QMap<QString, QVariant> > settin
     foreach (filterName, settings.keys()) {
         foreach (filter, tabToFilter) {
             if (filterName == filter->getName()) {
-                filter->setSettings(settings[filterName]);
+                filter->setSettings(settings[filterName].toMap());
             }
         }
     }

@@ -22,10 +22,13 @@
 
 #include <QWidget>
 #include <QListWidgetItem>
+#include "filtercontainer.h"
 
 namespace Ui {
     class ImageListWidget;
 }
+
+enum ImageListUserRoles { ImagePreferences = Qt::UserRole };
 
 class ImageListWidget : public QWidget
 {
@@ -34,9 +37,10 @@ class ImageListWidget : public QWidget
 public:
     explicit ImageListWidget(QWidget *parent = 0);
     ~ImageListWidget();
+    void setFilterContainer(FilterContainer *container);
 
 public slots:
-    void imageClicked (QListWidgetItem * item);
+    void currentItemChanged(QListWidgetItem *newItem, QListWidgetItem *previousItem);
 
 private slots:
     void on_addEmpty_clicked();
@@ -51,6 +55,8 @@ private slots:
 
 private:
     Ui::ImageListWidget *ui;
+    FilterContainer *filterContainer;
+
 
 signals:
     void pixmapChanged (QPixmap newPixmap);

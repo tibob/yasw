@@ -33,8 +33,10 @@ ImageListWidget::ImageListWidget(QWidget *parent) :
     ui->images->setIconSize(QSize(100, 100));
     ui->images->setSpacing(1);
 
-    connect(ui->images, SIGNAL(itemClicked(QListWidgetItem*)),
-            this, SLOT(imageClicked(QListWidgetItem*)));
+    connect(ui->images, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)),
+            this, SLOT(currentItemChanged(QListWidgetItem*,QListWidgetItem*)));
+
+    filterContainer = NULL;
 }
 
 ImageListWidget::~ImageListWidget()
@@ -50,6 +52,7 @@ void ImageListWidget::on_addEmpty_clicked()
     ui->images->insertItem(currentRow, emptyItem);
 }
 
+/** \todo Clear FilterContainer on last Item */
 void ImageListWidget::on_remove_clicked()
 {
     delete ui->images->currentItem();
@@ -86,7 +89,45 @@ void ImageListWidget::on_down_clicked()
     ui->images->setCurrentItem(item);
 }
 
-void ImageListWidget::imageClicked(QListWidgetItem *item)
+/** \brief Change the Image beeing worked on.
+
+    This slot is connected to QListWidget::itemClicked. It saves the settings
+    of previous image and restore the settings of the clicked image.
+ */
+void ImageListWidget::currentItemChanged(QListWidgetItem *newItem, QListWidgetItem *previousItem)
 {
-    emit pixmapChanged(QPixmap(item->text()));
+    QMap<QString, QVariant> settings;
+
+    if (filterContainer && previousItem) {
+        settings = filterContainer->getSettings();
+        previousItem->setData(ImagePreferences, settings);
+    }
+
+    if (filterContainer && newItem) {
+        filterContainer->setSettings(newItem->data(ImagePreferences).toMap());
+    }
+
+    if (newItem) {
+        emit pixmapChanged(QPixmap(newItem->text()));
+    } else {
+        emit pixmapChanged(QPixmap());
+    }
+}
+
+/** \brief Sets the FilterContainer this image list has to interact with.
+
+    As the image list has to get the settings from the FilterContainer, a link
+    with signals ans slots is not working.
+*/
+void ImageListWidget::setFilterContainer(FilterContainer *container)
+{
+    if (filterContainer) {
+        disconnect(this, SIGNAL(pixmapChanged(QPixmap)),
+                   filterContainer, SLOT(setImage(QPixmap)));
+    }
+
+    filterContainer = container;
+
+    connect (this, SIGNAL(pixmapChanged(QPixmap)),
+             filterContainer, SLOT(setImage(QPixmap)));
 }

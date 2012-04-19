@@ -33,8 +33,8 @@ public:
     FilterContainer(QWidget * parent = 0);
     ~FilterContainer();
 
-    QMap<QString, QMap<QString, QVariant> > getSettings();
-    void setSettings(QMap<QString, QMap<QString, QVariant> > settings);
+    QMap<QString, QVariant> getSettings();
+    void setSettings(QMap<QString, QVariant> settings);
 
 public slots:
     void tabChanged(int index);

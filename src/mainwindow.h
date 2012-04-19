@@ -47,7 +47,7 @@ private:
     Ui::MainWindow *ui;
 
     /* \todo Test only */
-    QMap<QString, QMap<QString, QVariant> > imageSettings;
+    QMap<QString, QVariant> imageSettings;
 };
 
 #endif // MAINWINDOW_H
