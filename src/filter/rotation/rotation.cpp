@@ -46,7 +46,7 @@ void Rotation::recalculate()
 /** \brief Get filter settings
 
   The only relevant Setting for the Filter is its rotation angle.
-  \todo One my want to also save the preview checkbox.
+  todo: One may want to also save the preview checkbox.
   */
 QMap<QString, QVariant> Rotation::getSettings()
 {
@@ -60,7 +60,7 @@ QMap<QString, QVariant> Rotation::getSettings()
 /** \brief Set filter settings
 
   The only relevant Setting for the Filter is its rotation angle.
-  \todo One my want to also save the preview checkbox.
+  todo: One may want to also save the preview checkbox.
   */
 void Rotation::setSettings(QMap<QString, QVariant> settings)
 {

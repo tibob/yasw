@@ -28,7 +28,7 @@
 
 /*! Constructs the polygon, formed of 4 corners (c1..4) and 4 lines (l1..4)
   and adds them to the scene.
-  \todo appropriate naming for corners and lines would be nice
+  //NOTE: appropriate naming for corners and lines would be nice
   */
 DekeystoningGraphicsView::DekeystoningGraphicsView(QWidget *parent):
         BaseFilterGraphicsView(parent)

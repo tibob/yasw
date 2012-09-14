@@ -67,4 +67,5 @@ INCLUDEPATH += filter \
 RESOURCES += icons/icons.qrc
 
 OTHER_FILES += \
-    ../documentation/doxygen-mainpage.txt
+    ../documentation/doxygen-mainpage.txt \
+    ../changelog.txt

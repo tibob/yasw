@@ -52,6 +52,6 @@ void BaseFilterGraphicsView::setPixmap(const QPixmap pixmap)
     pixmapItem->setPixmap(pixmap);
 
     /* Zoom the QGraphicsView to fit the new Pixmap */
-//todo does not work for hidden QGraphicsView -> set zoomfactor ?
+//todo: does not work for hidden QGraphicsView -> set zoomfactor ?
     fitInView(pixmapItem, Qt::KeepAspectRatio);
 }

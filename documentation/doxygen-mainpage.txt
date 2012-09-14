@@ -13,15 +13,15 @@ modifiy hte INCLUDEPATH in yasw.pro.
 Have a look at the Rotation class (folder filter/rotation) for a simple filter example.
 
 \section todo
-\todo disabling a filter (UI) should disable the rendering.
-\todo project handling of a project:
+\todo: disabling a filter (UI) should disable the rendering.
+\todo: project handling of a project:
 - choose and sort source images
 - load and save parameters from filters
 - load and save projects
-\todo handling of output
+\todo: handling of output
 -jpg
 -pdf
-\todo (later) autocalibration with a printed grid (line detection)
-\todo (later) add filter for color manipulation_/adjustment
+\todo: (later) autocalibration with a printed grid (line detection)
+\todo: (later) add filter for color manipulation_/adjustment
 
 */

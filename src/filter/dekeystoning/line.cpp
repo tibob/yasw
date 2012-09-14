@@ -16,14 +16,12 @@
  * You should have received a copy of the GNU General Public License
  * along with YASW.  If not, see <http://www.gnu.org/licenses/>.
  */
-//! \todo remove QPen
-#include <QPen>
 #include "line.h"
 #include "corner.h"
 
 /*! \class Line
 
-  \todo comment this, rename it
+  \todo: comment this Class, rename it in DeykeystoningLine
   */
 
 Line::Line(Corner *from, Corner *to)

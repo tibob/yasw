@@ -17,6 +17,10 @@
  * along with YASW.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/** todo:
+Read File format should include png
+*/
+
 #include <QDebug>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -49,7 +53,7 @@ void MainWindow::changeEvent(QEvent *e)
     }
 }
 
-/* \todo Test only */
+/* NOTE: this is olny a test, remove later */
 void MainWindow::on_actionGetSettings_triggered()
 {
     imageSettings = ui->filterContainer->getSettings();

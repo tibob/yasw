@@ -21,7 +21,7 @@
 /** \class FilterWidget
   \brief An abstract class for all Filter Widgets.
 
-  \todo The class ist not abstract anymore...
+  NOTE: The class ist not really abstract anymore as is provides a basic implementation.
 
   This abstract class describes the members a Filter Widget must have.
   It has to be inherited by all Filter Widgets.

@@ -46,7 +46,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    /* \todo Test only */
+    // NOTE: this is for tests only; remove it later */
     QMap<QString, QVariant> imageSettings;
 };
 

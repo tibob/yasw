@@ -23,7 +23,7 @@
 #include "cropping.h"
 
 /** \class FilterContainer
-    \brief A QTabWidget to display the different filters.
+    \brief A customised QTabWidget to display the different filters.
 
     FilterContainer initialises each Filter.
 
@@ -63,13 +63,13 @@ FilterContainer::FilterContainer( QWidget * parent)
 
 FilterContainer::~FilterContainer()
 {
-//! \todo free tabToFilter content.
+// TODO: free tabToFilter content.
 }
 
 void FilterContainer::setImage(QPixmap pixmap)
 {
     // We do downscale the Pixmap to have better performance
-    //! \todo Do a better job here (only downscale, compare width and height...)
+    // TODO: Do a better job here (we should only downscale, compare width and height...)
     tabToFilter[0]->setImage(pixmap.scaledToHeight(1000));
     updateCurrentTabPixmap();
 }
@@ -85,7 +85,7 @@ void FilterContainer::tabChanged(int index)
     Lets the previous tabs (filters) recalculate their Pixmap so that current Tab
     gets the latest filtered Pixmap.
 
-    \todo This could be a performance issue, caching may be a solution.
+    // NOTE: This could be a performance issue, caching may be a solution.
 
 */
 void FilterContainer::updateCurrentTabPixmap(int fromIndex)
@@ -134,12 +134,19 @@ void FilterContainer::setSettings(QMap<QString, QVariant> settings)
 {
     QString filterName;
     BaseFilter *filter;
+    bool filterSet;
 
-    foreach (filterName, settings.keys()) {
-        foreach (filter, tabToFilter) {
+    foreach (filter, tabToFilter) {
+        filterSet = false;
+        foreach (filterName, settings.keys()) {
             if (filterName == filter->getName()) {
                 filter->setSettings(settings[filterName].toMap());
+                filterSet = true;
             }
+        }
+        if (filterSet == false) {
+            /* we did not found settings for this filter, reset settings */
+            filter->setSettings(QMap<QString, QVariant>());
         }
     }
 }

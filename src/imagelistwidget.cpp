@@ -20,8 +20,15 @@
 #include "imagelistwidget.h"
 #include "ui_imagelistwidget.h"
 #include <QFileDialog>
+#include <QDebug>
 
-/*! \todo use Roles to store data from the filters
+/**
+ \brief Widget that handle out list of images and display them as icons.
+
+ ImageListWidget will handle and store the filter settings for each image.
+ */
+
+/*! \todo: use Roles to store data from the filters
   Qt::UserRole (0) = filename of picture
   +1 = QMap<QString, QMap<QString, QVariant> to store filter settings map["filter name"]["setting"] = value
   */
@@ -44,6 +51,8 @@ ImageListWidget::~ImageListWidget()
     delete ui;
 }
 
+/** Creates an empty image (placeholder for example for
+    an empty page wich has not been scaned) */
 void ImageListWidget::on_addEmpty_clicked()
 {
     QListWidgetItem *emptyItem = new QListWidgetItem(QIcon(":/icons/tango-icon-theme/document-new.svg"),
@@ -52,7 +61,7 @@ void ImageListWidget::on_addEmpty_clicked()
     ui->images->insertItem(currentRow, emptyItem);
 }
 
-/** \todo Clear FilterContainer on last Item */
+/** Removes the current selected image */
 void ImageListWidget::on_remove_clicked()
 {
     delete ui->images->currentItem();
@@ -111,6 +120,11 @@ void ImageListWidget::currentItemChanged(QListWidgetItem *newItem, QListWidgetIt
         emit pixmapChanged(QPixmap(newItem->text()));
     } else {
         emit pixmapChanged(QPixmap());
+        /* Reset Filter Settings as no image is selected
+         * NOTE: check if needeed after deykeystoning settings have been implemented
+        */
+        if (filterContainer)
+            filterContainer->setSettings(QMap<QString, QVariant>());
     }
 }
 

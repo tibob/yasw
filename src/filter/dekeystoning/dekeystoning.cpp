@@ -32,7 +32,7 @@ QString Dekeystoning::getName()
     return tr("Dekeystoning");
 }
 
-/*! \todo cannot this be handled by BaseFilter::getWidget() ? */
+// NOTE: cannot this be handled by BaseFilter::getWidget() ?
 AbstractFilterWidget* Dekeystoning::getWidget()
 {
     return widget;

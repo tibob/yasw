@@ -98,12 +98,16 @@ QMap<QString, QVariant> BaseFilter::getSettings()
     return QMap<QString, QVariant>();
 }
 
-/** \brief virtual function do set the Filter settings */
+/** \brief virtual function do set the Filter settings.
+
+  If a needed setting is not available in settings, a default has to be set.
+
+  //FIXME: implement setSettings in cropping and dekeystoning.
+*/
 void BaseFilter::setSettings(QMap<QString, QVariant> /* settings */)
 {
     /* Ignore settings, as there is nothing to set */
 }
-
 
 
 
