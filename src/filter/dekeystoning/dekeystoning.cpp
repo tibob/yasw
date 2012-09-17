@@ -32,6 +32,16 @@ QString Dekeystoning::getName()
     return tr("Dekeystoning");
 }
 
+QMap<QString, QVariant> Dekeystoning::getSettings()
+{
+    return widget->getSettings();
+}
+
+void Dekeystoning::setSettings(QMap<QString, QVariant> settings)
+{
+    widget->setSettings(settings);
+}
+
 // NOTE: cannot this be handled by BaseFilter::getWidget() ?
 AbstractFilterWidget* Dekeystoning::getWidget()
 {

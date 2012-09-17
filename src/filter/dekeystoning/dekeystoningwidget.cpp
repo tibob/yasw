@@ -98,4 +98,26 @@ void DekeystoningWidget::resetPolygonMoved()
     return ui->view->resetPolygonMoved();
 }
 
+/** \brief Get the filter settings
+
+    NOTE: Currently does only save the polygon coordinates; one may want to save
+    activated and preview.
+*/
+QMap<QString, QVariant> DekeystoningWidget::getSettings()
+{
+    return ui->view->getSettings();
+}
+
+/** \brief sets the filter settings (change polygon coordinates)
+
+    If the settings are not present, sets default values
+
+    NOTE: Currently does only save the polygon coordinates; one may want to load
+    activated and preview settings (if present).
+*/
+void DekeystoningWidget::setSettings(QMap<QString, QVariant> settings)
+{
+    ui->view->setSettings(settings);
+}
+
 

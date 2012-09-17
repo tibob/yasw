@@ -140,5 +140,53 @@ void DekeystoningGraphicsView::resetPolygonMoved()
     c4->resetCornerMoved();
 }
 
+/** \brief Get the filter settings (gets the polygon coordinates)
+*/
+QMap<QString, QVariant> DekeystoningGraphicsView::getSettings()
+{
+    QMap<QString, QVariant> settings;
+    settings["c1"] = c1->pos();
+    settings["c2"] = c2->pos();
+    settings["c3"] = c3->pos();
+    settings["c4"] = c4->pos();
+
+    return settings;
+}
+
+/** \brief sets the filter settings (change polygon coordinates)
+
+    If the settings are not present, sets default values
+*/
+void DekeystoningGraphicsView::setSettings(QMap<QString, QVariant> settings)
+{
+    if (settings.contains("c1") && settings["c1"].canConvert(QVariant::PointF)) {
+        c1->setPos(settings["c1"].toPointF());
+    } else {
+        // NOTE: it would be nice to set these Values above global constants
+        c1->setPos(100, 100);
+    }
+
+    if (settings.contains("c2") && settings["c2"].canConvert(QVariant::PointF)) {
+        c2->setPos(settings["c2"].toPointF());
+    } else {
+        // NOTE: it would be nice to set these Values above global constants
+        c2->setPos(500, 100);
+    }
+
+    if (settings.contains("c3") && settings["c3"].canConvert(QVariant::PointF)) {
+        c3->setPos(settings["c3"].toPointF());
+    } else {
+        // NOTE: it would be nice to set these Values above global constants
+        c3->setPos(500, 500);
+    }
+
+    if (settings.contains("c4") && settings["c4"].canConvert(QVariant::PointF)) {
+        c4->setPos(settings["c4"].toPointF());
+    } else {
+        // NOTE: it would be nice to set these Values above global constants
+        c4->setPos(100, 500);
+    }
+}
+
 
 

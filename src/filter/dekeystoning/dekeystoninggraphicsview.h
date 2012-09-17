@@ -34,6 +34,8 @@ public:
     QPolygonF polygon();
     bool polygonMoved();
     void resetPolygonMoved();
+    QMap<QString, QVariant> getSettings();
+    void setSettings(QMap <QString, QVariant> settings);
 public slots:
     void hidePolygon(bool hide);
 

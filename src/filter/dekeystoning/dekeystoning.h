@@ -29,6 +29,8 @@ public:
     Dekeystoning();
     AbstractFilterWidget* getWidget();
     QString getName();
+    QMap<QString, QVariant> getSettings();
+    void setSettings(QMap <QString, QVariant> settings);
 private:
     DekeystoningWidget *widget;
 public slots:

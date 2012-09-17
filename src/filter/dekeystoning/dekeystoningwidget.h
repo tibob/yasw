@@ -39,6 +39,8 @@ public:
     QPolygonF polygon();
     bool polygonMoved();
     void resetPolygonMoved();
+    QMap<QString, QVariant> getSettings();
+    void setSettings(QMap <QString, QVariant> settings);
 
 protected:
     void changeEvent(QEvent *e);
