@@ -37,6 +37,7 @@ public:
     void setImage(const QPixmap pixmap);
     virtual QPixmap getFilteredImage();
     AbstractFilterWidget* getWidget();
+    virtual QString getIdentifier();
     virtual QString getName();
     virtual QMap<QString, QVariant> getSettings();
     virtual void setSettings(QMap <QString, QVariant> settings);

@@ -27,6 +27,7 @@ class Cropping : public BaseFilter
 public:
     Cropping();
     AbstractFilterWidget* getWidget();
+    QString getIdentifier();
     QString getName();
     QMap<QString, QVariant> getSettings();
     void setSettings(QMap <QString, QVariant> settings);private:

@@ -26,7 +26,17 @@ Dekeystoning::Dekeystoning()
     connect(widget, SIGNAL(polygonChanged()), this, SLOT(recalculate()));
 }
 
-/*! \brief Retruns the name of the filter */
+/** \brief Returns a universal name for this filter.
+
+ This identifier is unique for the filter. It can be used to identify the
+ filter used (for example in configuration files)
+ */
+QString Dekeystoning::getIdentifier()
+{
+    return QString("Dekeystoning");
+}
+
+/*! \brief Retruns the localised name of the filter */
 QString Dekeystoning::getName()
 {
     return tr("Dekeystoning");

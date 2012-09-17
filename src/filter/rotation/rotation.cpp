@@ -25,9 +25,21 @@ Rotation::Rotation(QObject * parent) : BaseFilter(parent)
     connect(widget, SIGNAL(rotationChanged()), this, SLOT(recalculate()));
 }
 
-QString Rotation::getName()
+/** \brief Returns a universal name for this filter.
+
+ This identifier is unique for the filter. It can be used to identify the
+ filter used (for example in configuration files)
+ */
+QString Rotation::getIdentifier()
 {
     return QString("Rotation");
+}
+
+/** \brief Returns the localised name of this filter
+ */
+QString Rotation::getName()
+{
+    return tr("Rotation");
 }
 
 AbstractFilterWidget * Rotation::getWidget()

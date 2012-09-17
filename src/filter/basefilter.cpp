@@ -73,10 +73,20 @@ AbstractFilterWidget* BaseFilter::getWidget()
     return widget;
 }
 
+/** \brief Returns a universal name for this filter.
+
+ This identifier is unique for the filter. It can be used to identify the
+ filter used (for example in configuration files)
+ */
+QString BaseFilter::getIdentifier()
+{
+    return QString("BaseFilter");
+}
+
 /*! \brief Retruns the name of the filter */
 QString BaseFilter::getName()
 {
-    return QString("Base Filer");
+    return tr("Base Filer");
 }
 
 /*! \brief Recalculate the output Pixmap

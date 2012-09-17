@@ -28,6 +28,7 @@ class Dekeystoning : public BaseFilter
 public:
     Dekeystoning();
     AbstractFilterWidget* getWidget();
+    QString getIdentifier();
     QString getName();
     QMap<QString, QVariant> getSettings();
     void setSettings(QMap <QString, QVariant> settings);

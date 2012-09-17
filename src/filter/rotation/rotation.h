@@ -30,6 +30,7 @@ class Rotation: public BaseFilter
 public:
     Rotation(QObject * parent = 0);
     AbstractFilterWidget* getWidget();
+    QString getIdentifier();
     QString getName();
     QMap<QString, QVariant> getSettings();
     void setSettings(QMap <QString, QVariant> settings);

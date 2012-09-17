@@ -1,4 +1,2 @@
 201209
- - Commenting, small fixes while reappropriating the code
- - update Doxygen to new version
- - FilterContainer: Reset settings when no image; set defaults when no settings
+ - Saving / Loading filter Settings
