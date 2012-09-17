@@ -31,6 +31,8 @@ public:
     QRect getRectangle();
     bool rectangleMoved();
     void resetRectangleMoved();
+    QMap<QString, QVariant> getSettings();
+    void setSettings(QMap <QString, QVariant> settings);
 public slots:
     void hideRectangle(bool hide);
     void moveRectangle();

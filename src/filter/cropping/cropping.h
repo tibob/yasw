@@ -28,7 +28,8 @@ public:
     Cropping();
     AbstractFilterWidget* getWidget();
     QString getName();
-private:
+    QMap<QString, QVariant> getSettings();
+    void setSettings(QMap <QString, QVariant> settings);private:
     CroppingWidget *widget;
 public slots:
     void recalculate();

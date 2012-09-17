@@ -32,11 +32,15 @@ QString Dekeystoning::getName()
     return tr("Dekeystoning");
 }
 
+/** \brief Gets the settings from this filter
+*/
 QMap<QString, QVariant> Dekeystoning::getSettings()
 {
     return widget->getSettings();
 }
 
+/** \brief set this filter's settings
+ **/
 void Dekeystoning::setSettings(QMap<QString, QVariant> settings)
 {
     widget->setSettings(settings);

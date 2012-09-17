@@ -20,7 +20,8 @@ public:
     QRect rectangle();
     bool rectangleMoved();
     void resetRectangleMoved();
-
+    QMap<QString, QVariant> getSettings();
+    void setSettings(QMap <QString, QVariant> settings);
 
 private:
     Ui::CroppingWidget *ui;

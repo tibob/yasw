@@ -21,6 +21,7 @@
 CroppingGraphicsView::CroppingGraphicsView(QWidget *parent) :
     BaseFilterGraphicsView(parent)
 {
+    //NOTE: it would be nice to set Class wide settings for default values
     topLeftCorner = new CroppingCorner(100, 100); //, TopLeftCorner, &rectangle);
     scene->addItem(topLeftCorner);
 
@@ -77,3 +78,38 @@ void CroppingGraphicsView::moveRectangle()
     rectangle->setRect(0, 0, width, heigth);
     rectangle->setPos(topLeftCorner->scenePos());
 }
+
+
+/** \brief Get the filter settings (gets the polygon coordinates)
+*/
+QMap<QString, QVariant> CroppingGraphicsView::getSettings()
+{
+    QMap<QString, QVariant> settings;
+
+    settings["bottomRightCorner"] =  bottomRightCorner->pos();
+    settings["topLeftCorner"] =  topLeftCorner->pos();
+
+    return settings;
+}
+
+/** \brief sets the filter settings (change polygon coordinates)
+
+    If the settings are not present, sets default values
+*/
+void CroppingGraphicsView::setSettings(QMap<QString, QVariant> settings)
+{
+    if (settings.contains("bottomRightCorner") && settings["bottomRightCorner"].canConvert(QVariant::PointF)) {
+        bottomRightCorner->setPos(settings["bottomRightCorner"].toPointF());
+    } else {
+        // NOTE: it would be nice to set these Values above global constants
+        bottomRightCorner->setPos(100, 100);
+    }
+
+    if (settings.contains("topLeftCorner") && settings["topLeftCorner"].canConvert(QVariant::PointF)) {
+        topLeftCorner->setPos(settings["topLeftCorner"].toPointF());
+    } else {
+        // NOTE: it would be nice to set these Values above global constants
+        topLeftCorner->setPos(500, 500);
+    }
+}
+

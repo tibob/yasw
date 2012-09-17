@@ -43,5 +43,18 @@ AbstractFilterWidget * Cropping::getWidget()
     return filterWidget;
 }
 
+/** \brief Gets the settings from this filter
+*/
+QMap<QString, QVariant> Cropping::getSettings()
+{
+    return widget->getSettings();
+}
+
+/** \brief set this filter's settings
+ **/
+void Cropping::setSettings(QMap<QString, QVariant> settings)
+{
+    widget->setSettings(settings);
+}
 
 
