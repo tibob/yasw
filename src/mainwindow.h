@@ -39,15 +39,11 @@ protected:
     void changeEvent(QEvent *e);
 
 private slots:
-    void on_actionGetSettings_triggered();
-
-    void on_actionFilterContainer_setSettings_triggered();
+    void on_action_Save_triggered();
+    void on_action_Open_triggered();
 
 private:
     Ui::MainWindow *ui;
-
-    // NOTE: this is for tests only; remove it later */
-    QMap<QString, QVariant> imageSettings;
 };
 
 #endif // MAINWINDOW_H

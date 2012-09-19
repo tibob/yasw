@@ -22,6 +22,7 @@ Read File format should include png
 */
 
 #include <QDebug>
+#include <QFile>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "corner.h"
@@ -53,16 +54,40 @@ void MainWindow::changeEvent(QEvent *e)
     }
 }
 
-/* NOTE: this is olny a test, remove later */
-void MainWindow::on_actionGetSettings_triggered()
+/** \brief Save the current project
+ \\TODO: save all images; ask for filename if not defined...
+*/
+void MainWindow::on_action_Save_triggered()
 {
-    imageSettings = ui->filterContainer->getSettings();
-    qDebug() << imageSettings;
+    QMap<QString, QVariant> settings;
+
+    settings = ui->filterContainer->getSettings();
+
+    // FIXME: Save QStreqm version and yast Version
+    QFile file("filesetting.txt");
+    if (file.open(QIODevice::WriteOnly)) {
+        QDataStream out(&file);
+        out << settings;
+        file.close();
+    }
+
 }
 
-void MainWindow::on_actionFilterContainer_setSettings_triggered()
-{
-    ui->filterContainer->setSettings(imageSettings);
+/** \brief Open a project from file
+ //TODO: clear current project; load all images...
+ */
 
-    /* \todo we need a redraw here */
+void MainWindow::on_action_Open_triggered()
+{
+    QMap<QString, QVariant> settings;
+
+    // FIXME: Load and check QStream version and yast Version
+    QFile file("filesetting.txt");
+    if (file.open(QIODevice::ReadOnly)) {
+        QDataStream in(&file);
+        in >> settings;
+        file.close();
+    }
+
+    ui->filterContainer->setSettings(settings);
 }
