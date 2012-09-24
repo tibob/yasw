@@ -1,2 +1,2 @@
 201209
- - Saving / Loading filter Settings
+ - Saving / Loading project Settings

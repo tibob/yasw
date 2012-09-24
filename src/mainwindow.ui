@@ -28,7 +28,7 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>yasw - new project</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <property name="sizePolicy">
@@ -83,15 +83,7 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
     <addaction name="action_Close"/>
     <addaction name="action_Quit"/>
    </widget>
-   <widget class="QMenu" name="menuTest">
-    <property name="title">
-     <string>Test</string>
-    </property>
-    <addaction name="actionGetSettings"/>
-    <addaction name="actionFilterContainer_setSettings"/>
-   </widget>
    <addaction name="menu_File"/>
-   <addaction name="menuTest"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="action_Quit">

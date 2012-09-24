@@ -38,6 +38,8 @@ public:
     explicit ImageListWidget(QWidget *parent = 0);
     ~ImageListWidget();
     void setFilterContainer(FilterContainer *container);
+    QMap<QString, QVariant> getSettings();
+    void setSettings(QMap<QString, QVariant> settings);
 
 public slots:
     void currentItemChanged(QListWidgetItem *newItem, QListWidgetItem *previousItem);

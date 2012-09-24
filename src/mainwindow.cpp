@@ -23,6 +23,9 @@ Read File format should include png
 
 #include <QDebug>
 #include <QFile>
+#include <QFileInfo>
+#include <QFileDialog>
+#include <QMessageBox>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "corner.h"
@@ -55,39 +58,100 @@ void MainWindow::changeEvent(QEvent *e)
 }
 
 /** \brief Save the current project
- \\TODO: save all images; ask for filename if not defined...
+ \\TODO: ask for filename if not defined...
 */
 void MainWindow::on_action_Save_triggered()
 {
+    if (projectFileName.length() != 0) {
+        saveProjectSettings(projectFileName);
+    } else {
+        on_action_SaveAs_triggered();
+    }
+}
+
+/** \brief Save the current project in a new file
+*/
+void MainWindow::on_action_SaveAs_triggered()
+{
+
+    QString fileName;
+
+    fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
+                               // FIXME: use last project name
+                               // FIXME: save last path
+                               QDir::currentPath() + "/project.yasw",
+                               tr("yasw projects (*.yasw);;All files (* *.*"));
+
+    if (fileName.length() == 0)
+        return;
+
+    //If saving to file was successfull, store the project filename in a global variable
+    if (saveProjectSettings(fileName))
+        setProjectFileName(fileName);
+}
+
+/** \brief Save project settings to file
+
+  @returns true if successful; false on failure
+  This private member is used to avoid dupplicate code betwenn save and save as.
+
+  */
+bool MainWindow::saveProjectSettings(QString fileName)
+{
     QMap<QString, QVariant> settings;
 
-    settings = ui->filterContainer->getSettings();
+    settings = ui->imageList->getSettings();
 
     // FIXME: Save QStreqm version and yast Version
-    QFile file("filesetting.txt");
+    QFile file(fileName);
     if (file.open(QIODevice::WriteOnly)) {
         QDataStream out(&file);
         out << settings;
         file.close();
+        return true;
     }
-
+    // else, we signal a failure
+    QMessageBox::critical(this,
+        tr("Could not save Project"),
+        tr("A problem occured while saving file \"%1\". The project could not be saved")
+                      .arg(fileName)
+                          );
+    return false;
 }
 
+void MainWindow::setProjectFileName(QString fileName)
+{
+    QFileInfo fi(fileName);
+
+    projectFileName = fileName;
+
+    setWindowTitle(tr("yasw - %1").arg(fi.fileName()));
+}
+
+
 /** \brief Open a project from file
- //TODO: clear current project; load all images...
+ // FIXME: Load and Check QStream version and yasw Version
  */
 
 void MainWindow::on_action_Open_triggered()
 {
     QMap<QString, QVariant> settings;
 
-    // FIXME: Load and check QStream version and yast Version
-    QFile file("filesetting.txt");
+    QString projectFileName = QFileDialog::getOpenFileName(this,
+                        tr("Choose project"),
+                        QDir::currentPath(),   // FIXME: save last path
+                        tr("yasw projects (*.yasw);;All files (* *.*"));
+    if (projectFileName.length() == 0) // Cancel pressed
+        return;
+
+    QFile file(projectFileName);
     if (file.open(QIODevice::ReadOnly)) {
         QDataStream in(&file);
         in >> settings;
         file.close();
     }
+    setProjectFileName(projectFileName);
 
-    ui->filterContainer->setSettings(settings);
+    ui->imageList->setSettings(settings);
 }
+

@@ -42,8 +42,13 @@ private slots:
     void on_action_Save_triggered();
     void on_action_Open_triggered();
 
+    void on_action_SaveAs_triggered();
+
 private:
+    bool saveProjectSettings(QString fileName);
+    void setProjectFileName(QString fileName);
     Ui::MainWindow *ui;
+    QString projectFileName;
 };
 
 #endif // MAINWINDOW_H

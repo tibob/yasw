@@ -71,8 +71,9 @@ void ImageListWidget::on_add_clicked()
 {
     QStringList images = QFileDialog::getOpenFileNames(this,
                         tr("Choose images"),
-                        QDir::currentPath(),
-                        tr("Images (*.jpg)"));
+                        QDir::currentPath(), // FIXME: save last opened path
+                        // FIXME: scaling down for *.png does not work as good as for jpg
+                        tr("Images (*.jpg *.png);;All files (* *.*)"));
 
     foreach (QString image, images) {
         new QListWidgetItem(QIcon(image),
@@ -144,4 +145,51 @@ void ImageListWidget::setFilterContainer(FilterContainer *container)
 
     connect (this, SIGNAL(pixmapChanged(QPixmap)),
              filterContainer, SLOT(setImage(QPixmap)));
+}
+
+/** \brief Get settings from all images of the project
+ */
+QMap<QString, QVariant> ImageListWidget::getSettings()
+{
+    QMap<QString, QVariant> settings;
+    QListWidgetItem *item;
+    int index;
+    QString key;
+
+    // Save the settings of current filter before saving
+    settings = filterContainer->getSettings();
+    ui->images->currentItem()->setData(ImagePreferences, settings);
+
+    for (index = 0; index < ui->images->count(); index++) {
+        item = ui->images->item(index);
+        key = QString("%1_").arg(index + 1) + item->text();
+        settings[key] = item->data(ImagePreferences).toMap();
+    }
+    return settings;
+}
+
+/** \brief Load a new Project from settings
+ */
+void ImageListWidget::setSettings(QMap<QString, QVariant> settings)
+{
+    QString key;
+    int index;
+    QString filename;
+    QListWidgetItem *item;
+
+    ui->images->clear();
+
+    foreach (key, settings.keys()) {
+        index = key.section("_", 0, 0).toInt();
+        filename = key.section("_", 1);
+        qDebug() << index << filename;
+        if (index > 0 && filename.length() > 0) {
+            //NOTE: define a global member to add an image with arguments.
+            item = new QListWidgetItem(QIcon(filename),
+                                filename,
+                                ui->images);
+            item->setData(ImagePreferences, settings[key]);
+            qDebug() << settings[key];
+        }
+    }
 }
