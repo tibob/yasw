@@ -119,7 +119,6 @@ QMap<QString, QVariant> FilterContainer::getSettings()
 
 
     foreach (filter, tabToFilter) {
-        //BUG: getName() is localised, this can not be used for a configuration file
         allSettings[filter->getIdentifier()] = filter->getSettings();
     }
 

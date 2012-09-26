@@ -132,9 +132,7 @@ void ImageListWidget::currentItemChanged(QListWidgetItem *newItem, QListWidgetIt
         emit pixmapChanged(QPixmap(newItem->data(ImageFileName).toString()));
     } else {
         emit pixmapChanged(QPixmap());
-        /* Reset Filter Settings as no image is selected
-         * NOTE: check if needeed after deykeystoning settings have been implemented
-        */
+        // Reset Filter Settings as no image is selected
         if (filterContainer)
             filterContainer->setSettings(QMap<QString, QVariant>());
     }
@@ -195,7 +193,7 @@ void ImageListWidget::setSettings(QMap<QString, QVariant> settings)
         filename = key.section("_", 1);
         qDebug() << index << filename;
         if (index > 0 && filename.length() > 0) {
-            //NOTE: define a global member to add an image with arguments.
+            //NOTE: define a global method to add an image with arguments.
             item = new QListWidgetItem(QIcon(filename),
                                 "",
                                 ui->images);

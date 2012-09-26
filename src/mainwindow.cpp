@@ -95,7 +95,7 @@ bool MainWindow::saveProjectSettings(QString fileName)
 
     settings = ui->imageList->getSettings();
 
-    // FIXME: Save QStreqm version and yast Version
+    // FIXME: Save QStream version and yast Version
     QFile file(fileName);
     if (file.open(QIODevice::WriteOnly)) {
         QDataStream out(&file);
