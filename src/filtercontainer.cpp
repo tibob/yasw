@@ -38,16 +38,9 @@ FilterContainer::FilterContainer( QWidget * parent)
     oldIndex = -1;
 
     // initialise the filters
-// We do not need to display the "Base Filter" as it does not work (yet)
-//    BaseFilter *baseFilter = new BaseFilter();
-//    tabToFilter.append(baseFilter); // as tabToFilter is empty, we start at index 0
-//    addTab(baseFilter->getWidget(), baseFilter->getName());
-
-    //Rotation Filter
     Rotation *rotationFilter = new Rotation();
     tabToFilter.append(rotationFilter);
     addTab(rotationFilter->getWidget(), rotationFilter->getName());
-
 
     Dekeystoning *dekeystoningFilter = new Dekeystoning();
     tabToFilter.append(dekeystoningFilter);
@@ -66,11 +59,17 @@ FilterContainer::~FilterContainer()
 // TODO: free tabToFilter content.
 }
 
+/** \brief Sets the image to be worked on.
+    NOTE: For the shake of perfomance, a downscale of the pixmap would be nice, BUT
+    this means every operation should be recomputed when working on the original image.
+    For now, The downscaling ist disabled, this is a feature to think about later when yasw
+    is functional an needs performance tuning.
+  */
 void FilterContainer::setImage(QPixmap pixmap)
 {
-    // We do downscale the Pixmap to have better performance
-    // TODO: Do a better job here (we should only downscale, compare width and height...)
-    tabToFilter[0]->setImage(pixmap.scaledToHeight(1000));
+    // Downscale the Pixmap to have better performance disabled (see comment)
+    //tabToFilter[0]->setImage(pixmap.scaledToHeight(1000));
+    tabToFilter[0]->setImage(pixmap);
     updateCurrentTabPixmap();
 }
 

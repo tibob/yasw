@@ -17,10 +17,10 @@
  * along with YASW.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "corner.h"
-#include "line.h"
+#include "dekeystoningcorner.h"
+#include "dekeystoningline.h"
 
-/*! \class Corner
+/*! \class DekeystoningCorner
     \brief Corner to build a polygon
 
     The corner is a circle (diameter 8 pixel) that can be moved to modify the lines
@@ -31,26 +31,23 @@
     It ignores Transformation of the GraphicsView so that it has allways the same
     size while zooming.
 */
-Corner::Corner(qreal x, qreal y)
+DekeystoningCorner::DekeystoningCorner(QPoint position)
 {
-    const int Diameter = 8;
-    setRect(-Diameter/2, -Diameter/2, Diameter, Diameter);
-    setPos(x, y);
+    setRect(-diameter/2, -diameter/2, diameter, diameter);
+    setPos(position);
     setZValue(100);
     setFlags(ItemIsMovable |
              ItemIgnoresTransformations |
              ItemSendsGeometryChanges);
 }
 
+/** \brief Registers a line ending at this corner.
+ This is called from the DekeystoningLine itself
 
-void Corner::addLine(Line *line)
+*/
+void DekeystoningCorner::registerLine(DekeystoningLine *line)
 {
     myLines.insert(line);
-}
-
-void Corner::removeLine(Line *line)
-{
-    myLines.remove(line);
 }
 
 /*! \brief Handle Corner moves
@@ -60,22 +57,22 @@ void Corner::removeLine(Line *line)
     and register that the Corner moved so that the transformation Matrix and the output Pixmap
     has to be recalculated.
 */
-QVariant Corner::itemChange(GraphicsItemChange change, const QVariant &value)
+QVariant DekeystoningCorner::itemChange(GraphicsItemChange change, const QVariant &value)
 {
     if (change == ItemPositionHasChanged) {
         cornerMoved = true;
-        foreach (Line *line, myLines)
+        foreach (DekeystoningLine *line, myLines)
             line->trackCorners();
     }
     return QGraphicsEllipseItem::itemChange(change, value);
 }
 
-void Corner::resetCornerMoved()
+void DekeystoningCorner::resetCornerMoved()
 {
     cornerMoved = false;
 }
 
-bool Corner::getCornerMoved()
+bool DekeystoningCorner::getCornerMoved()
 {
     return cornerMoved;
 }

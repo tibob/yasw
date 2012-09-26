@@ -58,7 +58,7 @@ void Rotation::recalculate()
 /** \brief Get filter settings
 
   The only relevant Setting for the Filter is its rotation angle.
-  todo: One may want to also save the preview checkbox.
+  todo: One may want to also save the preview/disable checkbox.
   */
 QMap<QString, QVariant> Rotation::getSettings()
 {

@@ -40,6 +40,8 @@ private:
     CroppingCorner *topLeftCorner;
     CroppingCorner *bottomRightCorner;
     QGraphicsRectItem *rectangle;
+    const QPoint defaultTopLeft = QPoint(100, 100);
+    const QPoint defaultBottomRight = QPoint(500, 500);
 };
 
 #endif // CROPPINGGRAPHICSVIEW_H

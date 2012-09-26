@@ -33,22 +33,22 @@
 DekeystoningGraphicsView::DekeystoningGraphicsView(QWidget *parent):
         BaseFilterGraphicsView(parent)
 {
-    c1 = new Corner(100, 100);
-    scene->addItem(c1);
+    topLeftCorner = new DekeystoningCorner(defaultTopLeft);
+    scene->addItem(topLeftCorner);
 
-    c2 = new Corner(500, 100);
-    scene->addItem(c2);
+    topRightCorner = new DekeystoningCorner(defaultTopRight);
+    scene->addItem(topRightCorner);
 
-    c3 = new Corner(500, 500);
-    scene->addItem(c3);
+    bottomRightCorner = new DekeystoningCorner(defaultBottomRight);
+    scene->addItem(bottomRightCorner);
 
-    c4 = new Corner(100, 500);
-    scene->addItem(c4);
+    bottomLeftCorner = new DekeystoningCorner(defaultBottomLeft);
+    scene->addItem(bottomLeftCorner);
 
-    l1 = new Line(c1, c2);
-    l2 = new Line(c2, c3);
-    l3 = new Line(c3, c4);
-    l4 = new Line(c4, c1);
+    l1 = new DekeystoningLine(topLeftCorner, topRightCorner);
+    l2 = new DekeystoningLine(topRightCorner, bottomRightCorner);
+    l3 = new DekeystoningLine(bottomRightCorner, bottomLeftCorner);
+    l4 = new DekeystoningLine(bottomLeftCorner, topLeftCorner);
     scene->addItem(l1);
     scene->addItem(l2);
     scene->addItem(l3);
@@ -58,10 +58,10 @@ DekeystoningGraphicsView::DekeystoningGraphicsView(QWidget *parent):
 /*! cleen the allocated memory */
 DekeystoningGraphicsView::~DekeystoningGraphicsView()
 {
-    delete c1;
-    delete c2;
-    delete c3;
-    delete c4;
+    delete topLeftCorner;
+    delete topRightCorner;
+    delete bottomRightCorner;
+    delete bottomLeftCorner;
     delete l1;
     delete l2;
     delete l3;
@@ -74,8 +74,8 @@ DekeystoningGraphicsView::~DekeystoningGraphicsView()
 */
 qreal DekeystoningGraphicsView::meanWidth()
 {
-    QLineF line1 = QLineF(c1->pos(), c2->pos());
-    QLineF line2 = QLineF(c3->pos(), c4->pos());
+    QLineF line1 = QLineF(topLeftCorner->pos(), topRightCorner->pos());
+    QLineF line2 = QLineF(bottomRightCorner->pos(), bottomLeftCorner->pos());
 
     qreal width = (line1.length() + line2.length())/2;
 
@@ -88,8 +88,8 @@ qreal DekeystoningGraphicsView::meanWidth()
 */
 qreal DekeystoningGraphicsView::meanHeight()
 {
-    QLineF line1 = QLineF(c2->pos(), c3->pos());
-    QLineF line2 = QLineF(c1->pos(), c4->pos());
+    QLineF line1 = QLineF(topRightCorner->pos(), bottomRightCorner->pos());
+    QLineF line2 = QLineF(topLeftCorner->pos(), bottomLeftCorner->pos());
 
     qreal height = (line1.length() + line2.length())/2;
 
@@ -101,7 +101,7 @@ QPolygonF DekeystoningGraphicsView::polygon()
 {
     QPolygonF polygon;
 
-    polygon << c1->pos() << c2->pos() << c3->pos() << c4->pos();
+    polygon << topLeftCorner->pos() << topRightCorner->pos() << bottomRightCorner->pos() << bottomLeftCorner->pos();
 
     return polygon;
 }
@@ -111,10 +111,10 @@ void DekeystoningGraphicsView::hidePolygon(bool hide)
 {
     bool showPolygon = !hide;
 
-    c1->setVisible(showPolygon);
-    c2->setVisible(showPolygon);
-    c3->setVisible(showPolygon);
-    c4->setVisible(showPolygon);
+    topLeftCorner->setVisible(showPolygon);
+    topRightCorner->setVisible(showPolygon);
+    bottomRightCorner->setVisible(showPolygon);
+    bottomLeftCorner->setVisible(showPolygon);
     l1->setVisible(showPolygon);
     l2->setVisible(showPolygon);
     l3->setVisible(showPolygon);
@@ -124,20 +124,20 @@ void DekeystoningGraphicsView::hidePolygon(bool hide)
 /** \brief Check if polygon moved since last resetPolygonMoved() */
 bool DekeystoningGraphicsView::polygonMoved()
 {
-    return c1->getCornerMoved()
-            || c2->getCornerMoved()
-            || c3->getCornerMoved()
-            || c4->getCornerMoved();
+    return topLeftCorner->getCornerMoved()
+            || topRightCorner->getCornerMoved()
+            || bottomRightCorner->getCornerMoved()
+            || bottomLeftCorner->getCornerMoved();
 }
 
 /** \brief Resets all registered moves for the polygon, so that polygonMoved()
 returns false */
 void DekeystoningGraphicsView::resetPolygonMoved()
 {
-    c1->resetCornerMoved();
-    c2->resetCornerMoved();
-    c3->resetCornerMoved();
-    c4->resetCornerMoved();
+    topLeftCorner->resetCornerMoved();
+    topRightCorner->resetCornerMoved();
+    bottomRightCorner->resetCornerMoved();
+    bottomLeftCorner->resetCornerMoved();
 }
 
 /** \brief Get the filter settings (gets the polygon coordinates)
@@ -145,10 +145,10 @@ void DekeystoningGraphicsView::resetPolygonMoved()
 QMap<QString, QVariant> DekeystoningGraphicsView::getSettings()
 {
     QMap<QString, QVariant> settings;
-    settings["c1"] = c1->pos();
-    settings["c2"] = c2->pos();
-    settings["c3"] = c3->pos();
-    settings["c4"] = c4->pos();
+    settings["topLeftCorner"] = topLeftCorner->pos();
+    settings["topRightCorner"] = topRightCorner->pos();
+    settings["bottomRightCorner"] = bottomRightCorner->pos();
+    settings["bottomLeftCorner"] = bottomLeftCorner->pos();
 
     return settings;
 }
@@ -159,32 +159,32 @@ QMap<QString, QVariant> DekeystoningGraphicsView::getSettings()
 */
 void DekeystoningGraphicsView::setSettings(QMap<QString, QVariant> settings)
 {
-    if (settings.contains("c1") && settings["c1"].canConvert(QVariant::PointF)) {
-        c1->setPos(settings["c1"].toPointF());
+    if (settings.contains("topLeftCorner")
+            && settings["topLeftCorner"].canConvert(QVariant::PointF)) {
+        topLeftCorner->setPos(settings["topLeftCorner"].toPointF());
     } else {
-        // NOTE: it would be nice to set these Values above global constants
-        c1->setPos(100, 100);
+        topLeftCorner->setPos(defaultTopLeft);
     }
 
-    if (settings.contains("c2") && settings["c2"].canConvert(QVariant::PointF)) {
-        c2->setPos(settings["c2"].toPointF());
+    if (settings.contains("topRightCorner")
+            && settings["topRightCorner"].canConvert(QVariant::PointF)) {
+        topRightCorner->setPos(settings["topRightCorner"].toPointF());
     } else {
-        // NOTE: it would be nice to set these Values above global constants
-        c2->setPos(500, 100);
+        topRightCorner->setPos(defaultTopRight);
     }
 
-    if (settings.contains("c3") && settings["c3"].canConvert(QVariant::PointF)) {
-        c3->setPos(settings["c3"].toPointF());
+    if (settings.contains("bottomRightCorner")
+            && settings["bottomRightCorner"].canConvert(QVariant::PointF)) {
+        bottomRightCorner->setPos(settings["bottomRightCorner"].toPointF());
     } else {
-        // NOTE: it would be nice to set these Values above global constants
-        c3->setPos(500, 500);
+        bottomRightCorner->setPos(defaultBottomRight);
     }
 
-    if (settings.contains("c4") && settings["c4"].canConvert(QVariant::PointF)) {
-        c4->setPos(settings["c4"].toPointF());
+    if (settings.contains("bottomLeftCorner")
+            && settings["bottomLeftCorner"].canConvert(QVariant::PointF)) {
+        bottomLeftCorner->setPos(settings["bottomLeftCorner"].toPointF());
     } else {
-        // NOTE: it would be nice to set these Values above global constants
-        c4->setPos(100, 500);
+        bottomLeftCorner->setPos(defaultBottomLeft);
     }
 }
 

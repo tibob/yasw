@@ -19,9 +19,10 @@
 #ifndef DEKEYSTONINGGRAPHICSVIEW_H
 #define DEKEYSTONINGGRAPHICSVIEW_H
 
+#include <QPoint>
 #include "basefiltergraphicsview.h"
-#include "corner.h"
-#include "line.h"
+#include "dekeystoningcorner.h"
+#include "dekeystoningline.h"
 
 class DekeystoningGraphicsView : public BaseFilterGraphicsView
 {
@@ -40,10 +41,16 @@ public slots:
     void hidePolygon(bool hide);
 
 private:
-    Corner *c1, *c2, *c3, *c4;
-    Line *l1, *l2, *l3, *l4;
-
-
+    DekeystoningCorner *topLeftCorner,
+            *topRightCorner,
+            *bottomRightCorner,
+            *bottomLeftCorner;
+    DekeystoningLine *l1, *l2, *l3, *l4;
+    // predefined corner positions for default settings
+    const QPoint defaultTopLeft = QPoint(100, 100);
+    const QPoint defaultTopRight = QPoint(500, 100);
+    const QPoint defaultBottomLeft = QPoint(100, 500);
+    const QPoint defaultBottomRight = QPoint(500, 500);
 };
 
 #endif // DEKEYSTONINGGRAPHICSVIEW_H

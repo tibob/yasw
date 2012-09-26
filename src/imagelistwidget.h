@@ -28,7 +28,10 @@ namespace Ui {
     class ImageListWidget;
 }
 
-enum ImageListUserRoles { ImagePreferences = Qt::UserRole };
+//NOTE: it would be nice do define these enum inside a namespace
+enum ImageListUserRoles { ImagePreferences = Qt::UserRole,
+                          ImageFileName
+                        };
 
 class ImageListWidget : public QWidget
 {
@@ -46,18 +49,15 @@ public slots:
 
 private slots:
     void on_addEmpty_clicked();
-
     void on_remove_clicked();
-
     void on_add_clicked();
-
     void on_up_clicked();
-
     void on_down_clicked();
 
 private:
     Ui::ImageListWidget *ui;
     FilterContainer *filterContainer;
+    QString lastDir;
 
 
 signals:

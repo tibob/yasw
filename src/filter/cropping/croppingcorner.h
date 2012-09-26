@@ -29,16 +29,15 @@ class CroppingCorner : public QObject, public QGraphicsEllipseItem
 {
     Q_OBJECT
 public:
-    CroppingCorner(qreal x, qreal y);//, int cornerType, QRect *rectangle);
+    CroppingCorner(QPoint position);
     bool getCornerMoved();
     void resetCornerMoved();
 protected:
     QVariant itemChange(GraphicsItemChange change, const QVariant &value);
 private:
-//    void moveRectangle();
-    int cornerType;
     QRect *rectangle;
     bool cornerMoved;
+    const int diameter = 8;
 signals:
     void signalCornerMoved();
 };

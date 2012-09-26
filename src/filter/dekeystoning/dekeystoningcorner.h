@@ -16,27 +16,28 @@
  * You should have received a copy of the GNU General Public License
  * along with YASW.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef CORNER_H
-#define CORNER_H
+#ifndef DEKEYSTONINGCORNER_H
+#define DEKEYSTONINGCORNER_H
 
 #include <QGraphicsEllipseItem>
 #include <QWheelEvent>
+#include <QPoint>
 
-class Line;
+class DekeystoningLine;
 
-class Corner : public QGraphicsEllipseItem
+class DekeystoningCorner : public QGraphicsEllipseItem
 {
 public:
-    Corner(qreal x, qreal y);
-    void addLine(Line *line);
-    void removeLine(Line *line);
+    DekeystoningCorner(QPoint position);
+    void registerLine(DekeystoningLine *line);
     bool getCornerMoved();
     void resetCornerMoved();
 protected:
     QVariant itemChange(GraphicsItemChange change, const QVariant &value);
 private:
-    QSet<Line *> myLines;
+    QSet<DekeystoningLine *> myLines;
     bool cornerMoved;
+    const int diameter = 8;
 };
 
-#endif // CORNER_H
+#endif // DEKEYSTONINGCORNER_H

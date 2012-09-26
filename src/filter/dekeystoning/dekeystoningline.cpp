@@ -16,25 +16,26 @@
  * You should have received a copy of the GNU General Public License
  * along with YASW.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "line.h"
-#include "corner.h"
+#include "dekeystoningline.h"
+#include "dekeystoningcorner.h"
 
-/*! \class Line
+/*! \class DekeystoningLine
+    \brief Line of the quadrilateral used to define how to dekeystone
 
-  \todo: comment this Class, rename it in DeykeystoningLine
+    The lines are updated when the corners are moved. The corners call trackCorners.
   */
-
-Line::Line(Corner *from, Corner *to)
+DekeystoningLine::DekeystoningLine(DekeystoningCorner *from, DekeystoningCorner *to)
 {
     fromCorner = from;
-    fromCorner->addLine(this);
+    fromCorner->registerLine(this);
     toCorner = to;
-    toCorner->addLine(this);
+    toCorner->registerLine(this);
 
     trackCorners();
 }
 
-void Line::trackCorners()
+/** \brief redraw the line */
+void DekeystoningLine::trackCorners()
 {
     setLine(QLineF(fromCorner->scenePos(), toCorner->scenePos()));
 }

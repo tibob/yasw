@@ -20,18 +20,15 @@
 #include "imagelistwidget.h"
 #include "ui_imagelistwidget.h"
 #include <QFileDialog>
+#include <QFileInfo>
 #include <QDebug>
 
-/**
- \brief Widget that handle out list of images and display them as icons.
+/** \class ImageListWidget
+    \brief Widget that handle out list of images and display them as icons.
 
  ImageListWidget will handle and store the filter settings for each image.
+ In each ImageListWidgetItem, we store the Filename and the Preferences as UserData (see ImageListUserRoles).
  */
-
-/*! \todo: use Roles to store data from the filters
-  Qt::UserRole (0) = filename of picture
-  +1 = QMap<QString, QMap<QString, QVariant> to store filter settings map["filter name"]["setting"] = value
-  */
 ImageListWidget::ImageListWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ImageListWidget)
@@ -69,17 +66,31 @@ void ImageListWidget::on_remove_clicked()
 
 void ImageListWidget::on_add_clicked()
 {
+    QListWidgetItem *item;
+    QFileInfo fi;
+    QString imageFileName;
+
+    if (lastDir.length() == 0)
+        lastDir = QDir::currentPath();
+
+
     QStringList images = QFileDialog::getOpenFileNames(this,
                         tr("Choose images"),
-                        QDir::currentPath(), // FIXME: save last opened path
+                        lastDir,
                         // FIXME: scaling down for *.png does not work as good as for jpg
                         tr("Images (*.jpg *.png);;All files (* *.*)"));
 
-    foreach (QString image, images) {
-        new QListWidgetItem(QIcon(image),
-                            image,
+    foreach (imageFileName, images) {
+        item = new QListWidgetItem(QIcon(imageFileName),
+                            "",
                             ui->images);
+        item->setToolTip(imageFileName);
+        item->setData(ImageFileName, imageFileName);
+    }
 
+    if (imageFileName.length() != 0) {
+        fi = QFileInfo(imageFileName);
+        lastDir = fi.absolutePath();
     }
 }
 
@@ -118,7 +129,7 @@ void ImageListWidget::currentItemChanged(QListWidgetItem *newItem, QListWidgetIt
     }
 
     if (newItem) {
-        emit pixmapChanged(QPixmap(newItem->text()));
+        emit pixmapChanged(QPixmap(newItem->data(ImageFileName).toString()));
     } else {
         emit pixmapChanged(QPixmap());
         /* Reset Filter Settings as no image is selected
@@ -162,7 +173,7 @@ QMap<QString, QVariant> ImageListWidget::getSettings()
 
     for (index = 0; index < ui->images->count(); index++) {
         item = ui->images->item(index);
-        key = QString("%1_").arg(index + 1) + item->text();
+        key = QString("%1_").arg(index + 1) + item->data(ImageFileName).toString();
         settings[key] = item->data(ImagePreferences).toMap();
     }
     return settings;
@@ -186,9 +197,11 @@ void ImageListWidget::setSettings(QMap<QString, QVariant> settings)
         if (index > 0 && filename.length() > 0) {
             //NOTE: define a global member to add an image with arguments.
             item = new QListWidgetItem(QIcon(filename),
-                                filename,
+                                "",
                                 ui->images);
             item->setData(ImagePreferences, settings[key]);
+            item->setData(ImageFileName, filename);
+            item->setToolTip(filename);
             qDebug() << settings[key];
         }
     }

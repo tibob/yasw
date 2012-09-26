@@ -16,20 +16,20 @@
  * You should have received a copy of the GNU General Public License
  * along with YASW.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef LINE_H
-#define LINE_H
+#ifndef DEKEYSTONINGLINE_H
+#define DEKEYSTONINGLINE_H
 
 #include <QGraphicsLineItem>
 
-class Corner;
+class DekeystoningCorner;
 
-class Line : public QGraphicsLineItem
+class DekeystoningLine : public QGraphicsLineItem
 {
 public:
-    Line(Corner *fromCorner, Corner *toCorner);
+    DekeystoningLine(DekeystoningCorner *fromCorner, DekeystoningCorner *toCorner);
     void trackCorners();
 private:
-    Corner *fromCorner, *toCorner;
+    DekeystoningCorner *fromCorner, *toCorner;
 };
 
-#endif // LINE_H
+#endif // DEKEYSTONINGLINE_H

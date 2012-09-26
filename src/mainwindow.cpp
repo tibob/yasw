@@ -17,10 +17,6 @@
  * along with YASW.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** todo:
-Read File format should include png
-*/
-
 #include <QDebug>
 #include <QFile>
 #include <QFileInfo>
@@ -28,8 +24,6 @@ Read File format should include png
 #include <QMessageBox>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "corner.h"
-#include "line.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -58,7 +52,6 @@ void MainWindow::changeEvent(QEvent *e)
 }
 
 /** \brief Save the current project
- \\TODO: ask for filename if not defined...
 */
 void MainWindow::on_action_Save_triggered()
 {

@@ -15,12 +15,14 @@
 # You should have received a copy of the GNU General Public License
 # along with YASW.  If not, see <http://www.gnu.org/licenses/>.
 
+# Disable warning about non-static data member initializers.
+# No idea if this works on other platforms, old platforms will probably do not support it.
+QMAKE_CXXFLAGS += -std=c++11
+
 TARGET = yasw
 TEMPLATE = app
 SOURCES += main.cpp \
     mainwindow.cpp \
-    filter/dekeystoning/corner.cpp \
-    filter/dekeystoning/line.cpp \
     filter/basefilter.cpp \
     filter/basefiltergraphicsview.cpp \
     filter/basefilterwidget.cpp \
@@ -35,10 +37,10 @@ SOURCES += main.cpp \
     filter/cropping/croppingwidget.cpp \
     filter/cropping/croppinggraphicsview.cpp \
     filter/cropping/croppingcorner.cpp \
-    imagelistwidget.cpp
+    imagelistwidget.cpp \
+    filter/dekeystoning/dekeystoningline.cpp \
+    filter/dekeystoning/dekeystoningcorner.cpp
 HEADERS += mainwindow.h \
-    filter/dekeystoning/corner.h \
-    filter/dekeystoning/line.h \
     filter/basefilter.h \
     filter/basefiltergraphicsview.h \
     filter/basefilterwidget.h \
@@ -53,7 +55,9 @@ HEADERS += mainwindow.h \
     filter/cropping/croppingwidget.h \
     filter/cropping/croppinggraphicsview.h \
     filter/cropping/croppingcorner.h \
-    imagelistwidget.h
+    imagelistwidget.h \
+    filter/dekeystoning/dekeystoningline.h \
+    filter/dekeystoning/dekeystoningcorner.h
 FORMS += mainwindow.ui \
     filter/basefilterwidget.ui \
     filter/dekeystoning/dekeystoningwidget.ui \

@@ -22,10 +22,10 @@ CroppingGraphicsView::CroppingGraphicsView(QWidget *parent) :
     BaseFilterGraphicsView(parent)
 {
     //NOTE: it would be nice to set Class wide settings for default values
-    topLeftCorner = new CroppingCorner(100, 100); //, TopLeftCorner, &rectangle);
+    topLeftCorner = new CroppingCorner(defaultTopLeft); //, TopLeftCorner, &rectangle);
     scene->addItem(topLeftCorner);
 
-    bottomRightCorner = new CroppingCorner(500, 500); //, BottomRightCorner, &rectangle);
+    bottomRightCorner = new CroppingCorner(defaultBottomRight); //, BottomRightCorner, &rectangle);
     scene->addItem(bottomRightCorner);
 
     rectangle = new QGraphicsRectItem();
@@ -102,14 +102,14 @@ void CroppingGraphicsView::setSettings(QMap<QString, QVariant> settings)
         bottomRightCorner->setPos(settings["bottomRightCorner"].toPointF());
     } else {
         // NOTE: it would be nice to set these Values above global constants
-        bottomRightCorner->setPos(100, 100);
+        bottomRightCorner->setPos(defaultBottomRight);
     }
 
     if (settings.contains("topLeftCorner") && settings["topLeftCorner"].canConvert(QVariant::PointF)) {
         topLeftCorner->setPos(settings["topLeftCorner"].toPointF());
     } else {
         // NOTE: it would be nice to set these Values above global constants
-        topLeftCorner->setPos(500, 500);
+        topLeftCorner->setPos(defaultTopLeft);
     }
 }
 

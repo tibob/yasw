@@ -19,10 +19,6 @@
 #include <QtGui/QApplication>
 #include "mainwindow.h"
 
-/** TODO section
- TODO: remember last folder when adding an image to imageListWidget.
- */
-
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

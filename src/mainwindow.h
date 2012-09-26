@@ -23,7 +23,6 @@
 #include <QModelIndex>
 #include <QFileSystemModel>
 #include <QGraphicsPixmapItem>
-#include "corner.h"
 
 namespace Ui {
     class MainWindow;
@@ -41,7 +40,6 @@ protected:
 private slots:
     void on_action_Save_triggered();
     void on_action_Open_triggered();
-
     void on_action_SaveAs_triggered();
 
 private:
