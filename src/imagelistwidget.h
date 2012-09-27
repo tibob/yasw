@@ -43,6 +43,8 @@ public:
     void setFilterContainer(FilterContainer *container);
     QMap<QString, QVariant> getSettings();
     void setSettings(QMap<QString, QVariant> settings);
+    int size();
+    void focusItem(int index);
 
 public slots:
     void currentItemChanged(QListWidgetItem *newItem, QListWidgetItem *previousItem);

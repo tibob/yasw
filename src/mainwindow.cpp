@@ -148,3 +148,19 @@ void MainWindow::on_action_Open_triggered()
     ui->imageList->setSettings(settings);
 }
 
+
+void MainWindow::on_action_Export_triggered()
+{
+    int i;
+    int imagesCount = ui->imageList->size();
+    QPixmap pixmap;
+    QString filename;
+
+    for (i = 0; i < imagesCount; i++) {
+        ui->imageList->focusItem(i);
+        pixmap = ui->filterContainer->getResultImage();
+        filename = QString("%1_result.jpg").arg(i);
+        pixmap.save(filename);
+    }
+
+}

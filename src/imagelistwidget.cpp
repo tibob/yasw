@@ -204,3 +204,13 @@ void ImageListWidget::setSettings(QMap<QString, QVariant> settings)
         }
     }
 }
+
+int ImageListWidget::size()
+{
+    return ui->images->count();
+}
+
+void ImageListWidget::focusItem(int index)
+{
+    ui->images->setCurrentRow(index);
+}

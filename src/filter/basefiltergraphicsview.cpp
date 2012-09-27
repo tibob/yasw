@@ -33,6 +33,7 @@ BaseFilterGraphicsView::BaseFilterGraphicsView(QWidget *parent) : QGraphicsView(
     scene->addItem(pixmapItem);
 }
 
+//FIXME: add another possibility to zoom.
 void
 BaseFilterGraphicsView::wheelEvent(QWheelEvent *event)
 {

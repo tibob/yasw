@@ -18,6 +18,7 @@
  */
 #include "cropping.h"
 
+//TODO: add a settings box to set size of resulting image.
 Cropping::Cropping()
 {
     widget = new CroppingWidget();

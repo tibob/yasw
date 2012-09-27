@@ -80,6 +80,8 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
     <addaction name="action_Save"/>
     <addaction name="action_SaveAs"/>
     <addaction name="separator"/>
+    <addaction name="action_Export"/>
+    <addaction name="separator"/>
     <addaction name="action_Close"/>
     <addaction name="action_Quit"/>
    </widget>
@@ -89,16 +91,6 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
   <action name="action_Quit">
    <property name="text">
     <string>&amp;Quit</string>
-   </property>
-  </action>
-  <action name="actionGetSettings">
-   <property name="text">
-    <string>FilterContainer::getSettings</string>
-   </property>
-  </action>
-  <action name="actionFilterContainer_setSettings">
-   <property name="text">
-    <string>FilterContainer::setSettings</string>
    </property>
   </action>
   <action name="action_Open">
@@ -113,12 +105,17 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
   </action>
   <action name="action_SaveAs">
    <property name="text">
-    <string>&amp;SaveAs</string>
+    <string>Save&amp;As</string>
    </property>
   </action>
   <action name="action_Close">
    <property name="text">
     <string>&amp;Close</string>
+   </property>
+  </action>
+  <action name="action_Export">
+   <property name="text">
+    <string>&amp;Export</string>
    </property>
   </action>
  </widget>

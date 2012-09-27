@@ -79,6 +79,27 @@ void FilterContainer::tabChanged(int index)
     oldIndex = index;
 }
 
+
+/* \brief Compute resulting image in Tabs
+    If no arguments are given, all tabs (Filter)will be computed.
+    Tabs are counted from 0;
+ */
+void FilterContainer::updatePixmapInTabs(int beginTab, int endTab)
+{
+    int realEndTab;
+    int i;
+
+    realEndTab = endTab;
+    if (endTab == -1)
+        realEndTab = tabToFilter.size() - 1;
+    if (beginTab < 1) // tab 0 is updated when setting the Pixmap
+        beginTab = 1;
+
+    for (i = beginTab; i <= realEndTab; i++) {
+        tabToFilter[i]->setImage(tabToFilter[i-1]->getFilteredImage());
+    }
+}
+
 /*! \brief Ensure the current Filter works with the latest Pixmap.
 
     Lets the previous tabs (filters) recalculate their Pixmap so that current Tab
@@ -89,7 +110,7 @@ void FilterContainer::tabChanged(int index)
 */
 void FilterContainer::updateCurrentTabPixmap(int fromIndex)
 {
-    int i;
+//    int i;
     int currentTab = std::min (tabToFilter.size(), currentIndex());
 
     if (currentTab <= 0)    //either no tab (-1) or first tab (0)
@@ -101,9 +122,10 @@ void FilterContainer::updateCurrentTabPixmap(int fromIndex)
     if (fromIndex > currentTab) //no update of tab further current Tab
         fromIndex = currentTab;
 
-    for (i = fromIndex; i <= currentTab; i++) {
-        tabToFilter[i]->setImage(tabToFilter[i-1]->getFilteredImage());
-    }
+    updatePixmapInTabs(fromIndex, currentTab);
+//    for (i = fromIndex; i <= currentTab; i++) {
+//        tabToFilter[i]->setImage(tabToFilter[i-1]->getFilteredImage());
+//    }
 }
 
 /*! \brief Get settings from the filters.
@@ -148,5 +170,16 @@ void FilterContainer::setSettings(QMap<QString, QVariant> settings)
             filter->setSettings(QMap<QString, QVariant>());
         }
     }
+}
+
+/** \brief Compute and return the resulting image above all filter
+ */
+QPixmap FilterContainer::getResultImage()
+{
+    int maxTab = tabToFilter.size() - 1;
+
+    updatePixmapInTabs(oldIndex);
+
+    return tabToFilter[maxTab]->getFilteredImage();
 }
 
