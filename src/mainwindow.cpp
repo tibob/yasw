@@ -17,6 +17,7 @@
  * along with YASW.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QChar>
 #include <QDebug>
 #include <QFile>
 #include <QFileInfo>
@@ -156,11 +157,24 @@ void MainWindow::on_action_Export_triggered()
     QPixmap pixmap;
     QString filename;
 
+    QString exportFolder = QFileDialog::getExistingDirectory(this,
+                tr("Choose folder for export"),
+                QDir::currentPath()  // FIXME: save last path
+                );
+
+    if (exportFolder.length() == 0)
+        return;
+
+    //TODO: save focus of current item or use an independent method to generate exported images.
     for (i = 0; i < imagesCount; i++) {
         ui->imageList->focusItem(i);
         pixmap = ui->filterContainer->getResultImage();
-        filename = QString("%1_result.jpg").arg(i);
+        filename = QString("%1/image_%2.jpg").arg(exportFolder).arg(i+1, 3, 10, QChar('0'));
         pixmap.save(filename);
     }
 
+    QMessageBox::information(this,
+                tr("Project exported"),
+                tr("The project was exported to folder %1").arg(exportFolder)
+                );
 }
