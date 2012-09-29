@@ -27,6 +27,7 @@ class BaseFilterGraphicsView : public QGraphicsView {
     Q_OBJECT
 public:
     BaseFilterGraphicsView(QWidget *parent);
+    ~BaseFilterGraphicsView();
     void setPixmap(const QPixmap pixmap);
 protected:
     void wheelEvent(QWheelEvent *event);

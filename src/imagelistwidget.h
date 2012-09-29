@@ -60,6 +60,7 @@ private:
     Ui::ImageListWidget *ui;
     FilterContainer *filterContainer;
     QString lastDir;
+    void addImage(QString fileName, QMap<QString, QVariant> settings = QMap<QString, QVariant> ());
 
 
 signals:

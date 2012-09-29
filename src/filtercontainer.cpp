@@ -56,7 +56,11 @@ FilterContainer::FilterContainer( QWidget * parent)
 
 FilterContainer::~FilterContainer()
 {
-// TODO: free tabToFilter content.
+    int index;
+    for (index = 0; index < tabToFilter.size(); index++) {
+        delete tabToFilter[index];
+    }
+    tabToFilter.clear();
 }
 
 /** \brief Sets the image to be worked on.

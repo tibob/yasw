@@ -66,7 +66,6 @@ void ImageListWidget::on_remove_clicked()
 
 void ImageListWidget::on_add_clicked()
 {
-    QListWidgetItem *item;
     QFileInfo fi;
     QString imageFileName;
 
@@ -81,11 +80,7 @@ void ImageListWidget::on_add_clicked()
                         tr("Images (*.jpg *.png);;All files (* *.*)"));
 
     foreach (imageFileName, images) {
-        item = new QListWidgetItem(QIcon(imageFileName),
-                            "",
-                            ui->images);
-        item->setToolTip(imageFileName);
-        item->setData(ImageFileName, imageFileName);
+        addImage(imageFileName);
     }
 
     if (imageFileName.length() != 0) {
@@ -108,6 +103,22 @@ void ImageListWidget::on_down_clicked()
     QListWidgetItem *item = ui->images->takeItem(currentRow);
     ui->images->insertItem(currentRow + 1, item);
     ui->images->setCurrentItem(item);
+}
+
+void ImageListWidget::addImage(QString fileName,
+                QMap<QString, QVariant> settings)
+{
+    QListWidgetItem *item;
+    QFileInfo fi(fileName);
+    QPixmap icon;
+
+    icon = QPixmap(fileName).scaledToWidth(100);
+    item = new QListWidgetItem(QIcon(icon),
+                        fi.baseName(),
+                        ui->images);
+    item->setData(ImageFileName, fileName);
+    item->setData(ImagePreferences, settings);
+    item->setToolTip(fileName);
 }
 
 /** \brief Change the Image beeing worked on.
@@ -184,23 +195,14 @@ void ImageListWidget::setSettings(QMap<QString, QVariant> settings)
     QString key;
     int index;
     QString filename;
-    QListWidgetItem *item;
 
     ui->images->clear();
 
     foreach (key, settings.keys()) {
         index = key.section("_", 0, 0).toInt();
         filename = key.section("_", 1);
-        qDebug() << index << filename;
         if (index > 0 && filename.length() > 0) {
-            //NOTE: define a global method to add an image with arguments.
-            item = new QListWidgetItem(QIcon(filename),
-                                "",
-                                ui->images);
-            item->setData(ImagePreferences, settings[key]);
-            item->setData(ImageFileName, filename);
-            item->setToolTip(filename);
-            qDebug() << settings[key];
+            addImage(filename, settings[key].toMap());
         }
     }
 }
