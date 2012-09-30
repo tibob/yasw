@@ -1,3 +1,7 @@
+TODO
+ - progress dialog while exporting / loading
+ - handling two page types (left/right)
 201209
  - Saving / Loading project Settings
  - Exporting project to images
+ - Propaging page/image settings to other pages/images

@@ -112,6 +112,8 @@ void ImageListWidget::addImage(QString fileName,
     QFileInfo fi(fileName);
     QPixmap icon;
 
+    //NOTE: loading all icons at this time implies waiting time for the user.
+    //Alternatives: put some "waiting" dialog or do ICON-loading in the background
     icon = QPixmap(fileName).scaledToWidth(100);
     item = new QListWidgetItem(QIcon(icon),
                         fi.baseName(),
@@ -125,14 +127,35 @@ void ImageListWidget::addImage(QString fileName,
 
     This slot is connected to QListWidget::itemClicked. It saves the settings
     of previous image and restore the settings of the clicked image.
+    It also applies the propagation policy for image settings
  */
 void ImageListWidget::currentItemChanged(QListWidgetItem *newItem, QListWidgetItem *previousItem)
 {
     QMap<QString, QVariant> settings;
+    int indexPreviousItem, i;
 
     if (filterContainer && previousItem) {
         settings = filterContainer->getSettings();
-        previousItem->setData(ImagePreferences, settings);
+        // settings changed? Save them!
+        if (settings != previousItem->data(ImagePreferences).toMap()) {
+            previousItem->setData(ImagePreferences, settings);
+
+            // Propagate settings according to settings policy
+            switch (ui->settingPolicy->currentIndex()) {
+                case 1: // propagate to all following images
+                    indexPreviousItem = ui->images->row(previousItem);
+                    for (i = indexPreviousItem; i < ui->images->count(); i++) {
+                        ui->images->item(i)->setData(ImagePreferences, settings);
+                    }
+                    break;
+                case 2: // propagate to all images
+                    for (i = 0; i < ui->images->count(); i++) {
+                        ui->images->item(i)->setData(ImagePreferences, settings);
+                    }
+                    break;
+                //case 0: do not propagate;
+            }
+        }
     }
 
     if (filterContainer && newItem) {
