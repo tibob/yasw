@@ -45,6 +45,7 @@ public:
     void setSettings(QMap<QString, QVariant> settings);
     int size();
     void focusItem(int index);
+    void clear();
 
 public slots:
     void currentItemChanged(QListWidgetItem *newItem, QListWidgetItem *previousItem);

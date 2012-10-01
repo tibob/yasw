@@ -44,6 +44,8 @@ private slots:
 
     void on_action_Export_triggered();
 
+    void on_action_Close_triggered();
+
 private:
     bool saveProjectSettings(QString fileName);
     void setProjectFileName(QString fileName);

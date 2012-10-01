@@ -121,7 +121,10 @@ void MainWindow::setProjectFileName(QString fileName)
 
     projectFileName = fileName;
 
-    setWindowTitle(tr("yasw - %1").arg(fi.fileName()));
+    if (fileName.length() > 0)
+        setWindowTitle(tr("yasw - %1").arg(fi.fileName()));
+    else
+        setWindowTitle(tr("yasw - new project"));
 }
 
 
@@ -133,20 +136,20 @@ void MainWindow::on_action_Open_triggered()
 {
     QMap<QString, QVariant> settings;
 
-    QString projectFileName = QFileDialog::getOpenFileName(this,
+    QString fileName = QFileDialog::getOpenFileName(this,
                         tr("Choose project"),
                         QDir::currentPath(),   // FIXME: save last path
                         tr("yasw projects (*.yasw);;All files (* *.*"));
-    if (projectFileName.length() == 0) // Cancel pressed
+    if (fileName.length() == 0) // Cancel pressed
         return;
 
-    QFile file(projectFileName);
+    QFile file(fileName);
     if (file.open(QIODevice::ReadOnly)) {
         QDataStream in(&file);
         in >> settings;
         file.close();
     }
-    setProjectFileName(projectFileName);
+    setProjectFileName(fileName);
 
     ui->imageList->setSettings(settings);
 }
@@ -179,4 +182,12 @@ void MainWindow::on_action_Export_triggered()
                 tr("Project exported"),
                 tr("The project was exported to folder %1").arg(exportFolder)
                 );
+}
+
+/** \brief Close curent project,
+    reset settings to default values */
+void MainWindow::on_action_Close_triggered()
+{
+    ui->imageList->clear();
+    setProjectFileName("");
 }

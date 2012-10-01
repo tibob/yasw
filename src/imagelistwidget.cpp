@@ -239,3 +239,9 @@ void ImageListWidget::focusItem(int index)
 {
     ui->images->setCurrentRow(index);
 }
+
+/* clear all items in the list */
+void ImageListWidget::clear()
+{
+    ui->images->clear();
+}
