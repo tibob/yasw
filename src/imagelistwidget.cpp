@@ -203,6 +203,7 @@ QMap<QString, QVariant> ImageListWidget::getSettings()
     settings = filterContainer->getSettings();
     ui->images->currentItem()->setData(ImagePreferences, settings);
 
+    settings.clear();
     for (index = 0; index < ui->images->count(); index++) {
         item = ui->images->item(index);
         key = QString("%1_").arg(index + 1) + item->data(ImageFileName).toString();
