@@ -23,8 +23,8 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>734</width>
-    <height>576</height>
+    <width>1010</width>
+    <height>582</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -55,6 +55,9 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
      </widget>
     </item>
     <item>
+     <widget class="ImageTableWidget" name="widget" native="true"/>
+    </item>
+    <item>
      <widget class="FilterContainer" name="filterContainer">
       <property name="currentIndex">
        <number>-1</number>
@@ -68,7 +71,7 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>734</width>
+     <width>1010</width>
      <height>25</height>
     </rect>
    </property>
@@ -131,6 +134,12 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
    <class>ImageListWidget</class>
    <extends>QWidget</extends>
    <header>imagelistwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ImageTableWidget</class>
+   <extends>QWidget</extends>
+   <header>imagetablewidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -50,6 +50,7 @@ ImageListWidget::~ImageListWidget()
 
 /** Creates an empty image (placeholder for example for
     an empty page wich has not been scaned) */
+//TODO: integrate into addImage
 void ImageListWidget::on_addEmpty_clicked()
 {
     QListWidgetItem *emptyItem = new QListWidgetItem(QIcon(":/icons/tango-icon-theme/document-new.svg"),

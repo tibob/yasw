@@ -28,11 +28,6 @@ namespace Ui {
     class ImageListWidget;
 }
 
-//NOTE: it would be nice do define these enum inside a namespace
-enum ImageListUserRoles { ImagePreferences = Qt::UserRole,
-                          ImageFileName
-                        };
-
 class ImageListWidget : public QWidget
 {
     Q_OBJECT
@@ -63,6 +58,9 @@ private:
     QString lastDir;
     void addImage(QString fileName, QMap<QString, QVariant> settings = QMap<QString, QVariant> ());
 
+    enum ImageListUserRoles { ImagePreferences = Qt::UserRole,
+                              ImageFileName
+                            };
 
 signals:
     void pixmapChanged (QPixmap newPixmap);
