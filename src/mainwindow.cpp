@@ -35,6 +35,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     ui->imageList->setFilterContainer(ui->filterContainer);
+
+    showMaximized();
 }
 
 MainWindow::~MainWindow()
@@ -157,11 +159,6 @@ void MainWindow::on_action_Open_triggered()
 
 void MainWindow::on_action_Export_triggered()
 {
-    int i;
-    int imagesCount = ui->imageList->size();
-    QPixmap pixmap;
-    QString filename;
-
     QString exportFolder = QFileDialog::getExistingDirectory(this,
                 tr("Choose folder for export"),
                 QDir::currentPath()  // FIXME: save last path
@@ -171,12 +168,7 @@ void MainWindow::on_action_Export_triggered()
         return;
 
     //TODO: save focus of current item or use an independent method to generate exported images.
-    for (i = 0; i < imagesCount; i++) {
-        ui->imageList->focusItem(i);
-        pixmap = ui->filterContainer->getResultImage();
-        filename = QString("%1/image_%2.jpg").arg(exportFolder).arg(i+1, 3, 10, QChar('0'));
-        pixmap.save(filename);
-    }
+    ui->imageList->exportToFolder(exportFolder);
 
     QMessageBox::information(this,
                 tr("Project exported"),

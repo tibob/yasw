@@ -38,9 +38,8 @@ public:
     void setFilterContainer(FilterContainer *container);
     QMap<QString, QVariant> getSettings();
     void setSettings(QMap<QString, QVariant> settings);
-    int size();
-    void focusItem(int index);
     void clear();
+    void exportToFolder(QString folder);
 
 public slots:
     void currentItemChanged(QTableWidgetItem *newItem, QTableWidgetItem *previousItem);

@@ -252,7 +252,9 @@ QMap<QString, QVariant> ImageTableWidget::getSettings()
 
     // Save the settings of current filter before saving
     settings = filterContainer->getSettings();
-    ui->images->currentItem()->setData(ImagePreferences, settings);
+    item = ui->images->currentItem();
+    if (item)
+        item->setData(ImagePreferences, settings);
     settings.clear();
 
     for (row = 0; row < nextRow[leftSide]; row++) {
@@ -295,17 +297,30 @@ void ImageTableWidget::setSettings(QMap<QString, QVariant> settings)
     }
 }
 
-//@@@: FIXME: implement this
-int ImageTableWidget::size()
-{
-    return 0;
-}
-
-void ImageTableWidget::focusItem(int index)
-{
-}
-
 void ImageTableWidget::clear()
 {
     ui->images->setRowCount(0);
+}
+
+void ImageTableWidget::exportToFolder(QString folder)
+{
+    int row;
+    QTableWidgetItem *currentItem = ui->images->currentItem();
+    QPixmap pixmap;
+    QString filename;
+
+    for (row = 0; row < nextRow[leftSide]; row++) {
+        ui->images->setCurrentCell(row, leftSide);
+        pixmap = filterContainer->getResultImage();
+        filename = QString("%1/image_%2_Left.jpg").arg(folder).arg(row+1, 3, 10, QChar('0'));
+        pixmap.save(filename);
+    }
+    for (row = 0; row < nextRow[rightSide]; row++) {
+        ui->images->setCurrentCell(row, rightSide);
+        pixmap = filterContainer->getResultImage();
+        filename = QString("%1/image_%2_Right.jpg").arg(folder).arg(row+1, 3, 10, QChar('0'));
+        pixmap.save(filename);
+    }
+
+    ui->images->setCurrentItem(currentItem);
 }

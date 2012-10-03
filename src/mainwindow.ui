@@ -27,6 +27,12 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
     <height>582</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>yasw - new project</string>
   </property>
@@ -39,27 +45,23 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="ImageListWidget" name="imageListOld" native="true">
+     <widget class="ImageTableWidget" name="imageList" native="true">
       <property name="sizePolicy">
-       <sizepolicy hsizetype="Maximum" vsizetype="Expanding">
-        <horstretch>200</horstretch>
+       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+        <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
       <property name="minimumSize">
        <size>
-        <width>100</width>
-        <height>200</height>
+        <width>238</width>
+        <height>0</height>
        </size>
       </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="ImageTableWidget" name="imageList" native="true">
-      <property name="minimumSize">
+      <property name="maximumSize">
        <size>
-        <width>100</width>
-        <height>0</height>
+        <width>238</width>
+        <height>16777215</height>
        </size>
       </property>
      </widget>
@@ -135,12 +137,6 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
    <class>FilterContainer</class>
    <extends>QTabWidget</extends>
    <header>filtercontainer.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>ImageListWidget</class>
-   <extends>QWidget</extends>
-   <header>imagelistwidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
