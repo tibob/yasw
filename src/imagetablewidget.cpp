@@ -243,16 +243,59 @@ void ImageTableWidget::on_remove_clicked()
     }
 }
 
-//@@@: FIXME: implement this
 QMap<QString, QVariant> ImageTableWidget::getSettings()
 {
-    return QMap<QString, QVariant> ();
+    QMap<QString, QVariant> settings;
+    QTableWidgetItem *item;
+    int row;
+    QString key;
+
+    // Save the settings of current filter before saving
+    settings = filterContainer->getSettings();
+    ui->images->currentItem()->setData(ImagePreferences, settings);
+    settings.clear();
+
+    for (row = 0; row < nextRow[leftSide]; row++) {
+        item = ui->images->item(row, leftSide);
+        key = QString("%1_Left_").arg(row, leftSide) + item->data(ImageFileName).toString();
+        settings[key] = item->data(ImagePreferences).toMap();
+    }
+    for (row = 0; row < nextRow[rightSide]; row++) {
+        item = ui->images->item(row, rightSide);
+        key = QString("%1_Right_").arg(row, rightSide) + item->data(ImageFileName).toString();
+        settings[key] = item->data(ImagePreferences).toMap();
+    }
+
+    return settings;
 }
 
 void ImageTableWidget::setSettings(QMap<QString, QVariant> settings)
 {
+    QString key;
+    int row;
+    QString sideString;
+    ImageTableWidget::ImageSide side;
+    QString filename;
+
+    ui->images->clear();
+
+    foreach (key, settings.keys()) {
+        row = key.section("_", 0, 0).toInt();
+        sideString = key.section("_", 1, 1);
+        if (sideString == "Left") {
+            side = leftSide;
+        } else {
+            //NOTE: this is not nice, we should check if sideString == "Right"
+            side = rightSide;
+        }
+        filename = key.section("_", 2);
+        if (row >= 0 && filename.length() > 0) {
+            addImage(filename, side, settings[key].toMap());
+        }
+    }
 }
 
+//@@@: FIXME: implement this
 int ImageTableWidget::size()
 {
     return 0;
@@ -264,4 +307,5 @@ void ImageTableWidget::focusItem(int index)
 
 void ImageTableWidget::clear()
 {
+    ui->images->setRowCount(0);
 }
