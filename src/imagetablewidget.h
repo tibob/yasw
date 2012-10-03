@@ -1,3 +1,22 @@
+/*
+ * Copyright (C) 2012 Robert Chéramy (robert@cheramy.net)
+ *
+ * This file is part of YASW (Yet Another Scan Wizard).
+ *
+ * YASW is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * YASW is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with YASW.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #ifndef IMAGETABLEWIDGET_H
 #define IMAGETABLEWIDGET_H
 
@@ -17,14 +36,14 @@ public:
     explicit ImageTableWidget(QWidget *parent = 0);
     ~ImageTableWidget();
     void setFilterContainer(FilterContainer *container);
-//    QMap<QString, QVariant> getSettings();
-//    void setSettings(QMap<QString, QVariant> settings);
-//    int size();
-//    void focusItem(int index);
-//    void clear();
+    QMap<QString, QVariant> getSettings();
+    void setSettings(QMap<QString, QVariant> settings);
+    int size();
+    void focusItem(int index);
+    void clear();
 
 public slots:
-//    void currentItemChanged(QTableWidgetItem *newItem, QTableWidgetItem *previousItem);
+    void currentItemChanged(QTableWidgetItem *newItem, QTableWidgetItem *previousItem);
 
 private slots:
     //FIXME: to implement left / right

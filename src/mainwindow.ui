@@ -39,7 +39,7 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="ImageListWidget" name="imageList" native="true">
+     <widget class="ImageListWidget" name="imageListOld" native="true">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Maximum" vsizetype="Expanding">
         <horstretch>200</horstretch>
@@ -48,14 +48,21 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
       </property>
       <property name="minimumSize">
        <size>
-        <width>200</width>
+        <width>100</width>
         <height>200</height>
        </size>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="ImageTableWidget" name="widget" native="true"/>
+     <widget class="ImageTableWidget" name="imageList" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>0</height>
+       </size>
+      </property>
+     </widget>
     </item>
     <item>
      <widget class="FilterContainer" name="filterContainer">

@@ -1,3 +1,22 @@
+/*
+ * Copyright (C) 2012 Robert Chéramy (robert@cheramy.net)
+ *
+ * This file is part of YASW (Yet Another Scan Wizard).
+ *
+ * YASW is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * YASW is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with YASW.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #include <QFileInfo>
 #include <QFileDialog>
 #include "imagetablewidget.h"
@@ -9,8 +28,8 @@ ImageTableWidget::ImageTableWidget(QWidget *parent) :
 {
     ui->setupUi(this);
 
-//    connect(ui->images, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)),
-//            this, SLOT(currentItemChanged(QListWidgetItem*,QListWidgetItem*)));
+    connect(ui->images, SIGNAL(currentItemChanged(QTableWidgetItem*,QTableWidgetItem*)),
+            this, SLOT(currentItemChanged(QTableWidgetItem*,QTableWidgetItem*)));
 
     filterContainer = NULL;
 
@@ -39,6 +58,53 @@ void ImageTableWidget::setFilterContainer(FilterContainer *container)
 }
 
 
+
+void ImageTableWidget::currentItemChanged(QTableWidgetItem *newItem, QTableWidgetItem *previousItem)
+{
+    QMap<QString, QVariant> settings;
+    int rowPreviousItem, sidePreviousItem, i;
+
+    if (filterContainer && previousItem) {
+        settings = filterContainer->getSettings();
+        // settings changed? Save them!
+        if (settings != previousItem->data(ImagePreferences).toMap()) {
+            previousItem->setData(ImagePreferences, settings);
+
+            // Propagate settings according to settings policy
+            switch (ui->settingPolicy->currentIndex()) {
+                case 1: // propagate to all following images
+                    rowPreviousItem = ui->images->row(previousItem);
+                    sidePreviousItem = ui->images->column(previousItem);
+                    for (i = rowPreviousItem; i < nextRow[sidePreviousItem]; i++) {
+                        ui->images->item(i, sidePreviousItem)->setData(ImagePreferences, settings);
+                    }
+                    break;
+                case 2: // propagate to all images
+                    for (i = 0; i < nextRow[leftSide]; i++) {
+                        ui->images->item(i, leftSide)->setData(ImagePreferences, settings);
+                    }
+                    for (i = 0; i < nextRow[rightSide]; i++) {
+                        ui->images->item(i, rightSide)->setData(ImagePreferences, settings);
+                    }
+                    break;
+                //case 0: do not propagate;
+            }
+        }
+    }
+
+    if (filterContainer && newItem) {
+        filterContainer->setSettings(newItem->data(ImagePreferences).toMap());
+    }
+
+    if (newItem) {
+        emit pixmapChanged(QPixmap(newItem->data(ImageFileName).toString()));
+    } else {
+        emit pixmapChanged(QPixmap());
+        // Reset Filter Settings as no image is selected
+        if (filterContainer)
+            filterContainer->setSettings(QMap<QString, QVariant>());
+    }
+}
 
 void ImageTableWidget::on_addLeft_clicked()
 {
@@ -175,4 +241,27 @@ void ImageTableWidget::on_remove_clicked()
     if (nextRow[currentColumn] >= nextRow[otherSide]) {
         ui->images->setRowCount(nextRow[currentColumn]);
     }
+}
+
+//@@@: FIXME: implement this
+QMap<QString, QVariant> ImageTableWidget::getSettings()
+{
+    return QMap<QString, QVariant> ();
+}
+
+void ImageTableWidget::setSettings(QMap<QString, QVariant> settings)
+{
+}
+
+int ImageTableWidget::size()
+{
+    return 0;
+}
+
+void ImageTableWidget::focusItem(int index)
+{
+}
+
+void ImageTableWidget::clear()
+{
 }
