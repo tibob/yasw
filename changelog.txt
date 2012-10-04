@@ -5,6 +5,8 @@ TODO
  - Add ability to scale resulting images after cropping
  - Display page preview instead of original image in image list
  - Load images in background
+ - handle empty images (placeholder) differently
+
 201210
  - handling two page types (left/right)
 

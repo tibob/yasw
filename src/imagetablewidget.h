@@ -45,22 +45,14 @@ public slots:
     void currentItemChanged(QTableWidgetItem *newItem, QTableWidgetItem *previousItem);
 
 private slots:
-    //FIXME: to implement left / right
     void on_addLeft_clicked();
-
     void on_addEmptyLeft_clicked();
-
     void on_addRight_clicked();
-
     void on_addEmptyRight_clicked();
-
     void on_upLeft_clicked();
-
     void on_upRight_clicked();
-
     void on_downRight_clicked();
     void on_downLeft_clicked();
-
     void on_remove_clicked();
 
 private:

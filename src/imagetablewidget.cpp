@@ -143,8 +143,10 @@ void ImageTableWidget::addClicked(ImageTableWidget::ImageSide side)
 void ImageTableWidget::addImage(QString fileName, ImageTableWidget::ImageSide side, QMap<QString, QVariant> settings)
 {
     QTableWidgetItem *item;
+    QTableWidgetItem *currentItem;
     QFileInfo fi(fileName);
     QPixmap icon;
+    int i, currentRow;
 
     //NOTE: loading all icons at this time implies waiting time for the user.
     //Alternatives: put some "waiting" dialog or do ICON-loading in the background
@@ -156,11 +158,29 @@ void ImageTableWidget::addImage(QString fileName, ImageTableWidget::ImageSide si
     if (nextRow[side] >=  ui->images->rowCount()) {
         ui->images->setRowCount(nextRow[side] + 1);
     }
-    ui->images->setItem(nextRow[side], side, item);
+
+    currentItem = ui->images->currentItem();
+    if (currentItem) {
+        // Insert before current item
+        currentRow = ui->images->currentRow();
+    } else {
+        // Insert at the End
+        currentRow = nextRow[side];
+    }
+
+    // move all items after current item one step down
+    for (i = nextRow[side]; i > currentRow; i--) {
+        ui->images->setItem(i, side, ui->images->takeItem(i - 1, side));
+    }
+
+    ui->images->setItem(currentRow, side, item);
     item->setData(ImageFileName, fileName);
     item->setData(ImagePreferences, settings);
     item->setToolTip(fileName);
     nextRow[side] = nextRow[side] + 1;
+
+    if (currentItem)
+        ui->images->setCurrentItem(currentItem);
 }
 
 void ImageTableWidget::on_addEmptyLeft_clicked()
@@ -195,7 +215,7 @@ void ImageTableWidget::downClicked(ImageTableWidget::ImageSide side)
 void ImageTableWidget::upClicked(ImageTableWidget::ImageSide side)
 {
     int currentRow = ui->images->currentRow();
-    if (currentRow < 1) {
+    if (currentRow < 1 || currentRow >= nextRow[side]) {
         return;
     }
     QTableWidgetItem *itemToUp = ui->images->takeItem(currentRow, side);
@@ -279,7 +299,7 @@ void ImageTableWidget::setSettings(QMap<QString, QVariant> settings)
     ImageTableWidget::ImageSide side;
     QString filename;
 
-    ui->images->clear();
+    clear();
 
     foreach (key, settings.keys()) {
         row = key.section("_", 0, 0).toInt();
@@ -299,7 +319,10 @@ void ImageTableWidget::setSettings(QMap<QString, QVariant> settings)
 
 void ImageTableWidget::clear()
 {
+    //FIXME: is memory cleared?
     ui->images->setRowCount(0);
+    nextRow[leftSide] = 0;
+    nextRow[rightSide] = 0;
 }
 
 void ImageTableWidget::exportToFolder(QString folder)
