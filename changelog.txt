@@ -1,11 +1,11 @@
 TODO
- - choose between one / two page modus.
- - progress dialog while exporting / loading
+ - up/down/left/right + menu to change from image to image
+ - handle empty images (placeholder) differently
+ - Load images for Icons in background
  - Implement disable filter
  - Add ability to scale resulting images after cropping
+ - progress dialog while exporting / loading
  - Display page preview instead of original image in image list
- - Load images in background
- - handle empty images (placeholder) differently
 
 201210
  - handling two page types (left/right)

@@ -160,7 +160,7 @@ void ImageTableWidget::addImage(QString fileName, ImageTableWidget::ImageSide si
     }
 
     currentItem = ui->images->currentItem();
-    if (currentItem) {
+    if (currentItem && ui->images->currentColumn() == side) {
         // Insert before current item
         currentRow = ui->images->currentRow();
     } else {
