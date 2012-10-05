@@ -1,4 +1,5 @@
 TODO
+ - export to pdf
  - up/down/left/right + menu to change from image to image
  - handle empty images (placeholder) differently
  - Load images for Icons in background

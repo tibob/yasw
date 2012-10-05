@@ -261,6 +261,9 @@ void ImageTableWidget::on_remove_clicked()
     if (nextRow[currentColumn] >= nextRow[otherSide]) {
         ui->images->setRowCount(nextRow[currentColumn]);
     }
+
+    // redraw
+    currentItemChanged(ui->images->currentItem(), NULL);
 }
 
 QMap<QString, QVariant> ImageTableWidget::getSettings()
