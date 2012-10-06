@@ -1,0 +1,19 @@
+How to Install YASW
+-------------------
+Currently, YASW has no install procedure. You can test YASW by compiling it
+and running it directly from the compilation directory.
+
+Complile YASW
+-------------
+$ cd src
+$ qmake
+$ make
+
+Run YASW
+--------
+After compiling YASW, just go into src and run "yasw"
+
+Build YASW Developer-Documentation
+----------------------------------
+$ cd documentation
+$ make

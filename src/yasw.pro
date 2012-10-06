@@ -75,4 +75,5 @@ RESOURCES += icons/icons.qrc
 
 OTHER_FILES += \
     ../documentation/doxygen-mainpage.txt \
-    ../changelog.txt
+    ../changelog.txt \
+    ../install.txt
