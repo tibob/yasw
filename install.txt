@@ -18,9 +18,21 @@ Alternative: install QT Creator, open yasw.pro and click "run".
 
 Run YASW
 --------
-After compiling YASW, just go into src and run "yasw"
+After compiling YASW, just go into src and run "yasw", on linux:
+./yasw
 
 Build YASW Developer-Documentation
 ----------------------------------
 $ cd documentation
 $ make
+
+
+How to Release
+--------------
+# Tag the git repository
+git tag -a yasw_0.1 -m 'YASW version 0.1'
+# build the tarball (note: it contains files like .gitignore...)
+git archive --prefix=yasw_0.1/ yasw_0.1 | gzip > ../yasw_0.1.tgz
+# test archive (tar xvzf, qmake, make, ./yasw, play around)
+# publish the tag on github:
+git push --tags
