@@ -81,7 +81,7 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
      <x>0</x>
      <y>0</y>
      <width>1010</width>
-     <height>25</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -92,12 +92,18 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
     <addaction name="action_Save"/>
     <addaction name="action_SaveAs"/>
     <addaction name="separator"/>
-    <addaction name="action_Export"/>
-    <addaction name="separator"/>
     <addaction name="action_Close"/>
     <addaction name="action_Quit"/>
    </widget>
+   <widget class="QMenu" name="menu_Export">
+    <property name="title">
+     <string>&amp;Export</string>
+    </property>
+    <addaction name="actionTo_Jpeg"/>
+    <addaction name="actionTo_PDF"/>
+   </widget>
    <addaction name="menu_File"/>
+   <addaction name="menu_Export"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="action_Quit">
@@ -125,9 +131,14 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
     <string>&amp;Close</string>
    </property>
   </action>
-  <action name="action_Export">
+  <action name="actionTo_Jpeg">
    <property name="text">
-    <string>&amp;Export</string>
+    <string>to &amp;JPEG</string>
+   </property>
+  </action>
+  <action name="actionTo_PDF">
+   <property name="text">
+    <string>to &amp;PDF</string>
    </property>
   </action>
  </widget>
@@ -164,9 +175,43 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionTo_Jpeg</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>exportToJpeg()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>504</x>
+     <y>290</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionTo_PDF</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>exportToPdf()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>504</x>
+     <y>290</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>ImageSelected(QModelIndex)</slot>
   <slot>slotTransform()</slot>
+  <slot>exportToJpeg()</slot>
+  <slot>exportToPdf()</slot>
  </slots>
 </ui>

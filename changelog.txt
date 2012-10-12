@@ -1,12 +1,17 @@
 ToDo / Roadmap
+ - FIXME: insert right does not work in the right order
  - export to pdf
- - up/down/left/right + menu to change from image to image
+ - open recent project
+ - key up/down/left/right + menu to change from image to image
+ - key "delete" deletes an image
  - handle empty images (placeholder) differently
  - Load images for Icons in background
  - Implement disable filter
  - Add ability to scale resulting images after cropping
  - progress dialog while exporting / loading
  - Display page preview instead of original image in image list
+ - drag and drop in the image list
+ - Filter to fix color / convert to black & white...
 
 20121006; YASW 0.1
  - First release

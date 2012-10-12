@@ -40,6 +40,8 @@ public:
     void setSettings(QMap<QString, QVariant> settings);
     void clear();
     void exportToFolder(QString folder);
+    void exportToPdf(QString pdfFile);
+
 
 public slots:
     void currentItemChanged(QTableWidgetItem *newItem, QTableWidgetItem *previousItem);

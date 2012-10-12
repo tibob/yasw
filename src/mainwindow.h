@@ -41,10 +41,10 @@ private slots:
     void on_action_Save_triggered();
     void on_action_Open_triggered();
     void on_action_SaveAs_triggered();
-
-    void on_action_Export_triggered();
-
     void on_action_Close_triggered();
+
+    void exportToJpeg();
+    void exportToPdf();
 
 private:
     bool saveProjectSettings(QString fileName);

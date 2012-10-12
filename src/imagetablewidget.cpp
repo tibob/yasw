@@ -19,6 +19,8 @@
 
 #include <QFileInfo>
 #include <QFileDialog>
+#include <QPrinter>
+#include <QPainter>
 #include "imagetablewidget.h"
 #include "ui_imagetablewidget.h"
 
@@ -350,3 +352,39 @@ void ImageTableWidget::exportToFolder(QString folder)
 
     ui->images->setCurrentItem(currentItem);
 }
+
+void ImageTableWidget::exportToPdf(QString pdfFile)
+{
+    //NOTE: this is duplicated code, this is bad, is it ?
+    int row;
+    QTableWidgetItem *currentItem = ui->images->currentItem();
+    QPixmap pixmap;
+    QPainter painter;
+
+    QPrinter *printer = new QPrinter();
+    printer->setOutputFormat(QPrinter::PdfFormat);
+    printer->setOutputFileName(pdfFile);
+
+    painter.begin(printer);
+
+    //FIXME: we should export event and odd for every row
+    for (row = 0; row < nextRow[leftSide]; row++) {
+        ui->images->setCurrentCell(row, leftSide);
+        pixmap = filterContainer->getResultImage();
+        painter.drawPixmap(printer->pageRect(), pixmap);
+        printer->newPage();
+    }
+    for (row = 0; row < nextRow[rightSide]; row++) {
+        ui->images->setCurrentCell(row, rightSide);
+        pixmap = filterContainer->getResultImage();
+        painter.drawPixmap(printer->pageRect(), pixmap);
+        printer->newPage();
+    }
+
+    painter.end();
+    delete(printer);
+
+    ui->images->setCurrentItem(currentItem);
+}
+
+
