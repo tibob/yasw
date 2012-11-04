@@ -177,7 +177,14 @@ void MainWindow::exportToJpeg()
 
 void MainWindow::exportToPdf()
 {
-    QString exportFile = QDir::currentPath() + "/test.pdf";
+    QString exportFile = QFileDialog::getSaveFileName(this, tr("Export to PDF"),
+                               // FIXME: use project name
+                               // FIXME: save last path
+                               QDir::currentPath() + "/file.pdf",
+                               tr("PDF Files (*.pdf);;All files (* *.*"));
+
+    if (exportFile.length() == 0)
+        return;
 
     ui->imageList->exportToPdf(exportFile);
 
