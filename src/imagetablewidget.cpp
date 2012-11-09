@@ -21,6 +21,7 @@
 #include <QFileDialog>
 #include <QPrinter>
 #include <QPainter>
+#include <QDebug>
 #include "imagetablewidget.h"
 #include "ui_imagetablewidget.h"
 
@@ -35,8 +36,8 @@ ImageTableWidget::ImageTableWidget(QWidget *parent) :
 
     filterContainer = NULL;
 
-    nextRow[leftSide] = 0;
-    nextRow[rightSide] = 0;
+    itemCount[leftSide] = 0;
+    itemCount[rightSide] = 0;
 
     ui->images->setHorizontalHeaderLabels(QStringList() << "Left" << "Right");
 }
@@ -77,15 +78,15 @@ void ImageTableWidget::currentItemChanged(QTableWidgetItem *newItem, QTableWidge
                 case 1: // propagate to all following images
                     rowPreviousItem = ui->images->row(previousItem);
                     sidePreviousItem = ui->images->column(previousItem);
-                    for (i = rowPreviousItem; i < nextRow[sidePreviousItem]; i++) {
+                    for (i = rowPreviousItem; i < itemCount[sidePreviousItem]; i++) {
                         ui->images->item(i, sidePreviousItem)->setData(ImagePreferences, settings);
                     }
                     break;
                 case 2: // propagate to all images
-                    for (i = 0; i < nextRow[leftSide]; i++) {
+                    for (i = 0; i < itemCount[leftSide]; i++) {
                         ui->images->item(i, leftSide)->setData(ImagePreferences, settings);
                     }
-                    for (i = 0; i < nextRow[rightSide]; i++) {
+                    for (i = 0; i < itemCount[rightSide]; i++) {
                         ui->images->item(i, rightSide)->setData(ImagePreferences, settings);
                     }
                     break;
@@ -118,6 +119,7 @@ void ImageTableWidget::addClicked(ImageTableWidget::ImageSide side)
 {
     QFileInfo fi;
     QString imageFileName;
+    bool moveSelectionDown = false;
 
     if (lastDir.length() == 0)
         lastDir = QDir::currentPath();
@@ -130,7 +132,13 @@ void ImageTableWidget::addClicked(ImageTableWidget::ImageSide side)
                         tr("Images (*.jpg *.png);;All files (* *.*)"));
 
     foreach (imageFileName, images) {
+        if (moveSelectionDown) {
+            // Append images after the previous insertion.
+            // Insert the first image depending on current selection, so do nothing.
+            ui->images->setCurrentCell(ui->images->currentRow() + 1, ui->images->currentColumn());
+        }
         addImage(imageFileName, side);
+        moveSelectionDown = true;
     }
 
     if (imageFileName.length() > 0) {
@@ -157,8 +165,8 @@ void ImageTableWidget::addImage(QString fileName, ImageTableWidget::ImageSide si
                         fi.baseName());
 
     // Adjust Table size if necessary
-    if (nextRow[side] >=  ui->images->rowCount()) {
-        ui->images->setRowCount(nextRow[side] + 1);
+    if (itemCount[side] >=  ui->images->rowCount()) {
+        ui->images->setRowCount(itemCount[side] + 1);
     }
 
     currentItem = ui->images->currentItem();
@@ -167,11 +175,11 @@ void ImageTableWidget::addImage(QString fileName, ImageTableWidget::ImageSide si
         currentRow = ui->images->currentRow();
     } else {
         // Insert at the End
-        currentRow = nextRow[side];
+        currentRow = itemCount[side];
     }
 
     // move all items after current item one step down
-    for (i = nextRow[side]; i > currentRow; i--) {
+    for (i = itemCount[side]; i > currentRow; i--) {
         ui->images->setItem(i, side, ui->images->takeItem(i - 1, side));
     }
 
@@ -179,10 +187,11 @@ void ImageTableWidget::addImage(QString fileName, ImageTableWidget::ImageSide si
     item->setData(ImageFileName, fileName);
     item->setData(ImagePreferences, settings);
     item->setToolTip(fileName);
-    nextRow[side] = nextRow[side] + 1;
+    itemCount[side] = itemCount[side] + 1;
 
-    if (currentItem)
-        ui->images->setCurrentItem(currentItem);
+    // Select the inserted item
+    ui->images->setCurrentItem(item);
+    // scroll down to next item for order by multiple inserts?
 }
 
 void ImageTableWidget::on_addEmptyLeft_clicked()
@@ -204,7 +213,7 @@ void ImageTableWidget::on_addEmptyRight_clicked()
 void ImageTableWidget::downClicked(ImageTableWidget::ImageSide side)
 {
     int currentRow = ui->images->currentRow();
-    if (currentRow + 1 > nextRow[side] - 1) {
+    if (currentRow + 1 > itemCount[side] - 1) {
         return;
     }
     QTableWidgetItem *itemToDown = ui->images->takeItem(currentRow, side);
@@ -217,7 +226,7 @@ void ImageTableWidget::downClicked(ImageTableWidget::ImageSide side)
 void ImageTableWidget::upClicked(ImageTableWidget::ImageSide side)
 {
     int currentRow = ui->images->currentRow();
-    if (currentRow < 1 || currentRow >= nextRow[side]) {
+    if (currentRow < 1 || currentRow >= itemCount[side]) {
         return;
     }
     QTableWidgetItem *itemToUp = ui->images->takeItem(currentRow, side);
@@ -251,17 +260,28 @@ void ImageTableWidget::on_remove_clicked()
 {
     int currentRow = ui->images->currentRow();
     int currentColumn = ui->images->currentColumn();
+    if (currentColumn < 0 || currentColumn > 1)
+        return;
     int otherSide = 1 - currentColumn;
     int i;
 
+    if (currentRow >=0
+            && currentRow >= itemCount[currentColumn])
+        return; //Nothing to delete
+
     delete ui->images->takeItem(currentRow, currentColumn);
-    for (i = currentRow; i < nextRow[currentColumn] - 1; i++) {
+    for (i = currentRow; i < itemCount[currentColumn] - 1; i++) {
         ui->images->setItem(i, currentColumn,
                             ui->images->takeItem(i + 1, currentColumn));
     }
-    nextRow[currentColumn]--;
-    if (nextRow[currentColumn] >= nextRow[otherSide]) {
-        ui->images->setRowCount(nextRow[currentColumn]);
+    itemCount[currentColumn]--;
+    if (itemCount[currentColumn] >= itemCount[otherSide]) {
+        ui->images->setRowCount(itemCount[currentColumn]);
+    }
+
+    // if last column removed, scroll one up
+    if (currentRow == itemCount[currentColumn] && currentRow > 0) {
+        ui->images->setCurrentCell(currentRow - 1, currentColumn);
     }
 
     // redraw
@@ -282,12 +302,12 @@ QMap<QString, QVariant> ImageTableWidget::getSettings()
         item->setData(ImagePreferences, settings);
     settings.clear();
 
-    for (row = 0; row < nextRow[leftSide]; row++) {
+    for (row = 0; row < itemCount[leftSide]; row++) {
         item = ui->images->item(row, leftSide);
         key = QString("%1_Left_").arg(row, leftSide) + item->data(ImageFileName).toString();
         settings[key] = item->data(ImagePreferences).toMap();
     }
-    for (row = 0; row < nextRow[rightSide]; row++) {
+    for (row = 0; row < itemCount[rightSide]; row++) {
         item = ui->images->item(row, rightSide);
         key = QString("%1_Right_").arg(row, rightSide) + item->data(ImageFileName).toString();
         settings[key] = item->data(ImagePreferences).toMap();
@@ -326,8 +346,8 @@ void ImageTableWidget::clear()
 {
     //FIXME: is memory cleared?
     ui->images->setRowCount(0);
-    nextRow[leftSide] = 0;
-    nextRow[rightSide] = 0;
+    itemCount[leftSide] = 0;
+    itemCount[rightSide] = 0;
 }
 
 void ImageTableWidget::exportToFolder(QString folder)
@@ -337,13 +357,13 @@ void ImageTableWidget::exportToFolder(QString folder)
     QPixmap pixmap;
     QString filename;
 
-    for (row = 0; row < nextRow[leftSide]; row++) {
+    for (row = 0; row < itemCount[leftSide]; row++) {
         ui->images->setCurrentCell(row, leftSide);
         pixmap = filterContainer->getResultImage();
         filename = QString("%1/image_%2_Left.jpg").arg(folder).arg(row+1, 3, 10, QChar('0'));
         pixmap.save(filename);
     }
-    for (row = 0; row < nextRow[rightSide]; row++) {
+    for (row = 0; row < itemCount[rightSide]; row++) {
         ui->images->setCurrentCell(row, rightSide);
         pixmap = filterContainer->getResultImage();
         filename = QString("%1/image_%2_Right.jpg").arg(folder).arg(row+1, 3, 10, QChar('0'));
@@ -368,13 +388,13 @@ void ImageTableWidget::exportToPdf(QString pdfFile)
     painter.begin(printer);
 
     //FIXME: we should export event and odd for every row
-    for (row = 0; row < nextRow[leftSide]; row++) {
+    for (row = 0; row < itemCount[leftSide]; row++) {
         ui->images->setCurrentCell(row, leftSide);
         pixmap = filterContainer->getResultImage();
         painter.drawPixmap(printer->pageRect(), pixmap);
         printer->newPage();
     }
-    for (row = 0; row < nextRow[rightSide]; row++) {
+    for (row = 0; row < itemCount[rightSide]; row++) {
         ui->images->setCurrentCell(row, rightSide);
         pixmap = filterContainer->getResultImage();
         painter.drawPixmap(printer->pageRect(), pixmap);

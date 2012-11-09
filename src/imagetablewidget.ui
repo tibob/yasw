@@ -70,7 +70,7 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
       </size>
      </property>
      <property name="editTriggers">
-      <set>QAbstractItemView::AnyKeyPressed</set>
+      <set>QAbstractItemView::NoEditTriggers</set>
      </property>
      <property name="dragEnabled">
       <bool>false</bool>
@@ -91,9 +91,6 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
       </size>
      </property>
      <property name="showGrid">
-      <bool>true</bool>
-     </property>
-     <property name="cornerButtonEnabled">
       <bool>true</bool>
      </property>
      <property name="rowCount">

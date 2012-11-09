@@ -61,9 +61,9 @@ private:
     Ui::ImageTableWidget *ui;
     enum ImageSide { leftSide, rightSide };
     FilterContainer *filterContainer;
-    QString lastDir;
+    QString lastDir = "";
     // stores the last row for left and right images
-    int nextRow[2];
+    int itemCount[2];
 
     void addImage(QString fileName, enum ImageSide side,
                   QMap<QString, QVariant> settings = QMap<QString, QVariant> ());

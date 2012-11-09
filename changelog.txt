@@ -1,7 +1,7 @@
 ToDo / Roadmap
- - FIXME: insert right does not work in the right order
-  - open recent project
+ - open recent project
  - key up/down/left/right + menu to change from image to image
+ - menu for adding/removing images
  - key "delete" deletes an image
  - handle empty images (placeholder) differently
  - Load images for Icons in background
@@ -14,6 +14,8 @@ ToDo / Roadmap
 
 2012****; YASW 0.2
  - export to pdf
+ - a lot of small fixes in handling to pages types (even/odd)
+ - cleaning old code away (only one page type handling)
 
 20121006; YASW 0.1
  - First release
