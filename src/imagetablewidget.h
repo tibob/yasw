@@ -47,15 +47,15 @@ public slots:
     void currentItemChanged(QTableWidgetItem *newItem, QTableWidgetItem *previousItem);
 
 private slots:
-    void on_addLeft_clicked();
+    void addLeft();
     void on_addEmptyLeft_clicked();
-    void on_addRight_clicked();
+    void addRight();
     void on_addEmptyRight_clicked();
     void on_upLeft_clicked();
     void on_upRight_clicked();
     void on_downRight_clicked();
     void on_downLeft_clicked();
-    void on_remove_clicked();
+    void removeSelected();
 
 private:
     Ui::ImageTableWidget *ui;

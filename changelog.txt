@@ -1,8 +1,7 @@
 ToDo / Roadmap
+ - windows build with mxe.cc
  - open recent project
  - key up/down/left/right + menu to change from image to image
- - menu for adding/removing images
- - key "delete" deletes an image
  - handle empty images (placeholder) differently
  - Load images for Icons in background
  - Implement disable filter
@@ -17,6 +16,10 @@ ToDo / Roadmap
  - export to pdf
  - a lot of small fixes in handling to pages types (even/odd)
  - cleaning old code away (only one page type handling)
+ - menu for adding/removing images
+ - key "delete" deletes an image
+
+
 
 20121006; YASW 0.1
  - First release

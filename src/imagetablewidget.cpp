@@ -109,7 +109,7 @@ void ImageTableWidget::currentItemChanged(QTableWidgetItem *newItem, QTableWidge
     }
 }
 
-void ImageTableWidget::on_addLeft_clicked()
+void ImageTableWidget::addLeft()
 {
     addClicked(leftSide);
 }
@@ -200,7 +200,7 @@ void ImageTableWidget::on_addEmptyLeft_clicked()
 }
 
 
-void ImageTableWidget::on_addRight_clicked()
+void ImageTableWidget::addRight()
 {
     addClicked(rightSide);
 }
@@ -256,7 +256,7 @@ void ImageTableWidget::on_downRight_clicked()
     downClicked(rightSide);
 }
 
-void ImageTableWidget::on_remove_clicked()
+void ImageTableWidget::removeSelected()
 {
     int currentRow = ui->images->currentRow();
     int currentColumn = ui->images->currentColumn();

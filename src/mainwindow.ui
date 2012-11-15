@@ -81,7 +81,7 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
      <x>0</x>
      <y>0</y>
      <width>1010</width>
-     <height>23</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -97,12 +97,21 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
    </widget>
    <widget class="QMenu" name="menu_Export">
     <property name="title">
-     <string>&amp;Export</string>
+     <string>&amp;Export to</string>
     </property>
     <addaction name="actionTo_Jpeg"/>
     <addaction name="actionTo_PDF"/>
    </widget>
+   <widget class="QMenu" name="menu_Image">
+    <property name="title">
+     <string>&amp;Image</string>
+    </property>
+    <addaction name="actionAdd_Left"/>
+    <addaction name="actionAdd_Right"/>
+    <addaction name="actionRemove_selected"/>
+   </widget>
    <addaction name="menu_File"/>
+   <addaction name="menu_Image"/>
    <addaction name="menu_Export"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
@@ -133,12 +142,30 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
   </action>
   <action name="actionTo_Jpeg">
    <property name="text">
-    <string>to &amp;JPEG</string>
+    <string>&amp;JPEG</string>
    </property>
   </action>
   <action name="actionTo_PDF">
    <property name="text">
-    <string>to &amp;PDF</string>
+    <string>&amp;PDF</string>
+   </property>
+  </action>
+  <action name="actionAdd_Left">
+   <property name="text">
+    <string>Add &amp;left</string>
+   </property>
+  </action>
+  <action name="actionAdd_Right">
+   <property name="text">
+    <string>Add &amp;right</string>
+   </property>
+  </action>
+  <action name="actionRemove_selected">
+   <property name="text">
+    <string>Remove selecte&amp;d</string>
+   </property>
+   <property name="shortcut">
+    <string>Del</string>
    </property>
   </action>
  </widget>
@@ -155,6 +182,11 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
    <extends>QWidget</extends>
    <header>imagetablewidget.h</header>
    <container>1</container>
+   <slots>
+    <slot>addLeft()</slot>
+    <slot>addRight()</slot>
+    <slot>removeSelected()</slot>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources/>
@@ -204,6 +236,54 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
     <hint type="destinationlabel">
      <x>504</x>
      <y>290</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionAdd_Left</sender>
+   <signal>triggered()</signal>
+   <receiver>imageList</receiver>
+   <slot>addLeft()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>127</x>
+     <y>293</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionAdd_Right</sender>
+   <signal>triggered()</signal>
+   <receiver>imageList</receiver>
+   <slot>addRight()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>127</x>
+     <y>293</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionRemove_selected</sender>
+   <signal>triggered()</signal>
+   <receiver>imageList</receiver>
+   <slot>removeSelected()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>127</x>
+     <y>293</y>
     </hint>
    </hints>
   </connection>
