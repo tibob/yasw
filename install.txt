@@ -29,6 +29,9 @@ $ make
 
 How to Release
 --------------
+#######################
+# Build source tarball
+#######################
 # Tag the git repository
 git tag -a yasw_0.1 -m 'YASW version 0.1'
 # build the tarball (note: it contains files like .gitignore...)
@@ -36,3 +39,18 @@ git archive --prefix=yasw_0.1/ yasw_0.1 | gzip > ../yasw_0.1.tgz
 # test archive (tar xvzf, qmake, make, ./yasw, play around)
 # publish the tag on github:
 git push --tags
+
+#######################
+# Build windows version (cross compile under linux)
+#######################
+# Preparation: follow steps 1; 3; 4; 5c on http://mxe.cc/#tutorial :
+git clone -b stable https://github.com/mxe/mxe.git
+cd mxe
+make qt
+export PATH=/where MXE is installed/usr/bin:$PATH
+# Cross-compile YASW:
+cd <path to yasw root folder>
+make windows-build
+cd yasw\windows-build
+i686-pc-mingw32-qmake ../src/yasw.pro CONFIG+=static
+make

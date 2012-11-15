@@ -76,7 +76,7 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
       <string>Rotate the image counterclockwise</string>
      </property>
      <property name="text">
-      <string>...</string>
+      <string>rotate counterclockwise</string>
      </property>
      <property name="icon">
       <iconset resource="../../icons/icons.qrc">
@@ -90,7 +90,7 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
       <string>Rotate the image clockwise</string>
      </property>
      <property name="text">
-      <string/>
+      <string>rotate clockwise</string>
      </property>
      <property name="icon">
       <iconset resource="../../icons/icons.qrc">

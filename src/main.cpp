@@ -19,6 +19,13 @@
 #include <QtGui/QApplication>
 #include "mainwindow.h"
 
+// Cross-compile for windows with mxe, some library have to be loaded explicitly as this is a static build
+// Thanks to Charles N. Burns, http://www.formortals.com/how-to-statically-link-qt-4/ for the help
+#ifdef STATIC
+#include <QtPlugin>
+Q_IMPORT_PLUGIN(qsvg)
+#endif
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

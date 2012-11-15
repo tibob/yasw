@@ -119,8 +119,11 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
       <widget class="QToolButton" name="addLeft">
+       <property name="toolTip">
+        <string>Insert an image on the left</string>
+       </property>
        <property name="text">
-        <string/>
+        <string>+</string>
        </property>
        <property name="icon">
         <iconset resource="icons/icons.qrc">
@@ -130,8 +133,11 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
      </item>
      <item row="0" column="1">
       <widget class="QToolButton" name="upLeft">
+       <property name="toolTip">
+        <string>Move the selected image up</string>
+       </property>
        <property name="text">
-        <string/>
+        <string>up</string>
        </property>
        <property name="icon">
         <iconset resource="icons/icons.qrc">
@@ -154,8 +160,11 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
      </item>
      <item row="0" column="3">
       <widget class="QToolButton" name="remove">
+       <property name="toolTip">
+        <string>remove selected image</string>
+       </property>
        <property name="text">
-        <string/>
+        <string>remove</string>
        </property>
        <property name="icon">
         <iconset resource="icons/icons.qrc">
@@ -178,6 +187,9 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
      </item>
      <item row="0" column="5">
       <widget class="QToolButton" name="addRight">
+       <property name="toolTip">
+        <string>Insert an image on the right</string>
+       </property>
        <property name="text">
         <string/>
        </property>
@@ -189,8 +201,11 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
      </item>
      <item row="0" column="6">
       <widget class="QToolButton" name="upRight">
+       <property name="toolTip">
+        <string>Move the selected image up</string>
+       </property>
        <property name="text">
-        <string/>
+        <string>up</string>
        </property>
        <property name="icon">
         <iconset resource="icons/icons.qrc">
@@ -200,6 +215,9 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
      </item>
      <item row="1" column="0">
       <widget class="QToolButton" name="addEmptyLeft">
+       <property name="toolTip">
+        <string>Add an empty image to the left</string>
+       </property>
        <property name="text">
         <string/>
        </property>
@@ -211,8 +229,11 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
      </item>
      <item row="1" column="1">
       <widget class="QToolButton" name="downLeft">
+       <property name="toolTip">
+        <string>Move the selected image down</string>
+       </property>
        <property name="text">
-        <string/>
+        <string>down</string>
        </property>
        <property name="icon">
         <iconset resource="icons/icons.qrc">
@@ -222,6 +243,9 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
      </item>
      <item row="1" column="5">
       <widget class="QToolButton" name="addEmptyRight">
+       <property name="toolTip">
+        <string>Add an empty image to the right</string>
+       </property>
        <property name="text">
         <string/>
        </property>
@@ -233,8 +257,11 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
      </item>
      <item row="1" column="6">
       <widget class="QToolButton" name="downRight">
+       <property name="toolTip">
+        <string>Move the selected image down</string>
+       </property>
        <property name="text">
-        <string/>
+        <string>down</string>
        </property>
        <property name="icon">
         <iconset resource="icons/icons.qrc">

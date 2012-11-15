@@ -74,3 +74,11 @@ OTHER_FILES += \
     ../documentation/doxygen-mainpage.txt \
     ../changelog.txt \
     ../install.txt
+
+static {
+# Everything below takes effect with CONFIG += static
+# thanks to Charles N. Burns, http://www.formortals.com/how-to-statically-link-qt-4/ for the help
+    QTPLUGIN += qsvg
+    DEFINES += STATIC
+    message ("This is a static build")
+}
