@@ -25,6 +25,8 @@
 #include "imagetablewidget.h"
 #include "ui_imagetablewidget.h"
 
+//TODO: comment this file, most comments from the old imagelistwidget shall match
+
 ImageTableWidget::ImageTableWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ImageTableWidget)
@@ -210,8 +212,12 @@ void ImageTableWidget::on_addEmptyRight_clicked()
     addImage("", rightSide);
 }
 
-void ImageTableWidget::downClicked(ImageTableWidget::ImageSide side)
+void ImageTableWidget::imageDown()
 {
+    int side = ui->images->currentColumn();
+    if (side < 0 || side > 1)
+        return;
+
     int currentRow = ui->images->currentRow();
     if (currentRow + 1 > itemCount[side] - 1) {
         return;
@@ -223,8 +229,12 @@ void ImageTableWidget::downClicked(ImageTableWidget::ImageSide side)
     ui->images->setCurrentItem(itemToDown);
 }
 
-void ImageTableWidget::upClicked(ImageTableWidget::ImageSide side)
+void ImageTableWidget::imageUp()
 {
+    int side = ui->images->currentColumn();
+    if (side < 0 || side > 1)
+        return;
+
     int currentRow = ui->images->currentRow();
     if (currentRow < 1 || currentRow >= itemCount[side]) {
         return;
@@ -234,26 +244,6 @@ void ImageTableWidget::upClicked(ImageTableWidget::ImageSide side)
     ui->images->setItem(currentRow - 1, side, itemToUp);
     ui->images->setItem(currentRow, side, itemToDown);
     ui->images->setCurrentItem(itemToUp);
-}
-
-void ImageTableWidget::on_upLeft_clicked()
-{
-    upClicked(leftSide);
-}
-
-void ImageTableWidget::on_upRight_clicked()
-{
-    upClicked(rightSide);
-}
-
-void ImageTableWidget::on_downLeft_clicked()
-{
-    downClicked(leftSide);
-}
-
-void ImageTableWidget::on_downRight_clicked()
-{
-    downClicked(rightSide);
 }
 
 void ImageTableWidget::removeSelected()

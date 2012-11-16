@@ -18,7 +18,6 @@
 # Disable warning about non-static data member initializers.
 # No idea if this works on other platforms, old platforms will probably do not support it.
 QMAKE_CXXFLAGS += -std=c++11
-
 TARGET = yasw
 TEMPLATE = app
 SOURCES += main.cpp \
@@ -78,6 +77,7 @@ OTHER_FILES += \
 static {
 # Everything below takes effect with CONFIG += static
 # thanks to Charles N. Burns, http://www.formortals.com/how-to-statically-link-qt-4/ for the help
+    QT += svg
     QTPLUGIN += qsvg
     DEFINES += STATIC
     message ("This is a static build")

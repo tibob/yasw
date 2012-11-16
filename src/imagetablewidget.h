@@ -51,10 +51,8 @@ private slots:
     void on_addEmptyLeft_clicked();
     void addRight();
     void on_addEmptyRight_clicked();
-    void on_upLeft_clicked();
-    void on_upRight_clicked();
-    void on_downRight_clicked();
-    void on_downLeft_clicked();
+    void imageUp();
+    void imageDown();
     void removeSelected();
 
 private:
@@ -71,8 +69,7 @@ private:
                               ImageFileName
                             };
     void addClicked(ImageTableWidget::ImageSide side);
-    void upClicked(ImageTableWidget::ImageSide side);
-    void downClicked(ImageTableWidget::ImageSide side);
+
 
 
 signals:

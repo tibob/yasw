@@ -1,7 +1,5 @@
 ToDo / Roadmap
- - windows build with mxe.cc
- - open recent project
- - key up/down/left/right + menu to change from image to image
+ - open -> recent projects
  - handle empty images (placeholder) differently
  - Load images for Icons in background
  - Implement disable filter
@@ -11,6 +9,10 @@ ToDo / Roadmap
  - drag and drop in the image list
  - Filter to fix image color / convert to black & white...
  - move image up/down could be merged in 2 buttons instead of 4
+ - error message on console: kfilemodule(5761)/kio (KDirModel) KDirModelPrivate::_k_slotDeleteItems: No node found for item that was just removed: KUrl("file:(((...")
+ - application icon
+ - windows port: security credentials (producer...)
+ - png images do not scale well
 
 2012****; YASW 0.2
  - export to pdf
@@ -18,6 +20,8 @@ ToDo / Roadmap
  - cleaning old code away (only one page type handling)
  - menu for adding/removing images
  - key "delete" deletes an image
+ - key "pgup/pgdown" to move image
+ - windows port (build on linux with mxe.cc)
 
 
 

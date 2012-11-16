@@ -109,6 +109,8 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
     <addaction name="actionAdd_Left"/>
     <addaction name="actionAdd_Right"/>
     <addaction name="actionRemove_selected"/>
+    <addaction name="actionMoveImageUp"/>
+    <addaction name="actionMoveImageDown"/>
    </widget>
    <addaction name="menu_File"/>
    <addaction name="menu_Image"/>
@@ -168,6 +170,28 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
     <string>Del</string>
    </property>
   </action>
+  <action name="actionMoveImageUp">
+   <property name="text">
+    <string>Move up</string>
+   </property>
+   <property name="toolTip">
+    <string>Move image up</string>
+   </property>
+   <property name="shortcut">
+    <string>PgUp</string>
+   </property>
+  </action>
+  <action name="actionMoveImageDown">
+   <property name="text">
+    <string>Move &amp;down</string>
+   </property>
+   <property name="toolTip">
+    <string>Move image down</string>
+   </property>
+   <property name="shortcut">
+    <string>PgDown</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
@@ -186,6 +210,8 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
     <slot>addLeft()</slot>
     <slot>addRight()</slot>
     <slot>removeSelected()</slot>
+    <slot>imageUp()</slot>
+    <slot>imageDown()</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -276,6 +302,38 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
    <signal>triggered()</signal>
    <receiver>imageList</receiver>
    <slot>removeSelected()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>127</x>
+     <y>293</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionMoveImageUp</sender>
+   <signal>triggered()</signal>
+   <receiver>imageList</receiver>
+   <slot>imageUp()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>127</x>
+     <y>293</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionMoveImageDown</sender>
+   <signal>triggered()</signal>
+   <receiver>imageList</receiver>
+   <slot>imageDown()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
