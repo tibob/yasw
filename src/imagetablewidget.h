@@ -47,10 +47,8 @@ public slots:
     void currentItemChanged(QTableWidgetItem *newItem, QTableWidgetItem *previousItem);
 
 private slots:
-    void addLeft();
-    void on_addEmptyLeft_clicked();
-    void addRight();
-    void on_addEmptyRight_clicked();
+    void insertImage();
+    void insertEmptyImage();
     void imageUp();
     void imageDown();
     void removeSelected();

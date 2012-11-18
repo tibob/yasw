@@ -1,18 +1,22 @@
 ToDo / Roadmap
+Milestone 0.2
+ - fix big TODO/FIME etc
+Later
  - open -> recent projects
  - handle empty images (placeholder) differently
  - Load images for Icons in background
  - Implement disable filter
  - Add ability to scale resulting images after cropping
+   * Set image size, use it in pdf export.
  - progress dialog while exporting / loading
  - Display page preview instead of original image in image list
  - drag and drop in the image list
  - Filter to fix image color / convert to black & white...
- - move image up/down could be merged in 2 buttons instead of 4
  - error message on console: kfilemodule(5761)/kio (KDirModel) KDirModelPrivate::_k_slotDeleteItems: No node found for item that was just removed: KUrl("file:(((...")
  - application icon
  - windows port: security credentials (producer...)
  - png images do not scale well
+ - add a placeholder at the end of the imagetablewidget, so that can insert an image at the end and insert an image on the right when there is no image in the list.
 
 2012****; YASW 0.2
  - export to pdf
@@ -22,7 +26,7 @@ ToDo / Roadmap
  - key "delete" deletes an image
  - key "pgup/pgdown" to move image
  - windows port (build on linux with mxe.cc)
-
+ - remove add left/right in favor of one "add", wich defaults to left.
 
 
 20121006; YASW 0.1

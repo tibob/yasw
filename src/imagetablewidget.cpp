@@ -111,17 +111,18 @@ void ImageTableWidget::currentItemChanged(QTableWidgetItem *newItem, QTableWidge
     }
 }
 
-void ImageTableWidget::addLeft()
-{
-    addClicked(leftSide);
-}
-
-//FIXME: should insert at the current position, not append
-void ImageTableWidget::addClicked(ImageTableWidget::ImageSide side)
+void ImageTableWidget::insertImage()
 {
     QFileInfo fi;
     QString imageFileName;
     bool moveSelectionDown = false;
+    ImageTableWidget::ImageSide side;
+
+    int column = ui->images->currentColumn();
+    if (column == 1)
+        side = ImageTableWidget::rightSide;
+    else // defaults to left
+        side = ImageTableWidget::leftSide;
 
     if (lastDir.length() == 0)
         lastDir = QDir::currentPath();
@@ -149,7 +150,6 @@ void ImageTableWidget::addClicked(ImageTableWidget::ImageSide side)
     }
 
 }
-
 
 // FIXME: handle fileName = "" (empty image)
 void ImageTableWidget::addImage(QString fileName, ImageTableWidget::ImageSide side, QMap<QString, QVariant> settings)
@@ -196,21 +196,19 @@ void ImageTableWidget::addImage(QString fileName, ImageTableWidget::ImageSide si
     // scroll down to next item for order by multiple inserts?
 }
 
-void ImageTableWidget::on_addEmptyLeft_clicked()
+void ImageTableWidget::insertEmptyImage()
 {
-    addImage("", leftSide);
+    ImageTableWidget::ImageSide side;
+
+    int column = ui->images->currentColumn();
+    if (column == 1)
+        side = ImageTableWidget::rightSide;
+    else // defaults to left
+        side = ImageTableWidget::leftSide;
+
+    addImage("", side);
 }
 
-
-void ImageTableWidget::addRight()
-{
-    addClicked(rightSide);
-}
-
-void ImageTableWidget::on_addEmptyRight_clicked()
-{
-    addImage("", rightSide);
-}
 
 void ImageTableWidget::imageDown()
 {

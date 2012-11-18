@@ -106,8 +106,8 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
     <property name="title">
      <string>&amp;Image</string>
     </property>
-    <addaction name="actionAdd_Left"/>
-    <addaction name="actionAdd_Right"/>
+    <addaction name="actionAddImage"/>
+    <addaction name="actionAdd_empty_image"/>
     <addaction name="actionRemove_selected"/>
     <addaction name="actionMoveImageUp"/>
     <addaction name="actionMoveImageDown"/>
@@ -152,19 +152,20 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
     <string>&amp;PDF</string>
    </property>
   </action>
-  <action name="actionAdd_Left">
+  <action name="actionAddImage">
    <property name="text">
-    <string>Add &amp;left</string>
+    <string>&amp;Add Image</string>
    </property>
-  </action>
-  <action name="actionAdd_Right">
-   <property name="text">
-    <string>Add &amp;right</string>
+   <property name="toolTip">
+    <string>Insert an image at current position (when no selection, defaults to left)</string>
+   </property>
+   <property name="shortcut">
+    <string>+</string>
    </property>
   </action>
   <action name="actionRemove_selected">
    <property name="text">
-    <string>Remove selecte&amp;d</string>
+    <string>&amp;Remove selected image</string>
    </property>
    <property name="shortcut">
     <string>Del</string>
@@ -172,7 +173,7 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
   </action>
   <action name="actionMoveImageUp">
    <property name="text">
-    <string>Move up</string>
+    <string>Move image &amp;up</string>
    </property>
    <property name="toolTip">
     <string>Move image up</string>
@@ -183,13 +184,21 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
   </action>
   <action name="actionMoveImageDown">
    <property name="text">
-    <string>Move &amp;down</string>
+    <string>Move image &amp;down</string>
    </property>
    <property name="toolTip">
     <string>Move image down</string>
    </property>
    <property name="shortcut">
     <string>PgDown</string>
+   </property>
+  </action>
+  <action name="actionAdd_empty_image">
+   <property name="text">
+    <string>Add &amp;empty image</string>
+   </property>
+   <property name="toolTip">
+    <string>Adds an empty image at selection. If there is default selection, inserts left</string>
    </property>
   </action>
  </widget>
@@ -207,11 +216,11 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
    <header>imagetablewidget.h</header>
    <container>1</container>
    <slots>
-    <slot>addLeft()</slot>
-    <slot>addRight()</slot>
     <slot>removeSelected()</slot>
     <slot>imageUp()</slot>
     <slot>imageDown()</slot>
+    <slot>insertImage()</slot>
+    <slot>insertEmptyImage()</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -266,26 +275,10 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
    </hints>
   </connection>
   <connection>
-   <sender>actionAdd_Left</sender>
+   <sender>actionAddImage</sender>
    <signal>triggered()</signal>
    <receiver>imageList</receiver>
-   <slot>addLeft()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>127</x>
-     <y>293</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>actionAdd_Right</sender>
-   <signal>triggered()</signal>
-   <receiver>imageList</receiver>
-   <slot>addRight()</slot>
+   <slot>insertImage()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
@@ -334,6 +327,22 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
    <signal>triggered()</signal>
    <receiver>imageList</receiver>
    <slot>imageDown()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>127</x>
+     <y>293</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionAdd_empty_image</sender>
+   <signal>triggered()</signal>
+   <receiver>imageList</receiver>
+   <slot>insertEmptyImage()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
