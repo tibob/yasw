@@ -1,7 +1,5 @@
 ToDo / Roadmap
-Milestone 0.2
- - fix big TODO/FIME etc
-Later
+ - About menu/window with authors, licence...
  - open -> recent projects
  - handle empty images (placeholder) differently
  - Load images for Icons in background
@@ -18,7 +16,7 @@ Later
  - png images do not scale well
  - add a placeholder at the end of the imagetablewidget, so that can insert an image at the end and insert an image on the right when there is no image in the list.
 
-2012****; YASW 0.2
+20121118; YASW 0.2
  - export to pdf
  - a lot of small fixes in handling to pages types (even/odd)
  - cleaning old code away (only one page type handling)

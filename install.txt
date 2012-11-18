@@ -30,6 +30,22 @@ $ make
 How to Release
 --------------
 #######################
+# Prepare Release
+#######################
+- make distclean working repository, rebuild in release, extensive test
+  - insert images left and right
+  - move images
+  - delete images
+  - save project
+  - close project
+  - open saved project
+  - export to jpg
+  - export to pdf
+- cross-compile to windows, small test
+  - insert images
+  - export to pdf
+
+#######################
 # Build source tarball
 #######################
 # Tag the git repository
