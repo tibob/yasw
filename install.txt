@@ -3,9 +3,10 @@ How to Install YASW
 Currently, YASW has no install procedure. You can test YASW by compiling it
 and running it directly from the compilation directory.
 
-YASW is developped under Debian GNU/Linux, but ought to run on other
-Qt-Platforms. If you want to port / compile YASW on other platforms, your help
-ist welcome!
+YASW is developped under Debian GNU/Linux.
+It is cross-compiled for windows using http://mxe.cc (see How to release for details)
+YASW ought to run on other Qt-Platforms. If you want to contribute to / port / compile YASW on other platforms, your help
+is welcome!
 
 Complile YASW
 -------------
@@ -32,6 +33,7 @@ How to Release
 #######################
 # Prepare Release
 #######################
+- edit changelog
 - make distclean working repository, rebuild in release, extensive test
   - insert images left and right
   - move images

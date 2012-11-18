@@ -26,8 +26,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-//FIXME: Performace optimisation (memory usage...)
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)

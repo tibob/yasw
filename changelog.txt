@@ -1,5 +1,6 @@
 ToDo / Roadmap
  - About menu/window with authors, licence...
+ - BUG: png images can't export to jpg!
  - open -> recent projects
  - handle empty images (placeholder) differently
  - Load images for Icons in background
@@ -25,7 +26,6 @@ ToDo / Roadmap
  - key "pgup/pgdown" to move image
  - windows port (build on linux with mxe.cc)
  - remove add left/right in favor of one "add", wich defaults to left.
-
 
 20121006; YASW 0.1
  - First release
