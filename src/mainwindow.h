@@ -46,6 +46,8 @@ private slots:
     void exportToJpeg();
     void exportToPdf();
 
+    void on_action_About_triggered();
+
 private:
     bool saveProjectSettings(QString fileName);
     void setProjectFileName(QString fileName);

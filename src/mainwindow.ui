@@ -112,9 +112,16 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
     <addaction name="actionMoveImageUp"/>
     <addaction name="actionMoveImageDown"/>
    </widget>
+   <widget class="QMenu" name="menu_Hilfe">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="action_About"/>
+   </widget>
    <addaction name="menu_File"/>
    <addaction name="menu_Image"/>
    <addaction name="menu_Export"/>
+   <addaction name="menu_Hilfe"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="action_Quit">
@@ -199,6 +206,11 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
    </property>
    <property name="toolTip">
     <string>Adds an empty image at selection. If there is default selection, inserts left</string>
+   </property>
+  </action>
+  <action name="action_About">
+   <property name="text">
+    <string>&amp;About</string>
    </property>
   </action>
  </widget>

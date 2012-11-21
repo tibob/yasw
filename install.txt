@@ -34,6 +34,7 @@ How to Release
 # Prepare Release
 #######################
 - edit changelog
+- update version in yasw.pro
 - make distclean working repository, rebuild in release, extensive test
   - insert images left and right
   - move images

@@ -199,3 +199,25 @@ void MainWindow::on_action_Close_triggered()
     ui->imageList->clear();
     setProjectFileName("");
 }
+
+void MainWindow::on_action_About_triggered()
+{
+    QMessageBox::about(this, tr("Yet Another Scan Wizard Version %1").arg(VERSION),
+                       tr("Yet Another Scan Wizard (YASW) is an application used to correct images taken "
+                          "with a camera while scanning a book.\n\n"
+
+                          "YASW is written by Robert Cheramy <robert@cheramy.net>\n\n"
+
+                          "YASW is free software: you can redistribute it and/or modify "
+                          "it under the terms of the GNU General Public License as published by "
+                          "the Free Software Foundation, either version 3 of the License, or "
+                          "(at your option) any later version.\n"
+
+                          "YASW is distributed in the hope that it will be useful, "
+                          "but WITHOUT ANY WARRANTY; without even the implied warranty of "
+                          "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the "
+                          "GNU General Public License for more details.\n"
+
+                          "You should have received a copy of the GNU General Public License "
+                          "along with YASW.  If not, see <http://www.gnu.org/licenses/>."));
+}
