@@ -23,6 +23,7 @@
 #include <QModelIndex>
 #include <QFileSystemModel>
 #include <QGraphicsPixmapItem>
+#include <QSettings>
 
 namespace Ui {
     class MainWindow;
@@ -48,11 +49,19 @@ private slots:
 
     void on_action_About_triggered();
 
+    void openRecentProject();
+
 private:
     bool saveProjectSettings(QString fileName);
     void setProjectFileName(QString fileName);
+
+    void addRecentProject(QString fileName);
+    void loadProject(QString fileName);
+
     Ui::MainWindow *ui;
     QString projectFileName;
+    QSettings *settings;
+    const int MAX_RECENT_PROJECTS = 5;
 };
 
 #endif // MAINWINDOW_H

@@ -88,7 +88,16 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
     <property name="title">
      <string>&amp;Project</string>
     </property>
+    <widget class="QMenu" name="recentProjects">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="title">
+      <string>&amp;Recent projects</string>
+     </property>
+    </widget>
     <addaction name="action_Open"/>
+    <addaction name="recentProjects"/>
     <addaction name="action_Save"/>
     <addaction name="action_SaveAs"/>
     <addaction name="separator"/>
@@ -211,6 +220,31 @@ along with YASW.  If not, see http://www.gnu.org/licenses/.
   <action name="action_About">
    <property name="text">
     <string>&amp;About</string>
+   </property>
+  </action>
+  <action name="actionRecentProject1">
+   <property name="text">
+    <string>Project1</string>
+   </property>
+  </action>
+  <action name="actionRecentProject2">
+   <property name="text">
+    <string>Project2</string>
+   </property>
+  </action>
+  <action name="action">
+   <property name="text">
+    <string>Project3</string>
+   </property>
+  </action>
+  <action name="actionRecentProject4">
+   <property name="text">
+    <string>Project4</string>
+   </property>
+  </action>
+  <action name="actionRecentProject5">
+   <property name="text">
+    <string>recentProject5</string>
    </property>
   </action>
  </widget>
