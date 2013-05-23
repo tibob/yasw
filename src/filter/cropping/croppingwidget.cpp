@@ -69,3 +69,13 @@ void CroppingWidget::setSettings(QMap<QString, QVariant> settings)
 {
     ui->view->setSettings(settings);
 }
+
+/** \brief Sets new Selection Color
+
+  This does only forward the information, as this widget ist the only one able to call
+  members functions of ui->view.
+ */
+void CroppingWidget::setSelectionColor(QColor color)
+{
+    ui->view->setSelectionColor(color);
+}

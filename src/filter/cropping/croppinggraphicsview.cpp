@@ -110,3 +110,12 @@ void CroppingGraphicsView::setSettings(QMap<QString, QVariant> settings)
     }
 }
 
+void CroppingGraphicsView::setSelectionColor(QColor color)
+{
+    QPen pen = QPen(color);
+
+    topLeftCorner->setPen(pen);
+    bottomRightCorner->setPen(pen);
+    rectangle->setPen(pen);
+}
+

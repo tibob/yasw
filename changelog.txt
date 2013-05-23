@@ -18,7 +18,8 @@ ToDo / Roadmap
  - Application Icon for YASW
  - autocalibration with a printed grid (line detection)
 
-2012xxxx; YASW 0.3
+2013xxxx; YASW 0.3 "yasw has reached one user!"
+ - change selection color for dekeystoning and cropping (user request from Terence Rodrigues)
  - About dialog
  - open -> recent projects
 

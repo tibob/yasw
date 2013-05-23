@@ -46,7 +46,7 @@ FilterContainer::FilterContainer( QWidget * parent)
     tabToFilter.append(dekeystoningFilter);
     addTab(dekeystoningFilter->getWidget(), dekeystoningFilter->getName());
 
-    Cropping *croppingFilter = new Cropping();
+    Cropping *croppingFilter = new Cropping(this);
     tabToFilter.append(croppingFilter);
     addTab(croppingFilter->getWidget(), croppingFilter->getName());
 

@@ -23,6 +23,9 @@ public:
     QMap<QString, QVariant> getSettings();
     void setSettings(QMap <QString, QVariant> settings);
 
+public slots:
+    void setSelectionColor(QColor color);
+
 private:
     Ui::CroppingWidget *ui;
 

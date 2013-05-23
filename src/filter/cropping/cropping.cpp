@@ -24,6 +24,11 @@ Cropping::Cropping(QObject *parent)
     widget = new CroppingWidget();
     filterWidget = widget;
     connect(widget, SIGNAL(rectangleChanged()), this, SLOT(recalculate()));
+
+    if (parent) {
+        /* Connect slots to the filtercontainer */
+        connect(parent, SIGNAL(selectionColorChanged(QColor)), widget, SLOT(setSelectionColor(QColor)));
+    }
 }
 
 void Cropping::recalculate() {

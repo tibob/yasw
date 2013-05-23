@@ -33,6 +33,8 @@ public:
     void resetRectangleMoved();
     QMap<QString, QVariant> getSettings();
     void setSettings(QMap <QString, QVariant> settings);
+    void setSelectionColor(QColor color);
+
 public slots:
     void hideRectangle(bool hide);
     void moveRectangle();
