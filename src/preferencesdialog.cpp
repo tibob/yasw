@@ -11,7 +11,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    setSelectionColor("green");
+    setSelectionColor("red");
 }
 
 PreferencesDialog::~PreferencesDialog()

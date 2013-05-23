@@ -37,7 +37,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     showMaximized();
 
-    settings = new QSettings("YASW", "YASW");
+    settings = new QSettings("yasw", "yasw");
     /* update recent projects menu */
     addRecentProject("");
 
