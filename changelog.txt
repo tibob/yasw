@@ -1,20 +1,22 @@
 ToDo / Roadmap
- - BUG: png images can't export to jpg!
+ == Add ability to scale resulting images after cropping
+ - Filter to fix image color / convert to black & white...
+   * add filter for color manipulation_/adjustment - BUG: png images can't export to jpg!
+ - png images do not scale well
  - handle empty images (placeholder) differently
  - Load images for Icons in background
  - Implement disable filter
- - Add ability to scale resulting images after cropping
    * Set image size, use it in pdf export.
+   * disabling a filter (UI) should disable the rendering.
  - progress dialog while exporting / loading
  - Display page preview instead of original image in image list
  - drag and drop in the image list
- - Filter to fix image color / convert to black & white...
  - error message on console: kfilemodule(5761)/kio (KDirModel) KDirModelPrivate::_k_slotDeleteItems: No node found for item that was just removed: KUrl("file:(((...")
  - application icon
  - windows port: security credentials (producer...)
- - png images do not scale well
  - add a placeholder at the end of the imagetablewidget, so that can insert an image at the end and insert an image on the right when there is no image in the list.
  - Application Icon for YASW
+ - autocalibration with a printed grid (line detection)
 
 2012xxxx; YASW 0.3
  - About dialog

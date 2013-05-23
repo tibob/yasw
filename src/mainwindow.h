@@ -24,6 +24,7 @@
 #include <QFileSystemModel>
 #include <QGraphicsPixmapItem>
 #include <QSettings>
+#include "preferencesdialog.h"
 
 namespace Ui {
     class MainWindow;
@@ -51,6 +52,8 @@ private slots:
 
     void openRecentProject();
 
+    void on_action_Preferences_triggered();
+
 private:
     bool saveProjectSettings(QString fileName);
     void setProjectFileName(QString fileName);
@@ -60,8 +63,9 @@ private:
 
     Ui::MainWindow *ui;
     QString projectFileName;
-    QSettings *settings;
+    QSettings *settings = NULL;
     const int MAX_RECENT_PROJECTS = 5;
+    PreferencesDialog *preferencesDialog;
 };
 
 #endif // MAINWINDOW_H

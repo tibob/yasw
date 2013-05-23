@@ -42,7 +42,7 @@ FilterContainer::FilterContainer( QWidget * parent)
     tabToFilter.append(rotationFilter);
     addTab(rotationFilter->getWidget(), rotationFilter->getName());
 
-    Dekeystoning *dekeystoningFilter = new Dekeystoning();
+    Dekeystoning *dekeystoningFilter = new Dekeystoning(this);
     tabToFilter.append(dekeystoningFilter);
     addTab(dekeystoningFilter->getWidget(), dekeystoningFilter->getName());
 
@@ -75,6 +75,11 @@ void FilterContainer::setImage(QPixmap pixmap)
     //tabToFilter[0]->setImage(pixmap.scaledToHeight(1000));
     tabToFilter[0]->setImage(pixmap);
     updateCurrentTabPixmap();
+}
+
+void FilterContainer::setSelectionColor(QColor color)
+{
+    emit(selectionColorChanged(color));
 }
 
 void FilterContainer::tabChanged(int index)

@@ -19,7 +19,7 @@
 #include "cropping.h"
 
 //TODO: add a settings box to set size of resulting image.
-Cropping::Cropping()
+Cropping::Cropping(QObject *parent)
 {
     widget = new CroppingWidget();
     filterWidget = widget;

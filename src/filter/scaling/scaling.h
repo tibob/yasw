@@ -16,26 +16,25 @@
  * You should have received a copy of the GNU General Public License
  * along with YASW.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef DEKEYSTONING_H
-#define DEKEYSTONING_H
+#ifndef SCALING_H
+#define SCALING_H
 
 #include "basefilter.h"
-#include "dekeystoningwidget.h"
 
-class Dekeystoning : public BaseFilter
+class Scaling : public BaseFilter
 {
-    Q_OBJECT
 public:
-    Dekeystoning(QObject * parent = 0);
-    AbstractFilterWidget* getWidget();
+    Scaling();
+//    AbstractFilterWidget* getWidget();
     QString getIdentifier();
     QString getName();
-    QMap<QString, QVariant> getSettings();
-    void setSettings(QMap <QString, QVariant> settings);
+//    QMap<QString, QVariant> getSettings();
+//    void setSettings(QMap <QString, QVariant> settings);
 private:
-    DekeystoningWidget *widget;
+
 public slots:
-    void recalculate();
+//    void recalculate();
+
 };
 
-#endif // DEKEYSTONING_H
+#endif // SCALING_H

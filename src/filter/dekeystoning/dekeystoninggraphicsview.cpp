@@ -120,6 +120,24 @@ void DekeystoningGraphicsView::hidePolygon(bool hide)
     l4->setVisible(showPolygon);
 }
 
+/** \brief Changes the color of the corners and the line.
+
+  This slot is called when changing the selectionColor preference of yasw
+*/
+void DekeystoningGraphicsView::setSelectionColor(QColor color)
+{
+    QPen pen = QPen(color);
+
+    topLeftCorner->setPen(pen);
+    topRightCorner->setPen(color);
+    bottomRightCorner->setPen(color);
+    bottomLeftCorner->setPen(color);
+    l1->setPen(color);
+    l2->setPen(color);
+    l3->setPen(color);
+    l4->setPen(color);
+}
+
 /** \brief Check if polygon moved since last resetPolygonMoved() */
 bool DekeystoningGraphicsView::polygonMoved()
 {

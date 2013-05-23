@@ -23,6 +23,7 @@
 #include "basefiltergraphicsview.h"
 #include "dekeystoningcorner.h"
 #include "dekeystoningline.h"
+#include <QColor>
 
 class DekeystoningGraphicsView : public BaseFilterGraphicsView
 {
@@ -37,6 +38,8 @@ public:
     void resetPolygonMoved();
     QMap<QString, QVariant> getSettings();
     void setSettings(QMap <QString, QVariant> settings);
+    void setSelectionColor(QColor color);
+
 public slots:
     void hidePolygon(bool hide);
 

@@ -40,7 +40,9 @@ SOURCES += main.cpp \
     filter/cropping/croppingcorner.cpp \
     filter/dekeystoning/dekeystoningline.cpp \
     filter/dekeystoning/dekeystoningcorner.cpp \
-    imagetablewidget.cpp
+    imagetablewidget.cpp \
+    filter/scaling/scaling.cpp \
+    preferencesdialog.cpp
 HEADERS += mainwindow.h \
     filter/basefilter.h \
     filter/basefiltergraphicsview.h \
@@ -58,13 +60,16 @@ HEADERS += mainwindow.h \
     filter/cropping/croppingcorner.h \
     filter/dekeystoning/dekeystoningline.h \
     filter/dekeystoning/dekeystoningcorner.h \
-    imagetablewidget.h
+    imagetablewidget.h \
+    filter/scaling/scaling.h \
+    preferencesdialog.h
 FORMS += mainwindow.ui \
     filter/basefilterwidget.ui \
     filter/dekeystoning/dekeystoningwidget.ui \
     filter/rotation/rotationwidget.ui \
     filter/cropping/croppingwidget.ui \
-    imagetablewidget.ui
+    imagetablewidget.ui \
+    preferencesdialog.ui
 INCLUDEPATH += filter \
     filter/dekeystoning \
     filter/rotation \

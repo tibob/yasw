@@ -23,6 +23,7 @@
 #include <QFileInfo>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QColor>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -39,12 +40,22 @@ MainWindow::MainWindow(QWidget *parent) :
     settings = new QSettings("YASW", "YASW");
     /* update recent projects menu */
     addRecentProject("");
+
+    preferencesDialog = new PreferencesDialog();
+
+    /* Transmit changes in the selectionColor to the Filter container.
+     * The filter container will retransmit the changes to the filter who subscribed to its signal */
+    connect(preferencesDialog, SIGNAL(selectionColorChanged(QColor)),
+            ui->filterContainer, SLOT(setSelectionColor(QColor)));
+
+    preferencesDialog->setSettings(settings);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
     delete settings;
+    delete preferencesDialog;
 }
 
 void MainWindow::changeEvent(QEvent *e)
@@ -278,4 +289,9 @@ void MainWindow::openRecentProject()
     QAction *action = qobject_cast<QAction *>(sender());
     if (action)
         loadProject(action->text());
+}
+
+void MainWindow::on_action_Preferences_triggered()
+{
+    preferencesDialog->exec();
 }

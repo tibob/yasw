@@ -5,23 +5,12 @@ This is YASW (Yet Another Scan Wizard) documentation.
 In order develop your own filter, you have to create a class that inherits from BaseFilter and reimplement
 - AbstractFilterWidget* getWidget();
 - QString getName();
+- QString getIdentifier();
 - void recalculate(); as a public slot
 
 Each Filter should be placed in its own folder under the filter folder. Don't forget to
 modifiy hte INCLUDEPATH in yasw.pro.
 
 Have a look at the Rotation class (folder filter/rotation) for a simple filter example.
-
-\section todo
-\todo: disabling a filter (UI) should disable the rendering.
-\todo: project handling of a project:
-- choose and sort source images
-- load and save parameters from filters
-- load and save projects
-\todo: handling of output
--jpg
--pdf
-\todo: (later) autocalibration with a printed grid (line detection)
-\todo: (later) add filter for color manipulation_/adjustment
 
 */

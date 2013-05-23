@@ -25,12 +25,13 @@
 class Cropping : public BaseFilter
 {
 public:
-    Cropping();
+    Cropping(QObject * parent = 0);
     AbstractFilterWidget* getWidget();
     QString getIdentifier();
     QString getName();
     QMap<QString, QVariant> getSettings();
-    void setSettings(QMap <QString, QVariant> settings);private:
+    void setSettings(QMap <QString, QVariant> settings);
+private:
     CroppingWidget *widget;
 public slots:
     void recalculate();

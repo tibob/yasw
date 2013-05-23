@@ -40,12 +40,16 @@ public:
 public slots:
     void tabChanged(int index);
     void setImage(QPixmap pixmap);
+    void setSelectionColor(QColor color);
 
 private:
         QList<BaseFilter *> tabToFilter;
         int oldIndex; //stores the last selected index
         void updatePixmapInTabs(int beginTab = 1, int endTab = -1);
         void updateCurrentTabPixmap(int fromIndex = 1);
-    };
 
-    #endif // FILTERCONTAINER_H
+signals:
+    void selectionColorChanged(QColor color);
+
+};
+#endif // FILTERCONTAINER_H
