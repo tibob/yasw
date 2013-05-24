@@ -18,6 +18,7 @@
  */
 
 #include "croppingcorner.h"
+#include <QApplication>
 
 /*! \class CroppingCorner
 
@@ -36,6 +37,7 @@ CroppingCorner::CroppingCorner(QPoint position)
 {
     setRect(-diameter/2, -diameter/2, diameter, diameter);
     setPos(position);
+    lastPosition = pos();
     setZValue(100);
     setFlags(ItemIsMovable |
              ItemIgnoresTransformations |
@@ -56,9 +58,29 @@ void CroppingCorner::resetCornerMoved()
 QVariant CroppingCorner::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
     if (change == ItemPositionHasChanged) {
+        Qt::KeyboardModifiers keyMod = QApplication::keyboardModifiers ();
+        if (keyMod.testFlag(Qt::ControlModifier)) {
+            QPointF positionDelta = pos() - lastPosition;
+            emit moveOtherCorner(positionDelta);
+        }
         cornerMoved = true;
-//        moveRectangle();
         emit signalCornerMoved();
+        lastPosition = pos();
     }
     return QGraphicsEllipseItem::itemChange(change, value);
+}
+
+
+void CroppingCorner::moveCorner(QPointF delta)
+{
+    /* deativate change notifications */
+    setFlag(ItemSendsGeometryChanges, false);
+    /* move the Corner */
+    setPos(pos() + delta);
+    /* Update cornerMoved, lastPosition and rectangle */
+    cornerMoved = true;
+    emit signalCornerMoved();
+    lastPosition = pos();
+    /* reactivate change notifications */
+    setFlag(ItemSendsGeometryChanges, true);
 }

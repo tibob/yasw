@@ -19,6 +19,8 @@
 
 #include "dekeystoningcorner.h"
 #include "dekeystoningline.h"
+#include <QApplication>
+#include <QDebug>
 
 /*! \class DekeystoningCorner
     \brief Corner to build a polygon
@@ -35,6 +37,7 @@ DekeystoningCorner::DekeystoningCorner(QPoint position)
 {
     setRect(-diameter/2, -diameter/2, diameter, diameter);
     setPos(position);
+    lastPosition = pos();
     setZValue(100);
     setFlags(ItemIsMovable |
              ItemIgnoresTransformations |
@@ -60,11 +63,39 @@ void DekeystoningCorner::registerLine(DekeystoningLine *line)
 QVariant DekeystoningCorner::itemChange(GraphicsItemChange change, const QVariant &value)
 {
     if (change == ItemPositionHasChanged) {
+        Qt::KeyboardModifiers keyMod = QApplication::keyboardModifiers ();
+        if (keyMod.testFlag(Qt::ControlModifier)) {
+            QPointF positionDelta = pos() - lastPosition;
+            emit moveOtherCorner(positionDelta);
+        }
         cornerMoved = true;
         foreach (DekeystoningLine *line, myLines)
             line->trackCorners();
+        lastPosition = pos();
     }
     return QGraphicsEllipseItem::itemChange(change, value);
+}
+
+/* \brief Move the corner withoud activating an itemChange
+
+    When a corner is moved while pressing the Control key modifier, other three corner
+    have to be moved equaly. This is done by emiting a DekeystoningCorner::signalCornerMoved() signal
+    which is connected to this slot. The connection is handled by the constructor of
+    DekeystoningGraphicsView
+*/
+void DekeystoningCorner::moveCorner(QPointF delta)
+{
+    /* deativate change notifications */
+    setFlag(ItemSendsGeometryChanges, false);
+    /* move the Corner */
+    setPos(pos() + delta);
+    /* Update cornerMoved, lastPosition and lines */
+    cornerMoved = true;
+    foreach (DekeystoningLine *line, myLines)
+        line->trackCorners();
+    lastPosition = pos();
+    /* reactivate change notifications */
+    setFlag(ItemSendsGeometryChanges, true);
 }
 
 void DekeystoningCorner::resetCornerMoved()

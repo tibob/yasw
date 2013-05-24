@@ -21,6 +21,7 @@
 #define CROPPINGCORNER_H
 
 #include <QGraphicsEllipseItem>
+#include <QPointF>
 
 enum CornerType { TopLeftCorner, BottomRightCorner };
 
@@ -38,8 +39,23 @@ private:
     QRect *rectangle;
     bool cornerMoved;
     const int diameter = 8;
+    QPointF lastPosition;
+
 signals:
+    /** \brief signal emited when a corner was moved.
+
+      This signal is connected to the parent class CroppingGraphicsView::moveRectangle()
+     */
     void signalCornerMoved();
+
+    /** \brief signal emited when a corner was moved and other corner have to change their position.
+
+    This signal is connected to the slot DekeystoningCorner::moveCorner() of the three other
+    coners. The connection is handeld in the constructor of DekeystoningGraphicsView.
+     */
+    void moveOtherCorner(QPointF delta);
+public slots:
+    void moveCorner(QPointF delta);
 };
 
 #endif // CROPPINGCORNER_H

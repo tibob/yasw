@@ -33,6 +33,12 @@ CroppingGraphicsView::CroppingGraphicsView(QWidget *parent) :
     connect(topLeftCorner, SIGNAL(signalCornerMoved()), this, SLOT(moveRectangle()));
     connect(bottomRightCorner, SIGNAL(signalCornerMoved()), this, SLOT(moveRectangle()));
     moveRectangle();
+
+    /* connect the corners together so they can move each other when Control is pressed */
+    connect(topLeftCorner, SIGNAL(moveOtherCorner(QPointF)),
+            bottomRightCorner, SLOT(moveCorner(QPointF)));
+    connect(bottomRightCorner, SIGNAL(moveOtherCorner(QPointF)),
+            topLeftCorner, SLOT(moveCorner(QPointF)));
 }
 
 CroppingGraphicsView::~CroppingGraphicsView()

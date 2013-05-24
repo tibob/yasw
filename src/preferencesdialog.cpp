@@ -44,8 +44,6 @@ void PreferencesDialog::setSelectionColor(QColor color)
 {
     QPalette palette;
 
-    qDebug() << color;
-
     if (!color.isValid()) {
         return;
     }

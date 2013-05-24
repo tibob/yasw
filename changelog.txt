@@ -1,7 +1,11 @@
 ToDo / Roadmap
- == Add ability to scale resulting images after cropping
+ - BUG: when moving the first time a dekeytoning/croping quadrangle with controp pressed,
+   the quadrangle is moved only the half of the mouse.
+ - BUG: when loading a project, the displayed image do not match with the selection
+ = Add ability to scale resulting images after cropping
  - Filter to fix image color / convert to black & white...
-   * add filter for color manipulation_/adjustment - BUG: png images can't export to jpg!
+   * add filter for color manipulation_/adjustment
+ - BUG: png images can't export to jpg!
  - png images do not scale well
  - handle empty images (placeholder) differently
  - Load images for Icons in background
@@ -11,17 +15,27 @@ ToDo / Roadmap
  - progress dialog while exporting / loading
  - Display page preview instead of original image in image list
  - drag and drop in the image list
- - error message on console: kfilemodule(5761)/kio (KDirModel) KDirModelPrivate::_k_slotDeleteItems: No node found for item that was just removed: KUrl("file:(((...")
+ - error message on console: kfilemodule(5761)/kio (KDirModel)
+   KDirModelPrivate::_k_slotDeleteItems: No node found for item that was just
+   removed: KUrl("file:(((...")
  - application icon
  - windows port: security credentials (producer...)
- - add a placeholder at the end of the imagetablewidget, so that can insert an image at the end and insert an image on the right when there is no image in the list.
+ - add a placeholder at the end of the imagetablewidget, so that can insert an image at the end and
+   insert an image on the right when there is no image in the list.
  - Application Icon for YASW
  - autocalibration with a printed grid (line detection)
+User requests:
+ - Add the ability to take a checkerboard pattern as input to the de-warping stage.
+ - A way to measure DPI in-situ. Allow the user to draw a line on the pic and inform yasw that the
+   actual physical length of this line is x. You could then compute DPI by measuring the length of
+   the drawn line in pixels and divide by length input.
 
 2013xxxx; YASW 0.3 "yasw has reached one user!"
- - change selection color for dekeystoning and cropping (user request from Terence Rodrigues)
  - About dialog
  - open -> recent projects
+ - change selection color for dekeystoning and cropping
+ - move all corners (dekeystonig, cropping) when pressing "control" while draging one of the corners
+
 
 20121118; YASW 0.2
  - export to pdf

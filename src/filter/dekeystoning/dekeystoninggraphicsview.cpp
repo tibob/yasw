@@ -52,6 +52,35 @@ DekeystoningGraphicsView::DekeystoningGraphicsView(QWidget *parent):
     scene->addItem(l2);
     scene->addItem(l3);
     scene->addItem(l4);
+
+    /* connect the corners together so they can move each other when Control is pressed */
+    connect(topLeftCorner, SIGNAL(moveOtherCorner(QPointF)),
+            topRightCorner, SLOT(moveCorner(QPointF)));
+    connect(topLeftCorner, SIGNAL(moveOtherCorner(QPointF)),
+            bottomRightCorner, SLOT(moveCorner(QPointF)));
+    connect(topLeftCorner, SIGNAL(moveOtherCorner(QPointF)),
+            bottomLeftCorner, SLOT(moveCorner(QPointF)));
+
+    connect(topRightCorner, SIGNAL(moveOtherCorner(QPointF)),
+            topLeftCorner, SLOT(moveCorner(QPointF)));
+    connect(topRightCorner, SIGNAL(moveOtherCorner(QPointF)),
+            bottomRightCorner, SLOT(moveCorner(QPointF)));
+    connect(topRightCorner, SIGNAL(moveOtherCorner(QPointF)),
+            bottomLeftCorner, SLOT(moveCorner(QPointF)));
+
+    connect(bottomRightCorner, SIGNAL(moveOtherCorner(QPointF)),
+            topRightCorner, SLOT(moveCorner(QPointF)));
+    connect(bottomRightCorner, SIGNAL(moveOtherCorner(QPointF)),
+            topLeftCorner, SLOT(moveCorner(QPointF)));
+    connect(bottomRightCorner, SIGNAL(moveOtherCorner(QPointF)),
+            bottomLeftCorner, SLOT(moveCorner(QPointF)));
+
+    connect(bottomLeftCorner, SIGNAL(moveOtherCorner(QPointF)),
+            topLeftCorner, SLOT(moveCorner(QPointF)));
+    connect(bottomLeftCorner, SIGNAL(moveOtherCorner(QPointF)),
+            bottomRightCorner, SLOT(moveCorner(QPointF)));
+    connect(bottomLeftCorner, SIGNAL(moveOtherCorner(QPointF)),
+            topRightCorner, SLOT(moveCorner(QPointF)));
 }
 
 /*! cleen the allocated memory */

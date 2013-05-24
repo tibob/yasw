@@ -22,11 +22,14 @@
 #include <QGraphicsEllipseItem>
 #include <QWheelEvent>
 #include <QPoint>
+#include <QPointF>
 
 class DekeystoningLine;
 
-class DekeystoningCorner : public QGraphicsEllipseItem
+/*! Inherits QObject to be able to emit and receive signals */
+class DekeystoningCorner : public QObject, public QGraphicsEllipseItem
 {
+    Q_OBJECT
 public:
     DekeystoningCorner(QPoint position);
     void registerLine(DekeystoningLine *line);
@@ -38,6 +41,17 @@ private:
     QSet<DekeystoningLine *> myLines;
     bool cornerMoved;
     const int diameter = 8;
+    QPointF lastPosition;
+public slots:
+    void moveCorner(QPointF delta);
+
+signals:
+    /** \brief signal emited when a corner was moved and other corner have to change their position.
+
+    This signal is connected to the slot DekeystoningCorner::moveCorner() of the three other
+    coners. The connection is handeld in the constructor of DekeystoningGraphicsView.
+     */
+    void moveOtherCorner(QPointF delta);
 };
 
 #endif // DEKEYSTONINGCORNER_H
