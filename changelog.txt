@@ -2,16 +2,17 @@ ToDo / Roadmap
  - BUG: when moving the first time a dekeytoning/croping quadrangle with controp pressed,
    the quadrangle is moved only the half of the mouse.
  - BUG: when loading a project, the displayed image do not match with the selection
- = Add ability to scale resulting images after cropping
+ - Add ability to scale resulting images after cropping
  - Filter to fix image color / convert to black & white...
-   * add filter for color manipulation_/adjustment
+   o add filter for color manipulation_/adjustment
+   o point to white pixel (or many white pixels)
  - BUG: png images can't export to jpg!
  - png images do not scale well
  - handle empty images (placeholder) differently
  - Load images for Icons in background
  - Implement disable filter
-   * Set image size, use it in pdf export.
-   * disabling a filter (UI) should disable the rendering.
+   o Set image size, use it in pdf export.
+   o disabling a filter (UI) should disable the rendering.
  - progress dialog while exporting / loading
  - Display page preview instead of original image in image list
  - drag and drop in the image list
@@ -24,13 +25,21 @@ ToDo / Roadmap
    insert an image on the right when there is no image in the list.
  - Application Icon for YASW
  - autocalibration with a printed grid (line detection)
+   o have a look at ppmunwarp http://diybookscanner.org/forum/viewtopic.php?f=19&t=2589
 User requests:
  - Add the ability to take a checkerboard pattern as input to the de-warping stage.
  - A way to measure DPI in-situ. Allow the user to draw a line on the pic and inform yasw that the
    actual physical length of this line is x. You could then compute DPI by measuring the length of
    the drawn line in pixels and divide by length input.
+   o I assume you would calculate DPI on the cropped image. In that case, use the DPI to also
+     calculate and display the physical dimensions of the page or a sub-set of the page as selected
+     by a user-defined bounding box.
+ - Under rotation filter, allow user to draw a line to indicate what is 'horizontal' - (maybe even
+   use 'Shift' key to force a horizontal line, i.e. deltaY = 0) Use the drawn line to calculate a
+   finer rotation angle to straighten the page. (maybe name the two filters 'orientation' and 'rotation'
+   to distinguish between them).
 
-2013xxxx; YASW 0.3 "yasw has reached one user!"
+20130525; YASW 0.3 "yasw has reached one (1) user!"
  - About dialog
  - open -> recent projects
  - change selection color for dekeystoning and cropping

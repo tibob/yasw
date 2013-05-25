@@ -1,0 +1,17 @@
+YASW
+----
+YASW (Yet Another Scan Wizard) is an application used to correct images taken
+with a camera while scanning a book. See http://http://www.diybookscanner.org/
+for full informations on how to scan with digital cameras.
+
+LICENSE
+-------
+yasw is licenced under GPLv3.
+ => See documentation/gpl.txt for details.
+
+yasw uses icons fron the Tango Theme, which are in the public domain.
+ => See src/icons/tango-icon-theme/copyright.txt for details.
+
+DOWNLOAD
+--------
+You can download yasw from https://github.com/tibob/yasw/downloads

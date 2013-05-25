@@ -281,7 +281,9 @@ void MainWindow::on_action_About_triggered()
                           "GNU General Public License for more details.\n"
 
                           "You should have received a copy of the GNU General Public License "
-                          "along with YASW.  If not, see <http://www.gnu.org/licenses/>."));
+                          "along with YASW.  If not, see <http://www.gnu.org/licenses/>.\n\n"
+
+                          "YASW uses icons from the Tango Theme, which is in the public domain."));
 }
 
 void MainWindow::openRecentProject()

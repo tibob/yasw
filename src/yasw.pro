@@ -79,7 +79,9 @@ RESOURCES += icons/icons.qrc
 OTHER_FILES += \
     ../documentation/doxygen-mainpage.txt \
     ../changelog.txt \
-    ../install.txt
+    ../install.txt \
+    ../documentation/gpl.txt \
+    ../README
 
 static {
 # Everything below takes effect with CONFIG += static

@@ -69,7 +69,8 @@ make qt
 export PATH=/where MXE is installed/usr/bin:$PATH
 # Cross-compile YASW:
 cd <path to yasw root folder>
-make windows-build
-cd yasw\windows-build
+mkdir windows-build
+cd windows-build
 i686-pc-mingw32-qmake ../src/yasw.pro CONFIG+=static
 make
+Pack yasw.exe, licence and changelog into a zip file.
